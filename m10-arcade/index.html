@@ -1,0 +1,367 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Бойцовский Клуб · Аркада — Pixel 8-bit</title>
+<meta name="description" content="Пиксельная аркадная вселенная фулфилмента. 8-bit боец, неоновый CRT, pixel-perfect."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;image-rendering:pixelated}
+:root{
+  --bg:#0d0221; --bg2:#1a0b3a; --surf:#241046;
+  --ink:#f8f8f2; --muted:#a18ccb; --dim:#6b5b95;
+  --pink:#ff2e88; --pink-2:#ff7ab8;
+  --cyan:#00f0ff; --cyan-2:#7dfaff;
+  --yellow:#ffd60a; --yellow-2:#fff48c;
+  --green:#39ff14; --green-2:#7fff5e;
+  --red:#ff3b3b; --orange:#ff7a1a;
+  --line:#3d2a6e;
+  --shad-pink:0 0 0 4px var(--pink),0 0 24px rgba(255,46,136,.55);
+  --shad-cyan:0 0 0 4px var(--cyan),0 0 24px rgba(0,240,255,.55);
+}
+html,body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.pix{font-family:'Press Start 2P',monospace;letter-spacing:0;line-height:1.5;text-transform:uppercase;font-feature-settings:"tnum"}
+.term{font-family:'VT323',monospace;font-size:1.3em}
+
+/* CRT scanlines */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:55;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0,rgba(0,0,0,.18) 2px,transparent 2px,transparent 4px);mix-blend-mode:multiply}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:56;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.55) 100%)}
+
+/* starfield */
+.stars{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(2px 2px at 12% 18%,#fff,transparent),
+  radial-gradient(2px 2px at 28% 62%,var(--pink),transparent),
+  radial-gradient(1.5px 1.5px at 47% 28%,#fff,transparent),
+  radial-gradient(2px 2px at 64% 78%,var(--cyan),transparent),
+  radial-gradient(1.5px 1.5px at 78% 38%,#fff,transparent),
+  radial-gradient(2px 2px at 88% 14%,var(--yellow),transparent),
+  radial-gradient(1.5px 1.5px at 14% 86%,#fff,transparent),
+  radial-gradient(1.5px 1.5px at 56% 92%,var(--green),transparent),
+  radial-gradient(1.5px 1.5px at 36% 8%,#fff,transparent),
+  radial-gradient(2px 2px at 92% 64%,#fff,transparent),
+  linear-gradient(180deg,#0d0221 0%,#1a0b3a 50%,#0d0221 100%)}
+
+.back{position:fixed;top:14px;left:14px;z-index:80;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;background:var(--surf);border:3px solid var(--cyan);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--cyan),0 0 18px rgba(0,240,255,.5);font-family:'Press Start 2P',monospace;font-size:9px;text-transform:uppercase;color:var(--cyan);transition:transform .12s,background .12s,color .12s}
+.back:hover{background:var(--cyan);color:var(--bg)}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:16px 18px 16px 220px;background:var(--bg2);border-bottom:3px solid var(--pink);font-family:'Press Start 2P',monospace;font-size:9px;color:var(--muted)}
+.bar .l,.bar .r{display:flex;gap:18px;align-items:center}
+.bar .ok{color:var(--green);text-shadow:0 0 8px var(--green)}
+.bar .ok::before{content:"●";margin-right:4px;animation:bl 1.2s steps(2) infinite}
+@keyframes bl{50%{opacity:.3}}
+.bar a.cta{padding:10px 16px;background:var(--pink);color:var(--bg);text-shadow:none;box-shadow:0 4px 0 0 #b91c5c}
+@media(max-width:780px){.bar{padding-left:170px;font-size:8px}.bar .l span:nth-child(n+2),.bar .r span:nth-child(n+1){display:none}.bar .r a.cta{display:inline-flex}}
+
+.shell{max-width:1340px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+@media(min-width:768px){.shell{padding:0 32px}}
+
+.hero{padding:130px 0 70px;display:grid;gap:48px;grid-template-columns:1fr;align-items:center}
+@media(min-width:1024px){.hero{grid-template-columns:1.05fr .95fr;gap:56px}}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;background:var(--surf);border:2px solid var(--cyan);font-family:'Press Start 2P',monospace;font-size:9px;color:var(--cyan);text-shadow:0 0 6px var(--cyan)}
+.eyebrow .d{width:8px;height:8px;background:var(--green);box-shadow:0 0 10px var(--green);animation:bl 1.2s steps(2) infinite}
+
+h1.disp{margin-top:24px;font-family:'Press Start 2P',monospace;font-size:clamp(28px,5.5vw,72px);line-height:1.16;color:var(--yellow);text-shadow:4px 4px 0 var(--pink),8px 8px 0 var(--bg2),0 0 30px rgba(255,214,10,.45);text-transform:uppercase}
+h1.disp .c{color:var(--cyan);text-shadow:4px 4px 0 var(--bg2),0 0 24px rgba(0,240,255,.5)}
+h1.disp .g{color:var(--green);text-shadow:4px 4px 0 var(--bg2),0 0 24px rgba(57,255,20,.5)}
+
+.sub{margin-top:30px;color:var(--ink);font-size:18px;line-height:1.55;max-width:48ch}
+.sub b{color:var(--yellow);font-weight:700}
+.sub .term{color:var(--green);text-shadow:0 0 6px var(--green)}
+
+.cta-row{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:18px 26px;font-family:'Press Start 2P',monospace;font-size:11px;text-transform:uppercase;border:0;cursor:pointer;transition:transform .1s,box-shadow .1s}
+.btn-primary{background:var(--pink);color:var(--bg);box-shadow:0 6px 0 0 #b91c5c,0 0 28px rgba(255,46,136,.5)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 0 0 #b91c5c,0 0 36px rgba(255,46,136,.7)}
+.btn-primary:active{transform:translateY(4px);box-shadow:0 2px 0 0 #b91c5c}
+.btn-cyan{background:var(--cyan);color:var(--bg);box-shadow:0 6px 0 0 #0891b2,0 0 28px rgba(0,240,255,.5)}
+.btn-cyan:hover{transform:translateY(-2px);box-shadow:0 8px 0 0 #0891b2}
+.btn-ghost{background:var(--surf);color:var(--cyan);border:3px solid var(--cyan);box-shadow:0 0 0 3px var(--bg2),0 0 18px rgba(0,240,255,.4)}
+.btn-ghost:hover{background:var(--cyan);color:var(--bg)}
+
+.hero-stats{margin-top:42px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.stat{padding:18px 16px;background:var(--bg2);border:3px solid var(--line);position:relative}
+.stat::before{content:"";position:absolute;top:-3px;left:-3px;right:-3px;height:3px;background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow))}
+.stat .v{font-family:'Press Start 2P',monospace;font-size:clamp(20px,2.6vw,28px);color:var(--yellow);text-shadow:0 0 12px rgba(255,214,10,.45)}
+.stat .v .u{color:var(--pink);font-size:.6em}
+.stat .l{margin-top:10px;font-family:'Press Start 2P',monospace;font-size:8px;color:var(--muted);text-transform:uppercase}
+
+/* hero side: 8-bit fighter card */
+.hero-side{display:grid;gap:14px}
+.hp{padding:20px;background:var(--bg2);border:3px solid var(--pink);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--pink),0 0 32px rgba(255,46,136,.4)}
+.hp-h{display:flex;justify-content:space-between;align-items:center;font-family:'Press Start 2P',monospace;font-size:9px;color:var(--pink);margin-bottom:14px;text-shadow:0 0 6px var(--pink)}
+.hp-bar{height:18px;background:var(--surf);border:2px solid var(--line);overflow:hidden;display:flex}
+.hp-bar i{display:block;height:100%}
+.hp-bar i:nth-child(1){background:var(--green);width:62%;box-shadow:inset 0 -4px 0 rgba(0,0,0,.3),inset 0 4px 0 rgba(255,255,255,.2)}
+.hp-bar i:nth-child(2){background:var(--yellow);width:24%;box-shadow:inset 0 -4px 0 rgba(0,0,0,.3),inset 0 4px 0 rgba(255,255,255,.2)}
+.hp-bar i:nth-child(3){background:var(--surf);flex:1}
+.hp-meta{display:flex;justify-content:space-between;margin-top:10px;font-family:'VT323',monospace;font-size:18px;color:var(--green);text-shadow:0 0 4px var(--green)}
+.hp-meta b{color:var(--yellow)}
+
+/* boss sprite (CSS pixel art) */
+.boss{padding:28px;background:var(--bg2);border:3px solid var(--cyan);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--cyan),0 0 32px rgba(0,240,255,.4);text-align:center;position:relative;overflow:hidden}
+.boss::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,240,255,.05) 0 2px,transparent 2px 4px);pointer-events:none}
+.sprite{display:grid;grid-template-columns:repeat(12,18px);gap:0;justify-content:center;margin:6px auto;animation:bob 1.6s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.sprite i{width:18px;height:18px}
+.sprite i.k{background:var(--bg)}
+.sprite i.s{background:var(--ink)}
+.sprite i.r{background:var(--red)}
+.sprite i.y{background:var(--yellow)}
+.sprite i.b{background:#3d2a6e}
+.sprite i.g{background:var(--green)}
+.boss .lbl{margin-top:14px;font-family:'Press Start 2P',monospace;font-size:10px;color:var(--cyan);text-shadow:0 0 6px var(--cyan)}
+.boss .name{margin-top:6px;font-family:'Press Start 2P',monospace;font-size:13px;color:var(--yellow);text-shadow:0 0 8px var(--yellow);animation:bl 1.4s steps(2) infinite}
+
+.coins{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.coin{padding:18px;background:var(--bg2);border:3px solid var(--yellow);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--yellow),0 0 24px rgba(255,214,10,.35);text-align:center}
+.coin:last-child{border-color:var(--green);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--green),0 0 24px rgba(57,255,20,.35)}
+.coin .icn{font-family:'Press Start 2P',monospace;font-size:24px;color:var(--yellow);text-shadow:0 0 10px var(--yellow);margin-bottom:8px}
+.coin:last-child .icn{color:var(--green);text-shadow:0 0 10px var(--green)}
+.coin .v{font-family:'Press Start 2P',monospace;font-size:16px;color:var(--ink)}
+.coin .l{margin-top:6px;font-family:'Press Start 2P',monospace;font-size:7.5px;color:var(--muted);letter-spacing:0}
+
+/* marquee */
+.banner{margin-top:48px;padding:18px 0;background:var(--bg2);border-top:3px solid var(--pink);border-bottom:3px solid var(--cyan);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.banner-track{display:flex;gap:48px;width:max-content;animation:s 30s linear infinite;font-family:'Press Start 2P',monospace;font-size:14px}
+.banner-track span{white-space:nowrap;display:flex;align-items:center;gap:24px;color:var(--cyan);text-shadow:0 0 8px var(--cyan)}
+.banner-track span:nth-child(2n){color:var(--pink);text-shadow:0 0 8px var(--pink)}
+.banner-track span:nth-child(3n){color:var(--yellow);text-shadow:0 0 8px var(--yellow)}
+.banner-track span::after{content:"★";color:var(--green);text-shadow:0 0 6px var(--green)}
+@keyframes s{to{transform:translateX(-50%)}}
+
+section{padding:90px 0;border-top:3px solid var(--line);position:relative}
+.s-h{display:grid;gap:24px;grid-template-columns:1fr;align-items:end;margin-bottom:48px}
+@media(min-width:900px){.s-h{grid-template-columns:1fr auto}}
+.s-tag{display:inline-flex;padding:8px 14px;background:var(--surf);border:2px solid var(--pink);font-family:'Press Start 2P',monospace;font-size:9px;color:var(--pink);text-shadow:0 0 6px var(--pink);align-self:start;margin-bottom:18px}
+.s-h h2{font-family:'Press Start 2P',monospace;font-size:clamp(20px,3.6vw,40px);line-height:1.3;color:var(--ink);text-transform:uppercase;text-shadow:3px 3px 0 var(--pink),6px 6px 0 var(--bg2)}
+.s-h h2 mark{background:transparent;color:var(--cyan);text-shadow:3px 3px 0 var(--bg2),0 0 18px rgba(0,240,255,.5)}
+.s-h .sub-r{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--green);text-shadow:0 0 6px var(--green);align-self:end}
+
+/* services as level cards */
+.svc{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:768px){.svc{grid-template-columns:repeat(6,1fr)}}
+.lv{position:relative;padding:26px;background:var(--bg2);border:3px solid var(--line);transition:transform .12s,border-color .12s,box-shadow .12s;display:flex;flex-direction:column}
+.lv:hover{transform:translate(-3px,-3px);border-color:var(--cyan);box-shadow:6px 6px 0 0 var(--cyan),0 0 28px rgba(0,240,255,.35)}
+.lv.s1{grid-column:span 6;border-color:var(--pink);box-shadow:6px 6px 0 0 var(--pink),0 0 28px rgba(255,46,136,.3);min-height:260px}
+@media(min-width:768px){.lv.s2{grid-column:span 3}.lv.s3{grid-column:span 3}.lv.s4{grid-column:span 2}.lv.s5{grid-column:span 2}.lv.s6{grid-column:span 2}}
+.lv .num{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--green);text-shadow:0 0 6px var(--green)}
+.lv h3{margin-top:14px;font-family:'Press Start 2P',monospace;font-size:14px;line-height:1.4;color:var(--yellow);text-shadow:2px 2px 0 var(--bg)}
+.lv.s1 h3{font-size:22px;color:var(--pink);text-shadow:3px 3px 0 var(--bg),0 0 18px rgba(255,46,136,.4)}
+.lv p{margin-top:14px;font-family:'VT323',monospace;font-size:18px;color:var(--ink);line-height:1.4;flex:1}
+.lv .stats{margin-top:14px;display:flex;gap:6px;flex-wrap:wrap}
+.lv .stats span{padding:4px 8px;background:var(--surf);border:2px solid var(--line);font-family:'Press Start 2P',monospace;font-size:7.5px;color:var(--cyan);letter-spacing:0}
+
+/* metrics: hi-score table */
+.score{margin-top:8px;background:var(--bg2);border:3px solid var(--yellow);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--yellow),0 0 32px rgba(255,214,10,.35);overflow:hidden}
+.score-h{padding:18px 22px;background:var(--surf);border-bottom:3px solid var(--yellow);display:flex;justify-content:space-between;align-items:center;font-family:'Press Start 2P',monospace;font-size:11px;color:var(--yellow);text-shadow:0 0 8px var(--yellow)}
+.score-row{display:grid;grid-template-columns:60px 1fr 200px 120px;gap:18px;align-items:center;padding:22px;border-bottom:2px solid var(--line);transition:background .15s}
+@media(max-width:780px){.score-row{grid-template-columns:50px 1fr;gap:12px}.score-row .v,.score-row .l{grid-column:span 2;padding-left:62px}}
+.score-row:last-child{border-bottom:0}
+.score-row:hover{background:var(--surf)}
+.score-row .rank{font-family:'Press Start 2P',monospace;font-size:14px;color:var(--pink);text-shadow:0 0 6px var(--pink)}
+.score-row .name{font-family:'Press Start 2P',monospace;font-size:12px;color:var(--ink);line-height:1.4}
+.score-row .name small{display:block;margin-top:4px;font-family:'VT323',monospace;font-size:16px;color:var(--muted);letter-spacing:0;text-transform:none}
+.score-row .v{font-family:'Press Start 2P',monospace;font-size:18px;color:var(--yellow);text-align:right;text-shadow:0 0 8px var(--yellow)}
+.score-row .v .u{color:var(--green);font-size:.6em;margin-left:4px}
+.score-row .l{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--cyan);text-align:right}
+
+/* pricing: select your fighter */
+.pr{display:grid;grid-template-columns:1fr;gap:24px;margin-top:8px}
+@media(min-width:900px){.pr{grid-template-columns:repeat(3,1fr);gap:24px}}
+.pc{position:relative;padding:32px;background:var(--bg2);border:3px solid var(--cyan);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--cyan),0 0 28px rgba(0,240,255,.3);display:flex;flex-direction:column;transition:transform .15s}
+.pc:hover{transform:translate(-3px,-6px)}
+.pc.feat{border-color:var(--pink);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--pink),0 0 36px rgba(255,46,136,.5)}
+.pc.epic{border-color:var(--yellow);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--yellow),0 0 28px rgba(255,214,10,.3)}
+.pc .ln{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--green);text-shadow:0 0 6px var(--green)}
+.pc h3{margin-top:14px;font-family:'Press Start 2P',monospace;font-size:22px;color:var(--ink);text-shadow:2px 2px 0 var(--bg),0 0 16px rgba(255,255,255,.2)}
+.pc.feat h3{color:var(--pink);text-shadow:2px 2px 0 var(--bg),0 0 18px rgba(255,46,136,.5)}
+.pc .price{margin-top:24px;font-family:'Press Start 2P',monospace;font-size:36px;color:var(--yellow);text-shadow:3px 3px 0 var(--bg),0 0 18px rgba(255,214,10,.5)}
+.pc .price small{display:block;margin-top:10px;font-family:'Press Start 2P',monospace;font-size:8px;color:var(--muted);text-shadow:none}
+.pc .desc{margin-top:14px;font-family:'VT323',monospace;font-size:18px;line-height:1.4;color:var(--ink)}
+.pc ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pc li{font-family:'VT323',monospace;font-size:18px;line-height:1.45;color:var(--ink);padding-left:24px;position:relative}
+.pc li::before{content:"►";position:absolute;left:0;color:var(--green);font-size:14px;text-shadow:0 0 4px var(--green);top:1px}
+.pc.feat li::before{color:var(--pink)}
+.pc.epic li::before{color:var(--yellow)}
+.pc .badge{position:absolute;top:-16px;right:24px;padding:6px 12px;background:var(--yellow);color:var(--bg);font-family:'Press Start 2P',monospace;font-size:9px;text-transform:uppercase;box-shadow:3px 3px 0 0 var(--bg2);animation:bl 1.6s steps(2) infinite}
+.pc .btn{margin-top:24px}
+
+/* contact: insert coin */
+.ct{display:grid;grid-template-columns:1fr;gap:28px;margin-top:8px}
+@media(min-width:900px){.ct{grid-template-columns:1fr 1fr;gap:32px}}
+.ct-info{padding:36px;background:var(--bg2);border:3px solid var(--green);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--green),0 0 28px rgba(57,255,20,.3)}
+.ct-info h3{font-family:'Press Start 2P',monospace;font-size:22px;line-height:1.3;color:var(--green);text-shadow:3px 3px 0 var(--bg),0 0 16px rgba(57,255,20,.4);max-width:14ch}
+.ct-info p{margin-top:18px;font-family:'VT323',monospace;font-size:18px;line-height:1.4;color:var(--ink);max-width:38ch}
+.ct-info .info{margin-top:28px;display:flex;flex-direction:column;gap:14px}
+.ct-info .info .it{display:flex;gap:14px;font-family:'VT323',monospace;font-size:18px;color:var(--ink)}
+.ct-info .info .it b{font-family:'Press Start 2P',monospace;font-size:8px;color:var(--cyan);text-shadow:0 0 6px var(--cyan);width:80px;flex-shrink:0;padding-top:3px}
+.ct-form{padding:36px;background:var(--bg2);border:3px solid var(--pink);box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--pink),0 0 32px rgba(255,46,136,.4);display:flex;flex-direction:column;gap:14px}
+.ct-form label{font-family:'Press Start 2P',monospace;font-size:9px;color:var(--pink);text-shadow:0 0 6px var(--pink);margin-bottom:-8px}
+.ct-form input{padding:14px 16px;background:var(--surf);border:2px solid var(--line);font-family:'VT323',monospace;font-size:18px;color:var(--green);text-shadow:0 0 4px var(--green)}
+.ct-form input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,240,255,.3)}
+.ct-form input::placeholder{color:var(--dim)}
+.ct-form button{margin-top:8px;padding:18px;background:var(--pink);color:var(--bg);border:0;font-family:'Press Start 2P',monospace;font-size:11px;text-transform:uppercase;cursor:pointer;box-shadow:0 6px 0 0 #b91c5c,0 0 24px rgba(255,46,136,.5);transition:transform .12s,box-shadow .12s}
+.ct-form button:hover{transform:translateY(-2px);box-shadow:0 8px 0 0 #b91c5c,0 0 32px rgba(255,46,136,.7)}
+.ct-form button:active{transform:translateY(4px);box-shadow:0 2px 0 0 #b91c5c}
+
+footer{padding:48px 0;border-top:3px solid var(--pink);background:var(--bg2);margin-top:60px}
+.f{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:'Press Start 2P',monospace;font-size:9px;color:var(--muted)}
+.f span:first-child{color:var(--cyan);text-shadow:0 0 6px var(--cyan)}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.06s}.reveal.d2{transition-delay:.12s}.reveal.d3{transition-delay:.18s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← TO MENU</a>
+<div class="stars"></div>
+
+<div class="bar">
+  <div class="l"><span>FF · ARCADE</span><span>STAGE 10</span><span>1CC</span></div>
+  <div class="r"><span class="ok">PRESS START</span><a href="#contact" class="cta">INSERT COIN ▸</a></div>
+</div>
+
+<header class="hero shell">
+  <div>
+    <span class="eyebrow reveal"><span class="d"></span>READY · 247 PALLETS FREE</span>
+    <h1 class="disp reveal d1">FIGHT<span class="c"> CLUB</span><br/><span class="g">FF</span><br/>STAGE 10</h1>
+    <p class="sub reveal d2">Поднимаем партию <span class="term">./batch up</span>, маркируем, отгружаем на РЦ. Каждое движение — <b>+1 к опыту</b>, каждый возврат — потеря HP, и&nbsp;мы её страхуем.</p>
+    <div class="cta-row reveal d3">
+      <a href="#contact" class="btn btn-primary">PRESS START ▸</a>
+      <a href="#svc" class="btn btn-cyan">SELECT MISSION</a>
+      <a href="#tiers" class="btn btn-ghost">SHOP</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat reveal d2"><div class="v">99.6<span class="u">%</span></div><div class="l">SLA</div></div>
+      <div class="stat reveal d3"><div class="v">1.4M<span class="u">+</span></div><div class="l">UNITS</div></div>
+      <div class="stat reveal d4"><div class="v">347<span class="u">+</span></div><div class="l">PLAYERS</div></div>
+    </div>
+  </div>
+
+  <aside class="hero-side reveal d2">
+    <div class="hp">
+      <div class="hp-h"><span>PLAYER 1 · FF-OPS</span><span style="color:var(--green);text-shadow:0 0 6px var(--green)">LV 47</span></div>
+      <div class="hp-bar"><i></i><i></i><i></i></div>
+      <div class="hp-meta"><span>HP: <b>86 / 100</b></span><span>SLA: <b style="color:var(--cyan);text-shadow:0 0 4px var(--cyan)">99.6%</b></span></div>
+    </div>
+    <div class="boss">
+      <div class="lbl">// BOSS</div>
+      <div class="sprite" aria-hidden="true">
+        <i class="k"></i><i class="k"></i><i class="k"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="k"></i><i class="k"></i><i class="k"></i>
+        <i class="k"></i><i class="k"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="k"></i><i class="k"></i>
+        <i class="k"></i><i class="r"></i><i class="r"></i><i class="s"></i><i class="s"></i><i class="r"></i><i class="r"></i><i class="s"></i><i class="s"></i><i class="r"></i><i class="r"></i><i class="k"></i>
+        <i class="k"></i><i class="r"></i><i class="r"></i><i class="s"></i><i class="b"></i><i class="r"></i><i class="r"></i><i class="s"></i><i class="b"></i><i class="r"></i><i class="r"></i><i class="k"></i>
+        <i class="k"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="k"></i>
+        <i class="k"></i><i class="r"></i><i class="r"></i><i class="y"></i><i class="y"></i><i class="r"></i><i class="r"></i><i class="y"></i><i class="y"></i><i class="r"></i><i class="r"></i><i class="k"></i>
+        <i class="k"></i><i class="r"></i><i class="r"></i><i class="y"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="y"></i><i class="r"></i><i class="r"></i><i class="k"></i>
+        <i class="k"></i><i class="k"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="r"></i><i class="k"></i><i class="k"></i>
+        <i class="k"></i><i class="k"></i><i class="k"></i><i class="r"></i><i class="r"></i><i class="k"></i><i class="k"></i><i class="r"></i><i class="r"></i><i class="k"></i><i class="k"></i><i class="k"></i>
+      </div>
+      <div class="name">RETURN-DEMON LV.99</div>
+    </div>
+    <div class="coins">
+      <div class="coin"><div class="icn">$</div><div class="v">+1.4M</div><div class="l">UNITS XP</div></div>
+      <div class="coin"><div class="icn">★</div><div class="v">347</div><div class="l">PLAYERS</div></div>
+    </div>
+  </aside>
+</header>
+
+<div class="banner reveal"><div class="banner-track"><span>WILDBERRIES</span><span>OZON</span><span>YANDEX</span><span>LAMODA</span><span>SBER</span><span>AVITO</span><span>WILDBERRIES</span><span>OZON</span><span>YANDEX</span><span>LAMODA</span><span>SBER</span><span>AVITO</span></div></div>
+
+<section id="svc" class="shell">
+  <div class="s-h"><div><span class="s-tag reveal">// 01 MISSIONS</span><h2 class="reveal d1">SELECT YOUR <mark>MISSION</mark></h2></div><span class="sub-r reveal d2">6 MISSIONS · 24H</span></div>
+  <div class="svc">
+    <article class="lv s1 reveal">
+      <span class="num">// 01 — INTAKE</span>
+      <h3>Приёмка<br/>и маркировка</h3>
+      <p>Конвейер с поштучной фотофиксацией. КИЗ, «Честный знак», штрихкоды WB и OZON. Брак отсеиваем на входе — никаких скрытых возвратов.</p>
+      <div class="stats"><span>+50 XP</span><span>FOTO ON</span><span>WB · OZ</span></div>
+    </article>
+    <article class="lv s2 reveal d1"><span class="num">// 02 — DELIVERY</span><h3>Сдача на РЦ</h3><p>Слоты Коледино, Электросталь, Подольск, Хоругвино, Тверь.</p><div class="stats"><span>+30 XP</span><span>5 RC</span></div></article>
+    <article class="lv s3 reveal d2"><span class="num">// 03 — RETURNS</span><h3>Возвраты + QC</h3><p>Перебираем, переупаковываем, фотографируем. Брак — в утиль.</p><div class="stats"><span>+25 XP</span><span>QC</span></div></article>
+    <article class="lv s4 reveal"><span class="num">// 04 — STORAGE</span><h3>Своя зона</h3><p>1 500 м², инвентарь раз в 14 дней.</p><div class="stats"><span>1500m²</span></div></article>
+    <article class="lv s5 reveal d1"><span class="num">// 05 — API</span><h3>API в ERP</h3><p>1С / МойСклад / Битрикс24, webhook.</p><div class="stats"><span>REST</span><span>HOOK</span></div></article>
+    <article class="lv s6 reveal d2"><span class="num">// 06 — SUPER</span><h3>Личный супер</h3><p>Контроль смен, эскалации в TG.</p><div class="stats"><span>7d/wk</span></div></article>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="s-h"><div><span class="s-tag reveal">// 02 HI-SCORE</span><h2 class="reveal d1"><mark>HIGH SCORES</mark> · 90 DAYS</h2></div><span class="sub-r reveal d2">SOURCE: ЛК</span></div>
+  <div class="score reveal">
+    <div class="score-h"><span>RANK · METRIC · SCORE · DELTA</span><span style="color:var(--green);text-shadow:0 0 6px var(--green)">● LIVE</span></div>
+    <div class="score-row reveal"><span class="rank">1ST</span><span class="name">UNITS THROUGHPUT<small>единиц через склад</small></span><span class="v">1.4M<span class="u">+</span></span><span class="l">↑ 18.4%</span></div>
+    <div class="score-row reveal d1"><span class="rank">2ND</span><span class="name">SLA QUARTER<small>отгрузка в срок</small></span><span class="v">99.6<span class="u">%</span></span><span class="l">↑ 0.3 pp</span></div>
+    <div class="score-row reveal d2"><span class="rank">3RD</span><span class="name">MGR PING<small>ответ в Telegram</small></span><span class="v">7<span class="u">M</span></span><span class="l">↓ 1.2m</span></div>
+    <div class="score-row reveal d3"><span class="rank">4TH</span><span class="name">ACTIVE PLAYERS<small>селлеров на потоке</small></span><span class="v">347<span class="u">+</span></span><span class="l">↑ 24</span></div>
+  </div>
+</section>
+
+<section id="tiers" class="shell">
+  <div class="s-h"><div><span class="s-tag reveal">// 03 SELECT FIGHTER</span><h2 class="reveal d1">CHOOSE YOUR <mark>CLASS</mark></h2></div><span class="sub-r reveal d2">NO DEPOSIT</span></div>
+  <div class="pr">
+    <div class="pc reveal">
+      <div class="ln">// CLASS · SCOUT</div>
+      <h3>СТАРТ</h3>
+      <div class="price">14₽<small>/ UNIT, FROM</small></div>
+      <p class="desc">До 500 ед/мес. Базовый комплект для входа на маркетплейсы.</p>
+      <ul><li>Приёмка и сверка</li><li>Маркировка WB / OZON</li><li>Хранение 14 дней</li><li>ЛК + TG-бот</li></ul>
+      <a href="#contact" class="btn btn-cyan" style="justify-content:center">SELECT ▸</a>
+    </div>
+    <div class="pc feat reveal d1">
+      <span class="badge">★ HIT</span>
+      <div class="ln">// CLASS · WARRIOR</div>
+      <h3>БОЕЦ</h3>
+      <div class="price">9₽<small>/ UNIT, FROM</small></div>
+      <p class="desc">500–10 000 ед/мес. Полный цикл с менеджером и SLA в договоре.</p>
+      <ul><li>Всё из СТАРТ</li><li>Менеджер 7д/нед</li><li>Возвраты + repack</li><li>Бронь любых РЦ</li><li>Хранение 30 дней</li><li>SLA 24ч в договоре</li></ul>
+      <a href="#contact" class="btn btn-primary" style="justify-content:center">FIGHT ▸</a>
+    </div>
+    <div class="pc epic reveal d2">
+      <div class="ln">// CLASS · LEGEND</div>
+      <h3>ЭНТЕРПРАЙЗ</h3>
+      <div class="price">∞<small>BY REQUEST</small></div>
+      <p class="desc">10K+ ед/мес. Своя зона, кастомные SLA, API в ERP.</p>
+      <ul><li>Выделенная зона склада</li><li>Кастомные SLA</li><li>API-интеграция в ERP</li><li>Менеджмент кабинетов МП</li><li>Личный супервайзер</li></ul>
+      <a href="#contact" class="btn btn-ghost" style="justify-content:center;border-color:var(--yellow);color:var(--yellow)">CONTACT ▸</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="shell">
+  <div class="s-h"><div><span class="s-tag reveal">// 04 INSERT COIN</span><h2 class="reveal d1">CONTRACT IN <mark>48H</mark></h2></div><span class="sub-r reveal d2">CALLBACK 7M</span></div>
+  <div class="ct">
+    <div class="ct-info reveal">
+      <h3>BRIEF 15M · QUOTE TODAY</h3>
+      <p>Без обязательных депозитов. Тестовая партия от 50 ед. Подписываем SLA в договоре, не на словах.</p>
+      <div class="info">
+        <div class="it"><b>// PHONE</b><span>+7 985 417 28 63</span></div>
+        <div class="it"><b>// MAIL</b><span>ring@fightclub-ff.ru</span></div>
+        <div class="it"><b>// ADDR</b><span>Дмитровское ш., 157с5</span></div>
+        <div class="it"><b>// HOURS</b><span>пн–вс · 09—22</span></div>
+        <div class="it"><b>// TG</b><span>@fightclub_ff</span></div>
+      </div>
+    </div>
+    <form class="ct-form reveal d1" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ SENT';this.querySelector('button').style.background='var(--green)'">
+      <label>// NAME</label><input required placeholder="Иван Петров"/>
+      <label>// CONTACT</label><input required type="tel" placeholder="+7 / @telegram"/>
+      <label>// VOLUME</label><input placeholder="напр. 3 000 ед / мес"/>
+      <label>// CABS</label><input placeholder="WB · OZON · LAMODA"/>
+      <button type="submit">PRESS START ▸</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="shell f">
+    <span>© 2026 БОЙЦОВСКИЙ КЛУБ · АРКАДА</span>
+    <span>CONCEPT 10 / 8-BIT</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
