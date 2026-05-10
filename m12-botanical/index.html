@@ -1,0 +1,426 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Бойцовский Клуб · Сад — Botanical Editorial</title>
+<meta name="description" content="Ботанический фулфилмент. Шалфей, кремовая бумага, Fraunces, листья — органичный ритм без агрессии."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#f7f3ea; --paper-2:#ede7d6; --cream:#fdfaf3;
+  --ink:#1a2418; --ink2:#2c3a28; --muted:#5a6b54; --dim:#8b9b85;
+  --sage:#8ba888; --sage-2:#a8c0a4; --sage-3:#6b8868; --sage-4:#4a6248;
+  --moss:#3d5a3a; --olive:#6b7a3d;
+  --terra:#c47a4a; --terra-2:#e8a276;
+  --bloom:#d4a5b8;
+  --line:rgba(26,36,24,.14);
+  --line2:rgba(26,36,24,.28);
+}
+html,body{background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.005em;min-height:100dvh;overflow-x:hidden;line-height:1.55}
+body{background-image:radial-gradient(ellipse at 10% 0%,rgba(168,192,164,.35) 0%,transparent 50%),radial-gradient(ellipse at 95% 100%,rgba(196,122,74,.18) 0%,transparent 55%),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence baseFrequency='.85' numOctaves='2' seed='5'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/></svg>");background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+.serif{font-family:'Fraunces',serif;font-variation-settings:"opsz" 144}
+
+.back{position:fixed;top:18px;left:18px;z-index:80;display:inline-flex;align-items:center;gap:10px;padding:11px 20px;border-radius:999px;background:var(--cream);font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--ink);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 4px 14px rgba(26,36,24,.1);border:1px solid var(--line);transition:transform .25s,box-shadow .25s}
+.back:hover{transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,.9) inset,0 8px 22px rgba(26,36,24,.14)}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:14px 24px 14px 220px;background:rgba(247,243,234,.82);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border-bottom:1px solid var(--line);font-size:12px;color:var(--muted);letter-spacing:.06em}
+.bar .l,.bar .r{display:flex;gap:20px;align-items:center}
+.bar .leaf{color:var(--sage-3);font-style:italic;font-family:'Fraunces',serif;font-size:14px}
+.bar a.cta{padding:9px 18px;border-radius:999px;background:var(--moss);color:var(--cream);font-family:'Fraunces',serif;font-style:italic;font-size:13.5px;font-weight:500;border:1px solid var(--moss)}
+.bar a.cta:hover{background:var(--sage-4)}
+@media(max-width:780px){.bar{padding-left:170px;font-size:11px}.bar .l span:nth-child(n+2),.bar .r span:nth-child(n+1){display:none}.bar .r a.cta{display:inline-flex}}
+
+.shell{max-width:1340px;margin:0 auto;padding:0 26px;position:relative;z-index:1}
+@media(min-width:768px){.shell{padding:0 44px}}
+
+.hero{padding:140px 0 80px;display:grid;gap:56px;grid-template-columns:1fr;align-items:start}
+@media(min-width:1024px){.hero{grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}}
+
+.eyebrow{display:inline-flex;align-items:center;gap:12px;padding:8px 18px 8px 14px;border-radius:999px;background:var(--cream);border:1px solid var(--line);font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--ink2);box-shadow:0 1px 0 rgba(255,255,255,.85) inset}
+.eyebrow .d{width:9px;height:9px;border-radius:50%;background:var(--sage-3);box-shadow:0 0 0 4px rgba(139,168,136,.28);animation:p 2.4s ease-in-out infinite}
+@keyframes p{50%{transform:scale(.85)}}
+
+h1.disp{margin-top:30px;font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:clamp(52px,9.4vw,138px);line-height:.94;letter-spacing:-.035em;font-weight:400;color:var(--ink)}
+h1.disp em{font-style:italic;font-weight:500;color:var(--moss)}
+h1.disp .leaf{position:relative;display:inline-block;color:var(--sage-3);font-style:italic;font-weight:500}
+h1.disp .leaf::after{content:"";position:absolute;left:-.06em;right:-.06em;bottom:.04em;height:.18em;background:var(--sage-2);z-index:-1;border-radius:50%;opacity:.55;transform:rotate(-.7deg)}
+h1.disp .terra{color:var(--terra);font-style:italic;font-weight:500}
+
+.sub{margin-top:34px;color:var(--ink2);font-size:18px;line-height:1.6;max-width:50ch;font-weight:400}
+.sub b{color:var(--moss);font-weight:600}
+.sub em{font-family:'Fraunces',serif;font-style:italic;color:var(--terra);font-weight:500}
+
+.cta-row{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:12px;padding:18px 30px;border-radius:999px;font-weight:500;font-size:15px;letter-spacing:.005em;transition:transform .25s,box-shadow .25s,background .25s;border:1px solid transparent}
+.btn-primary{background:var(--moss);color:var(--cream);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 22px rgba(61,90,58,.32)}
+.btn-primary:hover{transform:translateY(-2px);background:var(--sage-4);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 14px 30px rgba(61,90,58,.42)}
+.btn-ghost{background:var(--cream);color:var(--ink);border-color:var(--line2);box-shadow:0 1px 0 rgba(255,255,255,.85) inset,0 4px 14px rgba(26,36,24,.08)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--moss)}
+.btn-terra{background:var(--terra);color:var(--cream);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 22px rgba(196,122,74,.32)}
+
+.hero-meta{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0}
+.hero-meta .mt{padding:0 22px;border-right:1px solid var(--line)}
+.hero-meta .mt:first-child{padding-left:0}
+.hero-meta .mt:last-child{border-right:0;padding-right:0}
+.hero-meta .v{font-family:'Fraunces',serif;font-variation-settings:"opsz" 96;font-size:clamp(34px,4.6vw,52px);font-weight:400;letter-spacing:-.025em;line-height:1;color:var(--moss)}
+.hero-meta .v sup{font-size:.42em;font-weight:500;color:var(--terra);margin-left:3px}
+.hero-meta .l{margin-top:8px;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.16em}
+
+/* hero-side: layered pressed-leaf cards */
+.hero-side{position:relative;display:grid;gap:18px;align-content:start}
+.specimen{position:relative;padding:30px;border-radius:24px;background:var(--cream);border:1px solid var(--line);box-shadow:0 18px 44px -22px rgba(26,36,24,.28),0 1px 0 rgba(255,255,255,.85) inset;overflow:hidden}
+.specimen.tilt-l{transform:rotate(-1.4deg)}
+.specimen.tilt-r{transform:rotate(1.2deg)}
+.specimen .stamp{position:absolute;top:14px;right:14px;font-family:'Fraunces',serif;font-style:italic;font-size:11.5px;color:var(--terra);border:1px solid var(--terra);padding:3px 11px;border-radius:999px;letter-spacing:.04em}
+.specimen .lat{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--sage-3);letter-spacing:.02em}
+.specimen .v{margin-top:14px;font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:clamp(48px,6.4vw,76px);font-weight:400;letter-spacing:-.04em;line-height:.95;color:var(--ink)}
+.specimen .v sup{font-size:.36em;color:var(--moss);margin-left:4px;font-weight:500}
+.specimen .ru{margin-top:14px;font-size:14.5px;color:var(--ink2);line-height:1.5}
+.specimen .ru b{font-family:'Fraunces',serif;font-style:italic;font-weight:500;color:var(--moss)}
+
+.hero-side .leaf-svg{position:absolute;width:200px;height:240px;opacity:.16;pointer-events:none;z-index:0}
+.hero-side .leaf-svg.s1{top:-30px;right:-40px;color:var(--sage-3);transform:rotate(15deg)}
+.hero-side .leaf-svg.s2{bottom:-40px;left:-30px;color:var(--terra);transform:rotate(-25deg);width:170px;height:200px}
+
+.specimen-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.specimen-row .specimen{padding:22px}
+.specimen-row .specimen .v{font-size:42px}
+
+/* trust band — pressed paper */
+.trust{margin-top:60px;padding:26px 32px;border-radius:32px;background:var(--cream);border:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.85) inset,0 12px 32px -18px rgba(26,36,24,.18);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);position:relative}
+.trust-inner{display:flex;gap:48px;width:max-content;animation:m 32s linear infinite;font-family:'Fraunces',serif;font-style:italic;font-size:18px;color:var(--ink2)}
+.trust-inner span{white-space:nowrap;display:flex;align-items:center;gap:24px}
+.trust-inner span::after{content:"❦";color:var(--sage-3);font-size:.85em;font-style:normal}
+@keyframes m{to{transform:translateX(-50%)}}
+
+section{padding:110px 0;position:relative}
+.s-h{display:grid;gap:30px;grid-template-columns:1fr;align-items:end;margin-bottom:60px}
+@media(min-width:900px){.s-h{grid-template-columns:1.3fr .7fr}}
+.s-tag{display:inline-flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-style:italic;font-size:14.5px;color:var(--terra);align-self:start;margin-bottom:22px}
+.s-tag::before{content:"❦";color:var(--sage-3);font-style:normal}
+.s-h h2{font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:clamp(40px,6vw,82px);line-height:1;letter-spacing:-.035em;font-weight:400;color:var(--ink);max-width:18ch}
+.s-h h2 em{font-style:italic;color:var(--moss);font-weight:500}
+.s-h .right{font-size:14.5px;color:var(--muted);line-height:1.55;max-width:34ch;justify-self:start}
+@media(min-width:900px){.s-h .right{justify-self:end;text-align:right}}
+
+/* services as botanical specimen tiles */
+.svc{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:768px){.svc{grid-template-columns:repeat(6,1fr)}}
+.bot{position:relative;padding:34px;border-radius:28px;background:var(--cream);border:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 12px 30px -18px rgba(26,36,24,.16);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .3s;display:flex;flex-direction:column;overflow:hidden}
+.bot:hover{transform:translateY(-5px);box-shadow:0 1px 0 rgba(255,255,255,.8) inset,0 22px 44px -20px rgba(26,36,24,.24);border-color:var(--sage-2)}
+.bot.s1{grid-column:span 6;background:var(--sage-2);min-height:300px;color:var(--ink)}
+.bot.s1 .num{color:var(--moss)}
+@media(min-width:768px){.bot.s2{grid-column:span 3}.bot.s3{grid-column:span 3;background:var(--paper-2)}.bot.s4{grid-column:span 2}.bot.s5{grid-column:span 2;background:var(--terra-2)}.bot.s6{grid-column:span 2}}
+.bot .num{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--terra);letter-spacing:.04em}
+.bot .lat{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--sage-3);margin-top:4px}
+.bot h3{margin-top:18px;font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:26px;font-weight:500;letter-spacing:-.025em;line-height:1.1;color:var(--ink)}
+.bot.s1 h3{font-size:46px;font-weight:400}
+.bot p{margin-top:14px;font-size:14.5px;color:var(--ink2);line-height:1.6;flex:1;font-weight:400}
+.bot .leaf-bg{position:absolute;right:-20px;bottom:-30px;width:140px;height:160px;color:var(--sage-3);opacity:.12;pointer-events:none}
+.bot.s1 .leaf-bg{color:var(--moss);opacity:.18;width:200px;height:230px;right:-30px;bottom:-50px}
+.bot.s5 .leaf-bg{color:var(--terra);opacity:.2}
+
+/* metrics: garden bed */
+.met{display:grid;grid-template-columns:1fr;gap:0;margin-top:8px;border-radius:32px;background:var(--cream);border:1px solid var(--line);overflow:hidden;box-shadow:0 1px 0 rgba(255,255,255,.85) inset,0 16px 38px -22px rgba(26,36,24,.2)}
+@media(min-width:768px){.met{grid-template-columns:repeat(4,1fr)}}
+.peb{padding:42px 32px;border-bottom:1px solid var(--line);position:relative;transition:background .3s}
+@media(min-width:768px){.peb{border-bottom:0;border-right:1px solid var(--line)}.peb:last-child{border-right:0}}
+.peb:hover{background:rgba(168,192,164,.16)}
+.peb:nth-child(2){background:rgba(168,192,164,.22)}
+.peb:nth-child(2):hover{background:rgba(168,192,164,.32)}
+.peb:nth-child(3){background:rgba(232,162,118,.18)}
+.peb:nth-child(3):hover{background:rgba(232,162,118,.26)}
+.peb .lat{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--terra);letter-spacing:.04em}
+.peb .v{margin-top:18px;font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:clamp(54px,7vw,88px);font-weight:400;letter-spacing:-.04em;line-height:.9;color:var(--ink)}
+.peb .v sup{font-size:.36em;font-weight:500;color:var(--moss);margin-left:4px;vertical-align:top}
+.peb .l{margin-top:14px;font-size:14px;color:var(--ink2);line-height:1.5;font-weight:400}
+.peb .l em{font-family:'Fraunces',serif;font-style:italic;color:var(--moss)}
+
+/* pricing — pressed-petal cards */
+.pr{display:grid;grid-template-columns:1fr;gap:24px;margin-top:8px}
+@media(min-width:900px){.pr{grid-template-columns:repeat(3,1fr);gap:28px}}
+.pc{position:relative;padding:42px 36px;border-radius:32px;background:var(--cream);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .35s,box-shadow .35s,border-color .3s;box-shadow:0 1px 0 rgba(255,255,255,.85) inset,0 14px 36px -22px rgba(26,36,24,.18);overflow:hidden}
+.pc:hover{transform:translateY(-6px);box-shadow:0 1px 0 rgba(255,255,255,.85) inset,0 24px 50px -22px rgba(26,36,24,.28);border-color:var(--sage-2)}
+.pc.feat{background:var(--moss);color:var(--cream);transform:translateY(-12px);border-color:var(--sage-4)}
+.pc.feat:hover{transform:translateY(-18px)}
+.pc.bloom{background:var(--bloom)}
+.pc .ln{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--terra);letter-spacing:.04em}
+.pc.feat .ln{color:var(--terra-2)}
+.pc.bloom .ln{color:#7a3a4f}
+.pc .lat{font-family:'Fraunces',serif;font-style:italic;font-size:12.5px;color:var(--sage-3);margin-top:4px}
+.pc.feat .lat{color:var(--sage-2)}
+.pc.bloom .lat{color:#9b5872}
+.pc h3{margin-top:14px;font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:38px;font-weight:400;letter-spacing:-.03em;color:var(--ink)}
+.pc.feat h3{color:var(--cream)}
+.pc.bloom h3{color:#3a1822}
+.pc .price{margin-top:28px;font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:64px;font-weight:400;letter-spacing:-.04em;line-height:1;color:var(--moss)}
+.pc.feat .price{color:var(--cream)}
+.pc.bloom .price{color:#3a1822}
+.pc .price small{font-family:'Inter',sans-serif;display:block;margin-top:10px;font-size:.2em;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.16em}
+.pc.feat .price small{color:rgba(253,250,243,.7)}
+.pc.bloom .price small{color:rgba(58,24,34,.65)}
+.pc .desc{margin-top:18px;font-size:14.5px;line-height:1.55;color:var(--ink2);font-weight:400}
+.pc.feat .desc{color:rgba(253,250,243,.85)}
+.pc.bloom .desc{color:#3a1822}
+.pc ul{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:11px;flex:1}
+.pc li{font-size:14.5px;line-height:1.5;padding-left:24px;position:relative;color:var(--ink2);font-weight:400}
+.pc.feat li{color:rgba(253,250,243,.92)}
+.pc.bloom li{color:#3a1822}
+.pc li::before{content:"❦";position:absolute;left:0;top:1px;color:var(--sage-3);font-family:'Fraunces',serif}
+.pc.feat li::before{color:var(--terra-2)}
+.pc.bloom li::before{color:#9b5872}
+.pc .badge{position:absolute;top:-14px;right:32px;padding:7px 18px;border-radius:999px;background:var(--terra);color:var(--cream);font-family:'Fraunces',serif;font-style:italic;font-size:13px;font-weight:500;border:1px solid var(--terra);box-shadow:0 6px 16px rgba(196,122,74,.4)}
+.pc .btn{margin-top:32px;justify-content:center;width:100%}
+.pc .leaf-bg{position:absolute;left:-20px;bottom:-40px;width:130px;height:160px;color:var(--sage-3);opacity:.1;pointer-events:none}
+.pc.feat .leaf-bg{color:var(--cream);opacity:.14}
+.pc.bloom .leaf-bg{color:#7a3a4f;opacity:.18}
+
+/* contact — herbarium card */
+.ct{display:grid;grid-template-columns:1fr;gap:28px;margin-top:8px}
+@media(min-width:900px){.ct{grid-template-columns:1.05fr .95fr;gap:36px}}
+.ct-info{position:relative;padding:48px;border-radius:32px;background:var(--sage-2);border:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.6) inset,0 18px 40px -20px rgba(61,90,58,.4);overflow:hidden}
+.ct-info::before{content:"";position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(180deg,rgba(255,255,255,.35),transparent);pointer-events:none;border-radius:32px 32px 0 0}
+.ct-info .lat{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--moss);position:relative}
+.ct-info h3{margin-top:8px;font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:42px;font-weight:400;letter-spacing:-.03em;line-height:1.04;color:var(--ink);max-width:14ch;position:relative}
+.ct-info h3 em{font-style:italic;color:var(--moss);font-weight:500}
+.ct-info p{margin-top:20px;font-size:15px;line-height:1.6;color:var(--ink2);max-width:38ch;position:relative}
+.ct-info .info{margin-top:36px;display:flex;flex-direction:column;gap:12px;position:relative}
+.ct-info .info .it{display:flex;align-items:baseline;gap:18px;padding:14px 18px;border-radius:18px;background:var(--cream);border:1px solid rgba(255,255,255,.6);box-shadow:0 1px 0 rgba(255,255,255,.7) inset}
+.ct-info .info .it b{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--terra);width:80px;flex-shrink:0;font-weight:500}
+.ct-info .info .it span{font-size:14.5px;color:var(--ink2);font-weight:500}
+.ct-info .leaf-bg{position:absolute;right:-30px;bottom:-50px;width:240px;height:280px;color:var(--moss);opacity:.18;pointer-events:none}
+
+.ct-form{position:relative;padding:48px;border-radius:32px;background:var(--cream);border:1px solid var(--line);box-shadow:0 1px 0 rgba(255,255,255,.85) inset,0 18px 40px -22px rgba(26,36,24,.2);display:flex;flex-direction:column;gap:18px;overflow:hidden}
+.ct-form .lat{font-family:'Fraunces',serif;font-style:italic;font-size:14px;color:var(--terra)}
+.ct-form .ttl{font-family:'Fraunces',serif;font-variation-settings:"opsz" 144;font-size:32px;font-weight:400;letter-spacing:-.025em;line-height:1.05;color:var(--ink);margin-top:4px;margin-bottom:10px}
+.ct-form .ttl em{font-style:italic;color:var(--moss);font-weight:500}
+.ct-form label{font-family:'Fraunces',serif;font-style:italic;font-size:13px;color:var(--muted);margin-bottom:-10px;font-weight:500}
+.ct-form input{padding:16px 22px;border:1px solid var(--line);border-radius:14px;background:var(--paper);font-family:inherit;font-size:15px;font-weight:400;color:var(--ink);transition:border-color .25s,background .25s}
+.ct-form input:focus{outline:none;background:var(--cream);border-color:var(--sage-3);box-shadow:0 0 0 3px rgba(139,168,136,.18)}
+.ct-form input::placeholder{color:var(--dim)}
+.ct-form button{margin-top:14px;padding:20px;border:1px solid var(--moss);border-radius:999px;background:var(--moss);color:var(--cream);font-family:'Fraunces',serif;font-style:italic;font-size:16px;font-weight:500;cursor:pointer;letter-spacing:.005em;box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 8px 22px rgba(61,90,58,.3);transition:transform .25s,background .25s}
+.ct-form button:hover{transform:translateY(-2px);background:var(--sage-4)}
+
+footer{padding:64px 0;margin-top:80px;border-top:1px solid var(--line);background:var(--paper-2)}
+.f{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:center}
+.f span:first-child{font-family:'Fraunces',serif;font-style:italic;font-size:15px;color:var(--ink2)}
+.f span:last-child{font-size:12px;color:var(--muted);letter-spacing:.16em;text-transform:uppercase}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← к макетам</a>
+
+<div class="bar">
+  <div class="l"><span class="leaf">FF · Сад</span><span>concept 12</span><span>botanical</span></div>
+  <div class="r"><span>247 паллет свободно</span><a href="#contact" class="cta">Заявка</a></div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="leaf" viewBox="0 0 100 120">
+    <path d="M50 10 C 20 30, 10 70, 30 110 C 35 100, 40 90, 50 80 C 60 90, 65 100, 70 110 C 90 70, 80 30, 50 10 Z" fill="currentColor"/>
+    <path d="M50 10 L 50 110" stroke="rgba(0,0,0,.25)" stroke-width="1" fill="none"/>
+    <path d="M50 30 Q 35 38 28 50 M50 50 Q 32 58 25 70 M50 70 Q 35 78 28 88 M50 30 Q 65 38 72 50 M50 50 Q 68 58 75 70 M50 70 Q 65 78 72 88" stroke="rgba(0,0,0,.18)" stroke-width=".8" fill="none"/>
+  </symbol>
+  <symbol id="branch" viewBox="0 0 100 120">
+    <path d="M50 5 C 50 30 50 60 50 115" stroke="currentColor" stroke-width="1.6" fill="none"/>
+    <path d="M50 22 C 38 18 28 22 22 32 C 30 30 40 28 50 28 Z" fill="currentColor"/>
+    <path d="M50 42 C 62 38 72 42 78 52 C 70 50 60 48 50 48 Z" fill="currentColor"/>
+    <path d="M50 62 C 38 58 28 62 22 72 C 30 70 40 68 50 68 Z" fill="currentColor"/>
+    <path d="M50 82 C 62 78 72 82 78 92 C 70 90 60 88 50 88 Z" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<header class="hero shell">
+  <div>
+    <span class="eyebrow reveal"><span class="d"></span>культивируем поток · 24/7</span>
+    <h1 class="disp reveal d1">Фулфилмент,<br/>что <em>растёт</em><br/>из&nbsp;<span class="leaf">земли</span><span class="terra">.</span></h1>
+    <p class="sub reveal d2">Не цех с конвейером и&nbsp;криком. <b>Тихий сад операций</b>, где партия проходит каждый цикл — приёмка, маркировка, отгрузка — <em>без потерь и&nbsp;надрыва</em>.</p>
+    <div class="cta-row reveal d3">
+      <a href="#contact" class="btn btn-primary">Получить расчёт →</a>
+      <a href="#svc" class="btn btn-ghost">Что культивируем</a>
+      <a href="#tiers" class="btn btn-terra">Тарифы</a>
+    </div>
+    <div class="hero-meta reveal d4">
+      <div class="mt"><div class="v">99.6<sup>%</sup></div><div class="l">SLA, квартал</div></div>
+      <div class="mt"><div class="v">1.4M<sup>+</sup></div><div class="l">единиц / склад</div></div>
+      <div class="mt"><div class="v">347<sup>+</sup></div><div class="l">селлеров</div></div>
+    </div>
+  </div>
+
+  <aside class="hero-side reveal d2">
+    <svg class="leaf-svg s1" aria-hidden="true"><use href="#leaf"/></svg>
+    <svg class="leaf-svg s2" aria-hidden="true"><use href="#branch"/></svg>
+    <div class="specimen tilt-l">
+      <span class="stamp">spec. 01</span>
+      <div class="lat">— Operatio fidelis —</div>
+      <div class="v">99.6<sup>%</sup></div>
+      <div class="ru">квартальный <b>SLA отгрузки</b> на РЦ маркетплейсов. Закреплён в&nbsp;договоре, штраф за&nbsp;срыв — наш.</div>
+    </div>
+    <div class="specimen-row">
+      <div class="specimen tilt-r" style="background:var(--paper-2)">
+        <div class="lat">— Volumen —</div>
+        <div class="v">1.4M<sup>+</sup></div>
+        <div class="ru">единиц прошли через&nbsp;склад</div>
+      </div>
+      <div class="specimen tilt-l" style="background:var(--terra-2)">
+        <div class="lat">— Responsum —</div>
+        <div class="v">7<sup>m</sup></div>
+        <div class="ru">менеджер в&nbsp;Telegram</div>
+      </div>
+    </div>
+  </aside>
+</header>
+
+<div class="shell">
+  <div class="trust reveal">
+    <div class="trust-inner">
+      <span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span>
+      <span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span>
+    </div>
+  </div>
+</div>
+
+<section id="svc" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">— гербарий услуг · 01 —</span><h2 class="reveal d1">Шесть <em>культур</em><br/>одного сезона.</h2></div>
+    <p class="right reveal d2">Каждая линия — отдельный модуль с&nbsp;собственной нормой и&nbsp;ритмом. Соберите свою грядку.</p>
+  </div>
+  <div class="svc">
+    <article class="bot s1 reveal">
+      <span class="num">— 01 —</span>
+      <div class="lat">Receptio &amp; signum</div>
+      <h3>Приёмка<br/>и&nbsp;маркировка<br/><em class="serif" style="color:var(--moss)">с фотофиксацией</em></h3>
+      <p>Конвейер с&nbsp;поштучным фото каждой единицы. КИЗ, «Честный знак», штрихкоды WB и&nbsp;OZON. Брак отсеиваем на&nbsp;входе — никаких скрытых возвратов.</p>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#leaf"/></svg>
+    </article>
+    <article class="bot s2 reveal d1">
+      <span class="num">— 02 —</span><div class="lat">Transitus</div>
+      <h3>Сдача на&nbsp;РЦ</h3>
+      <p>Слоты Коледино, Электросталь, Подольск, Хоругвино, Тверь — по&nbsp;расписанию.</p>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#branch"/></svg>
+    </article>
+    <article class="bot s3 reveal d2">
+      <span class="num">— 03 —</span><div class="lat">Reditus &amp; cura</div>
+      <h3>Возвраты + QC</h3>
+      <p>Перебираем, переупаковываем, фотографируем. Брак — в&nbsp;утиль.</p>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#leaf"/></svg>
+    </article>
+    <article class="bot s4 reveal">
+      <span class="num">— 04 —</span><div class="lat">Hortus</div>
+      <h3>Своя зона</h3>
+      <p>1 500 м², инвентаризация раз в&nbsp;14 дней.</p>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#leaf"/></svg>
+    </article>
+    <article class="bot s5 reveal d1">
+      <span class="num">— 05 —</span><div class="lat">Connexio</div>
+      <h3>API в&nbsp;ERP</h3>
+      <p>1С / МойСклад / Битрикс24, webhook.</p>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#branch"/></svg>
+    </article>
+    <article class="bot s6 reveal d2">
+      <span class="num">— 06 —</span><div class="lat">Custos</div>
+      <h3>Личный супер</h3>
+      <p>Контроль смен, эскалации в&nbsp;Telegram.</p>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#leaf"/></svg>
+    </article>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">— урожай · 02 —</span><h2 class="reveal d1"><em>Реальные</em> цифры,<br/>не маркетинг.</h2></div>
+    <p class="right reveal d2">Снимок рабочего кабинета за&nbsp;последние 90&nbsp;дней. Без&nbsp;ретуши, без&nbsp;графического дизайна на&nbsp;бумаге.</p>
+  </div>
+  <div class="met reveal d1">
+    <div class="peb"><div class="lat">— Volumen —</div><div class="v">1.4M<sup>+</sup></div><div class="l">единиц через <em>склад</em> с&nbsp;момента запуска</div></div>
+    <div class="peb"><div class="lat">— Fidelitas —</div><div class="v">99.6<sup>%</sup></div><div class="l">отгрузка <em>в&nbsp;срок</em> · квартал</div></div>
+    <div class="peb"><div class="lat">— Responsum —</div><div class="v">7<sup>m</sup></div><div class="l">менеджер в&nbsp;<em>Telegram</em>, среднее</div></div>
+    <div class="peb"><div class="lat">— Cultores —</div><div class="v">347<sup>+</sup></div><div class="l">активных <em>селлеров</em> на&nbsp;потоке</div></div>
+  </div>
+</section>
+
+<section id="tiers" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">— сезоны · 03 —</span><h2 class="reveal d1">Цена <em>в&nbsp;лоб</em>.<br/>Без сюрпризов.</h2></div>
+    <p class="right reveal d2">Финальная ставка после короткого брифа по&nbsp;объёму. Без&nbsp;депозитов и&nbsp;звёздочек.</p>
+  </div>
+  <div class="pr">
+    <div class="pc reveal">
+      <span class="ln">— LIGHT —</span><div class="lat">Sprout</div>
+      <h3>Старт</h3>
+      <div class="price">14₽<small>/ ед, от</small></div>
+      <p class="desc">До 500 ед/мес. Базовый комплект для входа на&nbsp;маркетплейсы.</p>
+      <ul><li>Приёмка и&nbsp;сверка</li><li>Маркировка WB / OZON</li><li>Хранение 14 дней</li><li>ЛК + TG-бот</li></ul>
+      <a href="#contact" class="btn btn-ghost">Выбрать →</a>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#leaf"/></svg>
+    </div>
+    <div class="pc feat reveal d1">
+      <span class="badge">★ хит сезона</span>
+      <span class="ln">— PRO —</span><div class="lat">Bloom</div>
+      <h3>Боец</h3>
+      <div class="price">9₽<small>/ ед, от</small></div>
+      <p class="desc">500–10 000 ед/мес. Полный цикл с&nbsp;менеджером и&nbsp;SLA в&nbsp;договоре.</p>
+      <ul><li>Всё из «Старт»</li><li>Менеджер 7&nbsp;дней / нед</li><li>Возвраты + repack</li><li>Бронь любых РЦ</li><li>Хранение 30 дней</li><li>SLA 24ч в&nbsp;договоре</li></ul>
+      <a href="#contact" class="btn btn-terra">На&nbsp;ринг →</a>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#branch"/></svg>
+    </div>
+    <div class="pc bloom reveal d2">
+      <span class="ln">— ENTERPRISE —</span><div class="lat">Canopy</div>
+      <h3>Энтерпрайз</h3>
+      <div class="price">∞<small>по запросу</small></div>
+      <p class="desc">10 000+ ед/мес. Своя зона, кастомные SLA, API в&nbsp;ERP.</p>
+      <ul><li>Выделенная зона склада</li><li>Кастомные SLA</li><li>API-интеграция в&nbsp;ERP</li><li>Менеджмент кабинетов МП</li><li>Личный супервайзер</li></ul>
+      <a href="#contact" class="btn btn-primary">Обсудить →</a>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#leaf"/></svg>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">— посев · 04 —</span><h2 class="reveal d1">Договор<br/>за <em>48 часов.</em></h2></div>
+    <p class="right reveal d2">Перезвон в&nbsp;течение 7&nbsp;минут в&nbsp;рабочее время. Бриф 15 минут — расчёт сегодня.</p>
+  </div>
+  <div class="ct">
+    <div class="ct-info reveal">
+      <div class="lat">— Hortus communis —</div>
+      <h3>Бриф 15 минут — <em>расчёт сегодня.</em></h3>
+      <p>Без обязательных депозитов. Тестовая партия от&nbsp;50 ед. SLA закрепляем в&nbsp;договоре, не&nbsp;на&nbsp;словах.</p>
+      <div class="info">
+        <div class="it"><b>тел.</b><span>+7 985 417 28 63</span></div>
+        <div class="it"><b>почта</b><span>ring@fightclub-ff.ru</span></div>
+        <div class="it"><b>адрес</b><span>Дмитровское ш., 157с5</span></div>
+        <div class="it"><b>часы</b><span>пн–вс · 09—22</span></div>
+        <div class="it"><b>tg</b><span>@fightclub_ff</span></div>
+      </div>
+      <svg class="leaf-bg" aria-hidden="true"><use href="#branch"/></svg>
+    </div>
+    <form class="ct-form reveal d1" onsubmit="event.preventDefault();this.querySelector('button').textContent='Отправлено ❦';this.querySelector('button').style.background='var(--terra)';this.querySelector('button').style.borderColor='var(--terra)'">
+      <div class="lat">— Forma petitionis —</div>
+      <div class="ttl">Оставьте <em>заявку</em></div>
+      <label>имя</label><input required placeholder="Иван Петров"/>
+      <label>контакт</label><input required type="tel" placeholder="+7 / @telegram"/>
+      <label>объём в&nbsp;месяц</label><input placeholder="напр. 3 000 ед"/>
+      <label>категория и&nbsp;кабинеты</label><input placeholder="одежда, WB + OZON"/>
+      <button type="submit">Получить SLA-расчёт →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="shell f">
+    <span>© 2026 Бойцовский Клуб · Сад</span>
+    <span>concept 12 / botanical editorial</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
