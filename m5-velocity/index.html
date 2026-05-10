@@ -1,0 +1,225 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Бойцовский Клуб · Скорость — Editorial</title>
+<meta name="description" content="Швейцарский редакционный стиль фулфилмента. Большая типографика, табло-сетка, максимум воздуха."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#fafaf9;--ink:#0a0a0b;--paper:#fff;--muted:#52525b;--dim:#a1a1aa;--line:#e7e5e4;--line2:#d6d3d1;--accent:#dc2626}
+html,body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;min-height:100dvh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Geist Mono',monospace;letter-spacing:0;font-feature-settings:"tnum"}
+
+.back{position:fixed;top:18px;left:18px;z-index:70;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid var(--ink);background:var(--paper);font-family:'Geist Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink);transition:background .2s,color .2s}
+.back:hover{background:var(--ink);color:var(--paper)}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 24px 18px 220px;background:var(--bg);border-bottom:1px solid var(--line);font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+.bar .l,.bar .r{display:flex;gap:24px}
+.bar a.cta{padding:8px 16px;background:var(--ink);color:var(--paper);font-weight:500;letter-spacing:.1em}
+@media(max-width:780px){.bar{padding-left:170px;font-size:10px}.bar .l span:not(:first-child),.bar .r span:not(:last-child){display:none}}
+
+.shell{max-width:1440px;margin:0 auto;padding:0 32px}
+@media(min-width:768px){.shell{padding:0 56px}}
+
+.hero{padding:140px 0 80px;border-bottom:1px solid var(--ink)}
+.h-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:48px;font-family:'Geist Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.h-meta b{color:var(--ink);font-weight:500}
+@media(max-width:680px){.h-meta{grid-template-columns:1fr;gap:8px}}
+
+h1.disp{font-size:clamp(64px,14vw,220px);line-height:.84;letter-spacing:-.06em;font-weight:700;text-transform:uppercase}
+h1.disp .a{color:var(--accent);font-style:italic;font-weight:600}
+h1.disp .out{-webkit-text-stroke:2px var(--ink);color:transparent;font-weight:800}
+
+.lead{margin-top:64px;display:grid;grid-template-columns:1fr;gap:48px;border-top:1px solid var(--ink);padding-top:32px}
+@media(min-width:900px){.lead{grid-template-columns:1fr 1.4fr;gap:80px}}
+.lead .col-l{font-family:'Geist Mono',monospace;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;line-height:1.7}
+.lead .col-l b{color:var(--ink);font-weight:500;display:block;margin-bottom:6px}
+.lead p.body{font-size:22px;line-height:1.42;letter-spacing:-.015em;color:var(--ink);max-width:38ch}
+.lead p.body em{color:var(--accent);font-style:italic;font-weight:500}
+.lead .cta-row{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 24px;font-family:'Geist Mono',monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:500;transition:transform .2s,background .2s,color .2s}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--accent)}
+.btn-ghost{border:1px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+.banner{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);overflow:hidden;background:var(--paper)}
+.banner-track{display:flex;gap:80px;width:max-content;animation:s 38s linear infinite;padding:22px 0;font-family:'Geist',sans-serif;font-size:24px;font-weight:700;text-transform:uppercase;letter-spacing:-.03em;color:var(--ink)}
+.banner-track span{white-space:nowrap;display:flex;align-items:center;gap:32px}
+.banner-track span::after{content:"●";color:var(--accent);font-size:14px}
+@keyframes s{to{transform:translateX(-50%)}}
+
+section{padding:120px 0;border-bottom:1px solid var(--ink)}
+.s-meta{display:grid;grid-template-columns:1fr 1fr;gap:24px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:48px;font-family:'Geist Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.s-meta b{color:var(--ink);font-weight:500}
+.s-h{font-size:clamp(44px,7.5vw,124px);line-height:.88;letter-spacing:-.05em;font-weight:700;text-transform:uppercase;max-width:14ch}
+.s-h .a{color:var(--accent);font-style:italic;font-weight:600}
+
+/* table */
+.tbl{margin-top:64px;border-top:1px solid var(--ink)}
+.tbl-row{display:grid;grid-template-columns:80px 1fr 220px;gap:24px;padding:36px 0;border-bottom:1px solid var(--line);align-items:start;transition:padding .3s}
+@media(min-width:900px){.tbl-row{grid-template-columns:80px 1.5fr 1fr 200px;gap:32px}}
+@media(max-width:680px){.tbl-row{grid-template-columns:60px 1fr;gap:14px}.tbl-row .meta,.tbl-row .time{grid-column:span 2;padding-left:74px}}
+.tbl-row:hover{padding-left:14px}
+.tbl-n{font-family:'Geist Mono',monospace;font-size:18px;font-weight:500;color:var(--accent);letter-spacing:-.02em}
+.tbl-h{font-size:32px;font-weight:600;letter-spacing:-.025em;line-height:1.1}
+.tbl-row .meta{font-size:14.5px;color:var(--muted);line-height:1.55;max-width:36ch}
+.tbl-row .time{font-family:'Geist Mono',monospace;font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em;text-align:right}
+@media(max-width:899px){.tbl-row .time{text-align:left}}
+
+/* big stats grid */
+.stats{margin-top:64px;display:grid;grid-template-columns:1fr;border:1px solid var(--ink)}
+@media(min-width:768px){.stats{grid-template-columns:repeat(2,1fr)}}
+.st{padding:56px 36px;border-bottom:1px solid var(--ink);background:var(--paper)}
+@media(min-width:768px){.st{border-bottom:1px solid var(--ink);border-right:1px solid var(--ink)}.st:nth-child(2n){border-right:0}.st:nth-last-child(-n+2){border-bottom:0}}
+.st .k{font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted)}
+.st .v{margin-top:24px;font-size:clamp(80px,12vw,180px);line-height:.85;letter-spacing:-.06em;font-weight:700}
+.st .v .u{color:var(--accent);font-size:.45em;font-weight:600;font-style:italic}
+.st .l{margin-top:24px;font-size:15px;color:var(--muted);line-height:1.55;max-width:40ch}
+
+/* pricing as table */
+.price-tbl{margin-top:64px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+.pr-row{display:grid;grid-template-columns:1fr 1fr 200px;gap:24px;padding:48px 0;border-bottom:1px solid var(--line);align-items:end;transition:background .25s}
+.pr-row:last-child{border-bottom:0}
+.pr-row:hover{background:var(--paper)}
+.pr-row.feat{background:var(--ink);color:var(--paper);padding:48px 32px;margin:0 -32px;border:0}
+.pr-row.feat .pr-name,.pr-row.feat .pr-desc,.pr-row.feat .pr-price{color:var(--paper)}
+.pr-name{font-size:48px;font-weight:700;letter-spacing:-.04em;text-transform:uppercase;line-height:1}
+.pr-name .badge{display:inline-block;font-family:'Geist Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.12em;margin-left:14px;vertical-align:middle;text-transform:uppercase;font-weight:500}
+.pr-desc{font-size:14.5px;color:var(--muted);line-height:1.55;max-width:38ch}
+.pr-desc ul{margin-top:10px;list-style:none;font-family:'Geist Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.pr-row.feat .pr-desc ul{color:rgba(255,255,255,.55)}
+.pr-desc ul li{padding:3px 0}
+.pr-desc ul li::before{content:"+ ";color:var(--accent);font-weight:700}
+.pr-price{font-family:'Geist Mono',monospace;font-size:32px;font-weight:500;letter-spacing:-.02em;text-align:right;line-height:1}
+.pr-price small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:6px;font-weight:400}
+.pr-row.feat .pr-price small{color:rgba(255,255,255,.55)}
+@media(max-width:780px){.pr-row{grid-template-columns:1fr;gap:14px;text-align:left}.pr-price{text-align:left}.pr-row.feat{margin:0;padding:32px}}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr;gap:48px;margin-top:64px}
+@media(min-width:900px){.contact{grid-template-columns:1.2fr 1fr;gap:80px}}
+.c-info{font-family:'Geist Mono',monospace;font-size:14px;line-height:2.2;text-transform:uppercase;letter-spacing:.08em}
+.c-info b{color:var(--accent);font-weight:500;display:block;font-size:11px;letter-spacing:.16em;margin-top:24px}
+.c-info b:first-child{margin-top:0}
+.c-form{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--ink)}
+.c-form input{padding:22px 0;border:0;border-bottom:1px solid var(--ink);background:transparent;font-family:'Geist Mono',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink)}
+.c-form input::placeholder{color:var(--dim)}
+.c-form input:focus{outline:none;border-bottom-color:var(--accent)}
+.c-form button{margin-top:24px;padding:22px;background:var(--ink);color:var(--paper);border:0;font-family:'Geist Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.16em;cursor:pointer;font-weight:500;transition:background .2s}
+.c-form button:hover{background:var(--accent)}
+
+footer{padding:60px 0 40px;border-top:0}
+.f{display:grid;grid-template-columns:1fr 1fr;gap:14px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em}
+.f .r{text-align:right}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← К макетам</a>
+
+<div class="bar">
+  <div class="l"><span>FF · Скорость</span><span>№ 05</span><span>2026</span></div>
+  <div class="r"><span>Москва</span><a href="#contact" class="cta">Заявка →</a></div>
+</div>
+
+<header class="hero shell">
+  <div class="h-meta reveal">
+    <div><b>Выпуск</b>2026 / Q2 · v1.0</div>
+    <div><b>Контракт</b>WB · OZON · Lamoda</div>
+    <div><b>Свободно</b>247 паллетомест</div>
+  </div>
+  <h1 class="disp reveal d1">Скорость<br/><span class="out">не</span> <span class="a">обсуждается.</span></h1>
+  <div class="lead">
+    <div class="col-l reveal d2"><b>Кто мы</b>Фулфилмент-центр для селлеров маркетплейсов. Москва, 1 500 м², 347 активных контрактов. Подписываем SLA в договоре, не на словах.</div>
+    <div class="reveal d3">
+      <p class="body">Приёмка, маркировка и сдача поставки на РЦ — <em>за 24 часа.</em> Каждое движение партии — событие в логе ЛК.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn btn-primary">Получить расчёт →</a>
+        <a href="#proc" class="btn btn-ghost">Как мы работаем</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="banner"><div class="banner-track"><span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span><span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span></div></div>
+
+<section id="proc" class="shell">
+  <div class="s-meta reveal"><div><b>Раздел 01</b>Процесс</div><div style="text-align:right"><b>Дисциплина</b>5 раундов · 24 часа</div></div>
+  <h2 class="s-h reveal d1">Пять <span class="a">раундов</span> до полки.</h2>
+  <div class="tbl reveal d2">
+    <div class="tbl-row"><div class="tbl-n">01</div><div class="tbl-h">Забор</div><div class="meta">Курьер выезжает в течение 4 часов после заявки. Поштучная фиксация на точке.</div><div class="time">⏱ 0—4 ч</div></div>
+    <div class="tbl-row"><div class="tbl-n">02</div><div class="tbl-h">Приёмка</div><div class="meta">Сверка с УПД, фотопротокол брака, расхождения сразу в личный кабинет.</div><div class="time">⏱ +2 ч</div></div>
+    <div class="tbl-row"><div class="tbl-n">03</div><div class="tbl-h">Маркировка</div><div class="meta">КИЗ, «Честный знак», штрихкоды WB и OZON, термоэтикетки, упаковка.</div><div class="time">⏱ +6—10 ч</div></div>
+    <div class="tbl-row"><div class="tbl-n">04</div><div class="tbl-h">Сборка</div><div class="meta">Палетирование, обмотка, документы, бронь слота, подгон фуры.</div><div class="time">⏱ +4 ч</div></div>
+    <div class="tbl-row"><div class="tbl-n">05</div><div class="tbl-h">Сдача</div><div class="meta">Доставка на РЦ маркетплейса, фото-отчёт и УПД в личный кабинет.</div><div class="time">⏱ +4—8 ч</div></div>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="s-meta reveal"><div><b>Раздел 02</b>Цифры</div><div style="text-align:right"><b>Источник</b>ЛК · 90 дней</div></div>
+  <h2 class="s-h reveal d1">Каждая цифра — <span class="a">подтверждённый</span> KO.</h2>
+  <div class="stats reveal d2">
+    <div class="st"><div class="k">// 01 — Объём</div><div class="v">1.4M<span class="u">+</span></div><div class="l">единиц прошло через склад с момента запуска. Поштучная фотофиксация — 100% партий.</div></div>
+    <div class="st"><div class="k">// 02 — SLA</div><div class="v">99.6<span class="u">%</span></div><div class="l">отгрузка в срок за последний квартал. Контракт с пенальти при срыве.</div></div>
+    <div class="st"><div class="k">// 03 — Ответ</div><div class="v">7<span class="u">мин</span></div><div class="l">среднее время ответа персонального менеджера в Telegram в рабочее время.</div></div>
+    <div class="st"><div class="k">// 04 — Клиенты</div><div class="v">347<span class="u">+</span></div><div class="l">активных селлеров — от ИП с 5 SKU до брендов с тысячами артикулов.</div></div>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="s-meta reveal"><div><b>Раздел 03</b>Тарифы</div><div style="text-align:right"><b>Без депозитов</b>тестовая партия от 50 ед</div></div>
+  <h2 class="s-h reveal d1">Прозрачные ставки. <span class="a">Без сюрпризов.</span></h2>
+  <div class="price-tbl reveal d2">
+    <div class="pr-row">
+      <div class="pr-name">Старт</div>
+      <div class="pr-desc">До 500 ед/мес. Базовый комплект для входа на маркетплейсы.<ul><li>Приёмка и сверка</li><li>Маркировка WB / OZON</li><li>Хранение 14 дней</li><li>Личный кабинет + TG-бот</li></ul></div>
+      <div class="pr-price">14₽<small>за единицу, от</small></div>
+    </div>
+    <div class="pr-row feat">
+      <div class="pr-name">Боец<span class="badge">Хит</span></div>
+      <div class="pr-desc">500–10 000 ед/мес. Полный цикл с менеджером и SLA.<ul><li>Всё из «Старт»</li><li>Менеджер 7 дней / неделя</li><li>Возвраты + переупаковка</li><li>Бронь любых РЦ</li><li>Хранение 30 дней</li><li>SLA 24ч в договоре</li></ul></div>
+      <div class="pr-price">9₽<small>за единицу, от</small></div>
+    </div>
+    <div class="pr-row">
+      <div class="pr-name">Энтерпрайз</div>
+      <div class="pr-desc">10 000+ ед/мес. Своя зона, кастомные SLA, API в ERP.<ul><li>Выделенная зона</li><li>Кастомные SLA</li><li>API-интеграция</li><li>Личный супервайзер</li></ul></div>
+      <div class="pr-price">по запросу<small>после брифа</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="shell">
+  <div class="s-meta reveal"><div><b>Раздел 04</b>Заявка</div><div style="text-align:right"><b>Перезвон</b>7 минут в рабочее время</div></div>
+  <h2 class="s-h reveal d1">Подпишем договор <span class="a">за 48 часов.</span></h2>
+  <div class="contact reveal d2">
+    <div class="c-info">
+      <b>Телефон</b>+7 (985) 417 28 63<br/>
+      <b>Почта</b>ring@fightclub-ff.ru<br/>
+      <b>Адрес</b>Москва, Дмитровское ш., 157с5<br/>
+      <b>Часы</b>пн–вс · 09:00 — 22:00<br/>
+      <b>Telegram</b>@fightclub_ff
+    </div>
+    <form class="c-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Заявка отправлена ✓';this.querySelector('button').style.background='#22c55e'">
+      <input required placeholder="Имя"/>
+      <input required type="tel" placeholder="Телефон или Telegram"/>
+      <input placeholder="Объём в месяц (шт.)"/>
+      <input placeholder="Категория и кабинеты МП"/>
+      <button type="submit">Получить SLA-расчёт →</button>
+    </form>
+  </div>
+</section>
+
+<footer class="shell">
+  <div class="f"><span>© 2026 Бойцовский Клуб · Скорость</span><span class="r">concept 05 / editorial</span></div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
