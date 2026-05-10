@@ -1,0 +1,215 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Бойцовский Клуб · Конвейер — Фулфилмент WB / OZON</title>
+<meta name="description" content="Индустриальный фулфилмент-центр. Чистая приёмка, точная маркировка, отгрузка за 24 часа."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f5f1ea;--ink:#1c1917;--muted:#57534e;--dim:#a8a29e;--line:#d6d3d1;--line2:#e7e5e4;--accent:#ea580c;--paper:#fdfcf8}
+html,body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.01em;min-height:100dvh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Geist Mono',monospace;letter-spacing:0}
+.back{position:fixed;top:16px;left:16px;z-index:70;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--ink);border-radius:999px;background:var(--paper);font-size:13px;color:var(--ink);transition:transform .2s,background .2s}
+.back:hover{background:var(--ink);color:var(--paper)}
+.shell{max-width:1320px;margin:0 auto;padding:0 24px}
+@media(min-width:768px){.shell{padding:0 40px}}
+
+nav.top{position:fixed;top:16px;right:16px;z-index:60;display:flex;gap:8px;align-items:center;padding:8px 8px 8px 18px;border:1px solid var(--ink);border-radius:999px;background:var(--paper);font-size:13px}
+nav.top a.cta{padding:9px 16px;background:var(--ink);color:var(--paper);border-radius:999px;font-weight:500}
+
+.hero{padding:140px 0 80px;min-height:100dvh;display:flex;align-items:end;position:relative;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;width:100%;align-items:end}
+@media(min-width:1024px){.hero-grid{grid-template-columns:1.1fr .9fr;gap:80px}}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--accent);text-transform:uppercase;letter-spacing:.18em;padding:6px 12px;border:1px solid var(--accent);border-radius:0;background:var(--paper)}
+h1.disp{margin-top:32px;font-size:clamp(56px,11vw,160px);line-height:.86;letter-spacing:-.055em;font-weight:600;text-transform:uppercase}
+h1.disp .o{color:var(--accent)}
+h1.disp em{font-style:italic;font-weight:400}
+.sub{margin-top:36px;color:var(--muted);font-size:18px;line-height:1.5;max-width:46ch}
+.cta-row{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:18px 26px;border-radius:0;font-weight:500;font-size:14.5px;text-transform:uppercase;letter-spacing:.05em;font-family:'Geist Mono',monospace;transition:transform .2s,background .2s}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{transform:translateY(-2px);background:var(--accent)}
+.btn-ghost{border:1px solid var(--ink);color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+
+.hero-side{position:relative;border:1px solid var(--ink);background:var(--paper);padding:0;display:flex;flex-direction:column}
+.hs-h{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--ink);font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em}
+.hs-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(234,88,12,.18);animation:p 2s infinite}
+@keyframes p{50%{opacity:.4}}
+.hs-row{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;padding:18px 22px;border-bottom:1px dashed var(--line)}
+.hs-row:last-child{border-bottom:0}
+.hs-n{font-family:'Geist Mono',monospace;font-size:18px;color:var(--accent);font-weight:500}
+.hs-name{font-size:14.5px;font-weight:500}
+.hs-meta{font-family:'Geist Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.08em;margin-top:3px}
+.hs-val{font-family:'Geist Mono',monospace;font-size:12.5px;padding:4px 10px;border:1px solid var(--ink)}
+
+.bar{margin-top:60px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);overflow:hidden;background:var(--paper)}
+.bar-track{display:flex;gap:64px;width:max-content;animation:s 32s linear infinite;padding:18px 0;font-family:'Geist Mono',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.18em;color:var(--ink)}
+.bar-track span{white-space:nowrap;display:flex;align-items:center;gap:24px}
+.bar-track span::after{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%}
+@keyframes s{to{transform:translateX(-50%)}}
+
+section{padding:120px 0}
+.s-head{display:grid;grid-template-columns:1fr;gap:32px;margin-bottom:64px;align-items:end}
+@media(min-width:900px){.s-head{grid-template-columns:1fr auto}}
+.s-tag{font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--accent);text-transform:uppercase;letter-spacing:.18em;margin-bottom:18px}
+.s-h{font-size:clamp(40px,6vw,84px);font-weight:600;letter-spacing:-.04em;line-height:.96;max-width:18ch;text-transform:uppercase}
+.s-sub{color:var(--muted);font-size:15.5px;line-height:1.55;max-width:36ch;justify-self:start}
+@media(min-width:900px){.s-sub{justify-self:end;text-align:right}}
+
+.proc{border-top:1px solid var(--ink);display:grid;grid-template-columns:1fr}
+@media(min-width:900px){.proc{grid-template-columns:repeat(5,1fr)}}
+.step{padding:36px 24px;border-bottom:1px solid var(--ink);position:relative;background:var(--paper);transition:background .3s}
+@media(min-width:900px){.step{border-bottom:0;border-right:1px solid var(--ink)}.step:last-child{border-right:0}}
+.step:hover{background:var(--accent);color:var(--paper)}
+.step:hover .step-n,.step:hover .step-t{color:var(--paper)}
+.step-n{font-family:'Geist Mono',monospace;font-size:48px;font-weight:600;letter-spacing:-.04em;color:var(--ink)}
+.step h4{margin-top:24px;font-size:19px;font-weight:600;text-transform:uppercase;letter-spacing:-.01em}
+.step p{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.55}
+.step:hover p{color:rgba(255,255,255,.85)}
+.step-t{margin-top:20px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em}
+
+.svc{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+@media(min-width:768px){.svc{grid-template-columns:repeat(2,1fr)}}
+.svc-row{padding:48px 32px;border-bottom:1px solid var(--ink);display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start;background:var(--paper);transition:background .3s}
+@media(min-width:768px){.svc-row{border-right:1px solid var(--ink)}.svc-row:nth-child(2n){border-right:0}.svc-row:nth-last-child(-n+2){border-bottom:0}}
+@media(min-width:768px) and (max-width:899px){}
+.svc-row:hover{background:var(--bg)}
+.svc-num{font-family:'Geist Mono',monospace;font-size:13px;color:var(--accent);letter-spacing:.15em}
+.svc h3{font-size:24px;font-weight:600;letter-spacing:-.02em;line-height:1.15;text-transform:uppercase}
+.svc p{margin-top:12px;color:var(--muted);font-size:14.5px;line-height:1.6}
+.svc-tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:6px}
+.svc-tags span{font-family:'Geist Mono',monospace;font-size:10.5px;border:1px solid var(--ink);padding:4px 10px;text-transform:uppercase;letter-spacing:.08em}
+
+.kpi{display:grid;grid-template-columns:1fr;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);background:var(--paper)}
+@media(min-width:768px){.kpi{grid-template-columns:repeat(4,1fr)}}
+.kpi-c{padding:56px 28px;border-bottom:1px solid var(--ink);position:relative}
+@media(min-width:768px){.kpi-c{border-bottom:0;border-right:1px solid var(--ink)}.kpi-c:last-child{border-right:0}}
+.kpi-n{font-size:clamp(56px,7vw,92px);font-weight:600;letter-spacing:-.05em;line-height:.95;font-family:'Geist',sans-serif}
+.kpi-n .u{color:var(--accent);font-size:.55em;font-family:'Geist Mono',monospace;font-weight:500}
+.kpi-l{margin-top:18px;font-size:13px;color:var(--muted);line-height:1.5;text-transform:uppercase;letter-spacing:.06em;font-family:'Geist Mono',monospace}
+
+.cta{margin-top:0;padding:120px 0}
+.cta-box{background:var(--ink);color:var(--paper);padding:80px 48px;display:grid;grid-template-columns:1fr;gap:32px;align-items:end;position:relative;overflow:hidden}
+@media(min-width:900px){.cta-box{grid-template-columns:1.4fr 1fr;gap:64px;padding:96px 64px}}
+.cta-box h2{font-size:clamp(36px,5vw,72px);font-weight:600;letter-spacing:-.04em;line-height:.95;text-transform:uppercase;max-width:14ch}
+.cta-box h2 em{color:var(--accent);font-style:italic;font-weight:500}
+.cta-box p{color:rgba(255,255,255,.7);font-size:16px;line-height:1.55;max-width:42ch;margin-top:24px}
+.cta-form{display:flex;flex-direction:column;gap:12px}
+.cta-form input{padding:18px 18px;border:1px solid rgba(255,255,255,.2);background:transparent;color:var(--paper);font-family:inherit;font-size:15px;border-radius:0}
+.cta-form input::placeholder{color:rgba(255,255,255,.4)}
+.cta-form input:focus{outline:none;border-color:var(--accent)}
+.cta-form button{padding:18px;background:var(--accent);color:var(--paper);border:0;font-family:'Geist Mono',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.1em;cursor:pointer;transition:transform .2s}
+.cta-form button:hover{transform:translateY(-2px)}
+
+footer{padding:60px 0 40px;border-top:1px solid var(--ink);background:var(--paper)}
+.f-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;font-family:'Geist Mono',monospace;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← К макетам</a>
+
+<nav class="top">
+  <span class="mono" style="text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--muted)">FF · Конвейер</span>
+  <a href="#contact" class="cta">Расчёт →</a>
+</nav>
+
+<header class="hero shell">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow reveal">// Свободно 247 паллетомест</span>
+      <h1 class="disp reveal d1">Чистый<br/><em>конвейер.</em><br/><span class="o">Без подвалов.</span></h1>
+      <p class="sub reveal d2">Индустриальный фулфилмент-центр для селлеров Wildberries и OZON. 1500 м² адресного хранения, поштучная фотофиксация, отгрузка за 24 часа.</p>
+      <div class="cta-row reveal d3">
+        <a href="#contact" class="btn btn-primary">Получить расчёт →</a>
+        <a href="#proc" class="btn btn-ghost">Процесс</a>
+      </div>
+    </div>
+    <aside class="hero-side reveal d2">
+      <div class="hs-h"><span>Лента смены · 14:38 МСК</span><span class="hs-dot"></span></div>
+      <div class="hs-row"><span class="hs-n">01</span><div><div class="hs-name">Партия #B-2418 → WB Подольск</div><div class="hs-meta">418 ед · короб B-72</div></div><span class="hs-val">отгружено</span></div>
+      <div class="hs-row"><span class="hs-n">02</span><div><div class="hs-name">Партия #B-2419 → OZON Хоругвино</div><div class="hs-meta">маркировка КИЗ</div></div><span class="hs-val">в работе</span></div>
+      <div class="hs-row"><span class="hs-n">03</span><div><div class="hs-name">Возвраты WB · ТЦ Коледино</div><div class="hs-meta">переупаковка</div></div><span class="hs-val">42 шт</span></div>
+      <div class="hs-row"><span class="hs-n">04</span><div><div class="hs-name">Слот FBS · Электросталь</div><div class="hs-meta">бронь 16:30</div></div><span class="hs-val">+128 ед</span></div>
+    </aside>
+  </div>
+</header>
+
+<div class="shell"><div class="bar"><div class="bar-track"><span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span><span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span></div></div></div>
+
+<section id="proc" class="shell">
+  <div class="s-head">
+    <div><div class="s-tag reveal">// 01 Процесс</div><h2 class="s-h reveal d1">Пять станций. Без шума.</h2></div>
+    <p class="s-sub reveal d2">От заявки до сдачи на РЦ маркетплейса — каждый шаг с дедлайном и фиксацией в личном кабинете.</p>
+  </div>
+  <div class="proc reveal">
+    <div class="step"><div class="step-n">01</div><h4>Забор</h4><p>Курьер выезжает в течение 4 часов. Фиксируем мест на точке.</p><div class="step-t">⏱ 0—4 ч</div></div>
+    <div class="step"><div class="step-n">02</div><h4>Приёмка</h4><p>Поштучная сверка с УПД, фотопротокол брака, всё в ЛК.</p><div class="step-t">⏱ +2 ч</div></div>
+    <div class="step"><div class="step-n">03</div><h4>Маркировка</h4><p>WB / OZON, КИЗ, «Честный знак», термоэтикетки, упаковка.</p><div class="step-t">⏱ +6—10 ч</div></div>
+    <div class="step"><div class="step-n">04</div><h4>Сборка</h4><p>Палетирование, обмотка, документы, бронь слота.</p><div class="step-t">⏱ +4 ч</div></div>
+    <div class="step"><div class="step-n">05</div><h4>Сдача</h4><p>Доставка на РЦ, фото-отчёт и УПД в ЛК.</p><div class="step-t">⏱ +4—8 ч</div></div>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="s-head">
+    <div><div class="s-tag reveal">// 02 Услуги</div><h2 class="s-h reveal d1">Что закрываем целиком.</h2></div>
+    <p class="s-sub reveal d2">Полный операционный цикл — от забора у поставщика до возвратов с маркетплейса.</p>
+  </div>
+  <div class="svc reveal">
+    <div class="svc-row"><span class="svc-num">01</span><div><h3>Приёмка и маркировка</h3><p>Конвейер с фотофиксацией каждой единицы. КИЗ, «Честный знак», штрихкоды WB и OZON.</p><div class="svc-tags"><span>фото</span><span>КИЗ</span><span>УПД</span></div></div></div>
+    <div class="svc-row"><span class="svc-num">02</span><div><h3>Доставка на РЦ</h3><p>Слоты в Коледино, Электросталь, Подольск, Хоругвино, Тверь — по нашему или вашему графику.</p><div class="svc-tags"><span>fbo</span><span>fbs</span><span>слоты</span></div></div></div>
+    <div class="svc-row"><span class="svc-num">03</span><div><h3>Хранение</h3><p>Адресное хранение, инвентаризация раз в 14 дней. Отдельные зоны для food и косметики.</p><div class="svc-tags"><span>паллеты</span><span>ячейки</span><span>cold</span></div></div></div>
+    <div class="svc-row"><span class="svc-num">04</span><div><h3>Возвраты</h3><p>Перебираем, переупаковываем, фотографируем — годное обратно в продажу, брак в утиль.</p><div class="svc-tags"><span>QC</span><span>фото</span><span>repack</span></div></div></div>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="s-head">
+    <div><div class="s-tag reveal">// 03 Цифры</div><h2 class="s-h reveal d1">Данные из ЛК. 90 дней.</h2></div>
+    <p class="s-sub reveal d2">Не маркетинг — реальные показатели операционки. Покажем дашборд на встрече.</p>
+  </div>
+  <div class="kpi reveal">
+    <div class="kpi-c"><div class="kpi-n">1.4M<span class="u">+</span></div><div class="kpi-l">единиц через склад</div></div>
+    <div class="kpi-c"><div class="kpi-n">99.6<span class="u">%</span></div><div class="kpi-l">SLA отгрузки</div></div>
+    <div class="kpi-c"><div class="kpi-n">7<span class="u">мин</span></div><div class="kpi-l">ответ менеджера</div></div>
+    <div class="kpi-c"><div class="kpi-n">340<span class="u">+</span></div><div class="kpi-l">селлеров на потоке</div></div>
+  </div>
+</section>
+
+<section id="contact" class="cta shell">
+  <div class="cta-box reveal">
+    <div>
+      <div class="s-tag" style="color:var(--accent)">// 04 Заявка</div>
+      <h2 style="margin-top:18px">Запустите <em>конвейер</em> за 7 минут.</h2>
+      <p>Менеджер свяжется в Telegram или по телефону, рассчитает ставку под объём и категорию, пришлёт договор. Без скрытых платежей.</p>
+      <div class="mono" style="margin-top:32px;font-size:13px;color:rgba(255,255,255,.65);line-height:2">
+        +7 (985) 417 28 63<br/>ring@fightclub-ff.ru<br/>Москва, Дмитровское ш., 157с5
+      </div>
+    </div>
+    <form class="cta-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='ОТПРАВЛЕНО ✓';this.querySelector('button').style.background='#22c55e'">
+      <input required placeholder="Имя"/>
+      <input required type="tel" placeholder="Телефон или Telegram"/>
+      <input placeholder="Объём в месяц (шт.)"/>
+      <button type="submit">Получить расчёт →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="shell f-grid">
+    <span>© 2026 Бойцовский Клуб · Конвейер</span>
+    <span>v 1.0 · concept 02</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>

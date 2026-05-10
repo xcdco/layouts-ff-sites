@@ -1,0 +1,238 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Бойцовский Клуб · Гравитация — Cockpit</title>
+<meta name="description" content="Cockpit-режим фулфилмента. Сетка 1px, моноширинные цифры, всё под контролем."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--bg2:#0e0e10;--surf:#131316;--ink:#fafafa;--muted:#a1a1aa;--dim:#52525b;--line:rgba(255,255,255,.06);--line2:rgba(255,255,255,.12);--ok:#22c55e;--warn:#f59e0b;--err:#ef4444}
+html,body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.005em;min-height:100dvh;overflow-x:hidden;font-size:14px}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Geist Mono',monospace;letter-spacing:0;font-feature-settings:"tnum"}
+body{font-family:'Geist',sans-serif}
+body::before{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;mask:radial-gradient(ellipse at center,#000 0%,transparent 70%)}
+
+.back{position:fixed;top:14px;left:14px;z-index:70;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line2);border-radius:0;background:var(--surf);font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink);transition:background .2s,border-color .2s}
+.back:hover{background:var(--ok);color:#000;border-color:var(--ok)}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:14px 22px 14px 180px;border-bottom:1px solid var(--line);background:rgba(10,10,10,.85);backdrop-filter:blur(16px);font-family:'Geist Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.bar .l,.bar .r{display:flex;gap:24px;align-items:center}
+.bar .ok{color:var(--ok)}
+.bar .ok::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 10px var(--ok);margin-right:8px;animation:p 1.6s infinite}
+@keyframes p{50%{opacity:.4}}
+@media(max-width:780px){.bar{padding-left:140px}.bar .l span:not(:first-child),.bar .r span{display:none}}
+
+.shell{max-width:1480px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+.hero{padding:90px 0 32px;display:grid;grid-template-columns:1fr;gap:0;border-bottom:1px solid var(--line)}
+.hero-inner{display:grid;grid-template-columns:1fr;gap:32px}
+@media(min-width:1024px){.hero-inner{grid-template-columns:1.15fr .85fr;gap:48px;align-items:end}}
+.tag-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.tag{font-family:'Geist Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.16em;padding:5px 10px;border:1px solid var(--line2);color:var(--muted)}
+.tag.green{color:var(--ok);border-color:rgba(34,197,94,.4)}
+h1.disp{font-size:clamp(46px,7.6vw,108px);line-height:.9;letter-spacing:-.045em;font-weight:500;text-transform:none}
+h1.disp .g{color:var(--ok);font-family:'Geist Mono',monospace;font-weight:400}
+h1.disp em{font-style:italic;color:var(--muted);font-weight:400}
+.sub{margin-top:28px;color:var(--muted);font-size:15.5px;line-height:1.5;max-width:54ch}
+.cta-row{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:0;font-family:'Geist Mono',monospace;font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;transition:transform .2s,background .2s,color .2s}
+.btn-primary{background:var(--ok);color:#000;font-weight:500}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 0 0 1px var(--ok),0 0 24px rgba(34,197,94,.4)}
+.btn-ghost{border:1px solid var(--line2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ok);color:var(--ok)}
+
+.osc{position:relative;border:1px solid var(--line);background:var(--bg2);min-height:280px;display:flex;flex-direction:column}
+.osc-h{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line);font-family:'Geist Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted)}
+.osc-h .t{color:var(--ok)}
+.osc-svg{flex:1;width:100%;height:240px}
+.osc-svg path{stroke:var(--ok);stroke-width:1.4;fill:none;filter:drop-shadow(0 0 6px rgba(34,197,94,.45))}
+.osc-svg .grid line{stroke:var(--line);stroke-width:1}
+.osc-stat{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.osc-stat div{padding:14px 16px;border-right:1px solid var(--line)}
+.osc-stat div:last-child{border-right:0}
+.osc-stat .k{font-family:'Geist Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
+.osc-stat .v{margin-top:6px;font-family:'Geist Mono',monospace;font-size:18px;font-weight:500;color:var(--ink)}
+.osc-stat .v.ok{color:var(--ok)}
+
+.dash{padding:60px 0;border-bottom:1px solid var(--line)}
+.d-h{display:flex;justify-content:space-between;align-items:end;margin-bottom:32px;flex-wrap:wrap;gap:18px}
+.d-h h2{font-size:clamp(28px,3.6vw,46px);font-weight:500;letter-spacing:-.025em}
+.d-h .t{font-family:'Geist Mono',monospace;font-size:11px;color:var(--ok);text-transform:uppercase;letter-spacing:.16em}
+.d-grid{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line)}
+@media(min-width:768px){.d-grid{grid-template-columns:repeat(12,1fr)}}
+.cell{padding:24px 22px;border-bottom:1px solid var(--line);min-height:130px;display:flex;flex-direction:column;justify-content:space-between;background:var(--bg2);transition:background .25s}
+.cell:hover{background:var(--surf)}
+.cell .k{font-family:'Geist Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--dim)}
+.cell .v{margin-top:14px;font-family:'Geist Mono',monospace;font-size:32px;font-weight:500;letter-spacing:-.02em;line-height:1}
+.cell .v.ok{color:var(--ok)}
+.cell .v sup{font-size:.5em;color:var(--ok);vertical-align:super;font-weight:400}
+.cell .delta{font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--ok);margin-top:8px;letter-spacing:.06em}
+.cell .delta.down{color:var(--err)}
+.cell.span2{grid-column:span 1}
+@media(min-width:768px){
+.cell.span3{grid-column:span 3}.cell.span4{grid-column:span 4}.cell.span6{grid-column:span 6}.cell.span8{grid-column:span 8}.cell.span12{grid-column:span 12}
+.cell{border-right:1px solid var(--line)}.cell:last-child{border-right:0}
+}
+
+.spark{height:48px;margin-top:14px;display:flex;align-items:flex-end;gap:3px}
+.spark i{flex:1;background:linear-gradient(180deg,var(--ok),rgba(34,197,94,.2));min-height:6px;animation:bar 4s ease-in-out infinite alternate}
+.spark i:nth-child(1){--h:30%;height:30%;animation-delay:0s}.spark i:nth-child(2){--h:55%;height:55%;animation-delay:.2s}
+.spark i:nth-child(3){--h:42%;height:42%;animation-delay:.4s}.spark i:nth-child(4){--h:78%;height:78%;animation-delay:.6s}
+.spark i:nth-child(5){--h:65%;height:65%;animation-delay:.8s}.spark i:nth-child(6){--h:88%;height:88%;animation-delay:1s}
+.spark i:nth-child(7){--h:72%;height:72%;animation-delay:1.2s}.spark i:nth-child(8){--h:95%;height:95%;animation-delay:1.4s}
+.spark i:nth-child(9){--h:60%;height:60%;animation-delay:1.6s}.spark i:nth-child(10){--h:82%;height:82%;animation-delay:1.8s}
+@keyframes bar{from{transform:scaleY(.7)}to{transform:scaleY(1)}}
+
+.log{padding:60px 0;border-bottom:1px solid var(--line)}
+.log table{width:100%;border-collapse:collapse;font-family:'Geist Mono',monospace;font-size:12.5px}
+.log th,.log td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line)}
+.log th{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--dim);font-weight:500;background:var(--bg2)}
+.log td.ts{color:var(--dim)}
+.log td.id{color:var(--ink)}
+.log td .pill{display:inline-block;font-size:10px;padding:3px 8px;text-transform:uppercase;letter-spacing:.1em;border:1px solid currentColor}
+.log .ok{color:var(--ok)}.log .warn{color:var(--warn)}.log .err{color:var(--err)}
+.log tbody tr{transition:background .2s}
+.log tbody tr:hover{background:var(--bg2)}
+
+.ops{padding:60px 0;border-bottom:1px solid var(--line)}
+.ops-grid{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line)}
+@media(min-width:900px){.ops-grid{grid-template-columns:repeat(3,1fr)}}
+.op{padding:32px;border-bottom:1px solid var(--line);background:var(--bg2);transition:background .25s;position:relative}
+@media(min-width:900px){.op{border-bottom:0;border-right:1px solid var(--line)}.op:last-child{border-right:0}}
+.op:hover{background:var(--surf)}
+.op .n{font-family:'Geist Mono',monospace;font-size:10.5px;color:var(--ok);text-transform:uppercase;letter-spacing:.16em}
+.op h3{margin-top:20px;font-size:22px;font-weight:500;letter-spacing:-.015em;line-height:1.2}
+.op p{margin-top:12px;font-size:13.5px;color:var(--muted);line-height:1.55}
+.op ul{list-style:none;margin-top:18px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--dim)}
+.op ul li{padding:5px 0;border-bottom:1px dashed var(--line)}
+.op ul li::before{content:"▸ ";color:var(--ok)}
+
+footer{padding:48px 0;border-top:1px solid var(--line)}
+.f{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.14em}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.06s}.reveal.d2{transition-delay:.12s}.reveal.d3{transition-delay:.18s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← К макетам</a>
+
+<div class="bar">
+  <div class="l"><span>FF · Гравитация</span><span>v1.0</span><span>MOSCOW</span></div>
+  <div class="r"><span>247 PALLET FREE</span><span class="ok">SYSTEMS NOMINAL</span></div>
+</div>
+
+<header class="hero shell">
+  <div class="hero-inner">
+    <div>
+      <div class="tag-row reveal">
+        <span class="tag">// CONCEPT 03</span>
+        <span class="tag green">SLA 99.6%</span>
+        <span class="tag">FBO + FBS + EXPRESS</span>
+      </div>
+      <h1 class="disp reveal d1">Фулфилмент<br/>как <em>приборная</em><br/><span class="g">панель.</span></h1>
+      <p class="sub reveal d2">Каждое движение партии — событие в логе. Каждая цифра — на дашборде. Не «сделали», а конкретно: 1 240 ед., 14:38 МСК, фуру забронировали, фото в ЛК.</p>
+      <div class="cta-row reveal d3">
+        <a href="#contact" class="btn btn-primary">Запросить доступ →</a>
+        <a href="#dash" class="btn btn-ghost">Демо дашборда</a>
+      </div>
+    </div>
+    <div class="osc reveal d2">
+      <div class="osc-h"><span>OSC · отгрузки / 24h</span><span class="t mono">● live</span></div>
+      <svg class="osc-svg" viewBox="0 0 600 240" preserveAspectRatio="none">
+        <g class="grid"><line x1="0" y1="60" x2="600" y2="60"/><line x1="0" y1="120" x2="600" y2="120"/><line x1="0" y1="180" x2="600" y2="180"/></g>
+        <path d="M0,180 L40,170 L80,150 L120,160 L160,120 L200,140 L240,90 L280,110 L320,70 L360,80 L400,50 L440,75 L480,40 L520,60 L560,30 L600,55"/>
+      </svg>
+      <div class="osc-stat">
+        <div><div class="k">PEAK</div><div class="v ok">1248</div></div>
+        <div><div class="k">AVG</div><div class="v">782</div></div>
+        <div><div class="k">SLA</div><div class="v ok">99.6%</div></div>
+        <div><div class="k">ETA</div><div class="v">22m</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="dash" class="dash shell">
+  <div class="d-h">
+    <h2>Cockpit · 90 дней</h2>
+    <span class="t">// LIVE · auto-refresh 60s</span>
+  </div>
+  <div class="d-grid reveal">
+    <div class="cell span3"><div class="k">Units processed</div><div class="v">1.42M<sup>+</sup></div><div class="delta">↑ 18.4%</div></div>
+    <div class="cell span3"><div class="k">SLA отгрузки</div><div class="v ok">99.6<sup>%</sup></div><div class="delta">↑ 0.3 pp</div></div>
+    <div class="cell span3"><div class="k">Avg ответ TG</div><div class="v">7m</div><div class="delta">↓ 2m</div></div>
+    <div class="cell span3"><div class="k">Active sellers</div><div class="v">347</div><div class="delta">↑ 12</div></div>
+    <div class="cell span6"><div class="k">Throughput · units / day</div><div class="spark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="cell span3"><div class="k">Ошибки маркировки</div><div class="v ok">0.04<sup>%</sup></div><div class="delta down">↓ 0.02 pp</div></div>
+    <div class="cell span3"><div class="k">Возвраты</div><div class="v">2.7<sup>%</sup></div><div class="delta">флэт</div></div>
+  </div>
+</section>
+
+<section class="log shell">
+  <div class="d-h">
+    <h2>Event log · последние операции</h2>
+    <span class="t mono">// 18:24:07 МСК</span>
+  </div>
+  <div class="reveal" style="border:1px solid var(--line);overflow-x:auto">
+  <table>
+    <thead><tr><th>TS</th><th>ID</th><th>Поток</th><th>Назначение</th><th>Объём</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="ts">18:22:14</td><td class="id">#A-2418</td><td>FBO</td><td>WB · Подольск</td><td>1 240 ед</td><td><span class="pill ok">SHIPPED</span></td></tr>
+      <tr><td class="ts">18:18:02</td><td class="id">#A-2419</td><td>FBO</td><td>OZON · Хоругвино</td><td>418 ед</td><td><span class="pill warn">LABELING</span></td></tr>
+      <tr><td class="ts">18:14:40</td><td class="id">#A-2417</td><td>FBS</td><td>WB · Коледино</td><td>86 ед</td><td><span class="pill ok">SHIPPED</span></td></tr>
+      <tr><td class="ts">18:11:08</td><td class="id">#R-0974</td><td>RETURN</td><td>WB inbound</td><td>42 ед</td><td><span class="pill warn">QC</span></td></tr>
+      <tr><td class="ts">18:06:55</td><td class="id">#A-2416</td><td>FBO</td><td>OZON · Тверь</td><td>312 ед</td><td><span class="pill ok">SHIPPED</span></td></tr>
+      <tr><td class="ts">17:58:22</td><td class="id">#A-2415</td><td>FBS</td><td>Lamoda · Быково</td><td>54 ед</td><td><span class="pill err">SLOT REBOOK</span></td></tr>
+      <tr><td class="ts">17:51:09</td><td class="id">#A-2414</td><td>FBO</td><td>WB · Электросталь</td><td>892 ед</td><td><span class="pill ok">SHIPPED</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section id="contact" class="ops shell">
+  <div class="d-h">
+    <h2>Operations / тарифы</h2>
+    <span class="t">// 03 модуля</span>
+  </div>
+  <div class="ops-grid reveal">
+    <div class="op">
+      <div class="n">// MOD · STARTER</div>
+      <h3>Старт</h3>
+      <p>До 500 ед/мес. Базовая приёмка, маркировка, доставка на 1 РЦ.</p>
+      <ul><li>от 14₽ / ед</li><li>хранение 14 дней</li><li>ЛК + TG-бот</li></ul>
+    </div>
+    <div class="op" style="background:rgba(34,197,94,.04)">
+      <div class="n">// MOD · PRO ★</div>
+      <h3>Боец</h3>
+      <p>500–10 000 ед/мес. Полный цикл, персональный менеджер, бронь любых РЦ.</p>
+      <ul><li>от 9₽ / ед</li><li>хранение 30 дней</li><li>возвраты + repack</li><li>SLA 24ч</li></ul>
+    </div>
+    <div class="op">
+      <div class="n">// MOD · ENTERPRISE</div>
+      <h3>Энтерпрайз</h3>
+      <p>Своя зона на складе, кастомные SLA, API в вашу ERP.</p>
+      <ul><li>цена по запросу</li><li>выделенная зона</li><li>супервайзер</li></ul>
+    </div>
+  </div>
+  <div style="margin-top:48px;display:flex;gap:14px;flex-wrap:wrap" class="reveal">
+    <a href="tel:+79854172863" class="btn btn-primary">Запросить расчёт →</a>
+    <a href="https://t.me/fightclub_ff" class="btn btn-ghost">Telegram · 7 мин ответ</a>
+    <span class="mono" style="font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.14em;align-self:center">+7 985 417 28 63 · ring@fightclub-ff.ru</span>
+  </div>
+</section>
+
+<footer>
+  <div class="shell f">
+    <span>© 2026 Бойцовский Клуб · Гравитация</span>
+    <span>concept 03 / cockpit</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>

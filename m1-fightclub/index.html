@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#0a0a0b"/>
+<title>Бойцовский Клуб — Фулфилмент для Wildberries и OZON</title>
+<meta name="description" content="Фулфилмент-центр для селлеров WB и OZON. Приёмка, маркировка, отгрузка за 24 часа. Свой склад 1500+ м², личный кабинет, персональный менеджер."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0a0b;
+  --bg-2:#101013;
+  --surface:#131316;
+  --surface-2:#1a1a1f;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --text:#f4f4f5;
+  --muted:#a1a1aa;
+  --dim:#71717a;
+  --accent:#dc2626;
+  --accent-2:#ef4444;
+  --accent-soft:rgba(220,38,38,.14);
+  --radius:24px;
+  --radius-lg:32px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--text);font-family:'Geist',-apple-system,BlinkMacSystemFont,sans-serif;font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
+body{overflow-x:hidden;min-height:100dvh}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+::selection{background:var(--accent);color:#fff}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;letter-spacing:0}
+
+/* grain */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/></svg>")}
+
+/* glow blobs */
+.bg-glow{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bg-glow::before,.bg-glow::after{content:"";position:absolute;width:60vw;height:60vw;border-radius:50%;filter:blur(140px);opacity:.35}
+.bg-glow::before{background:radial-gradient(circle,#dc2626 0%,transparent 60%);top:-20vw;right:-20vw;animation:float1 24s ease-in-out infinite}
+.bg-glow::after{background:radial-gradient(circle,#7c2d12 0%,transparent 60%);bottom:-30vw;left:-20vw;animation:float2 28s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-6vw,4vw) scale(1.1)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(5vw,-5vw) scale(1.15)}}
+
+/* shell */
+.shell{max-width:1320px;margin:0 auto;padding:0 24px}
+@media(min-width:768px){.shell{padding:0 40px}}
+
+/* nav */
+nav.top{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;width:calc(100% - 32px);max-width:1280px;display:flex;align-items:center;justify-content:space-between;padding:10px 14px 10px 22px;border:1px solid var(--line);border-radius:999px;background:rgba(15,15,18,.65);backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 20px 50px -30px rgba(0,0,0,.6)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;letter-spacing:-.02em}
+.brand .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#dc2626,#7f1d1d);display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 24px rgba(220,38,38,.5)}
+.brand .mark svg{width:16px;height:16px}
+.nav-links{display:none;gap:28px;font-size:13.5px;color:var(--muted)}
+.nav-links a{transition:color .2s}
+.nav-links a:hover{color:#fff}
+@media(min-width:900px){.nav-links{display:flex}}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:#fff;color:#0a0a0b;font-weight:500;font-size:13.5px;transition:transform .2s ease,box-shadow .2s ease}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 30px -10px rgba(255,255,255,.4)}
+.nav-cta:active{transform:translateY(0) scale(.98)}
+
+/* hero */
+.hero{position:relative;padding:140px 0 80px;min-height:100dvh;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:end;width:100%}
+@media(min-width:1024px){.hero-grid{grid-template-columns:1.15fr .85fr;gap:80px}}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border:1px solid var(--line-2);border-radius:999px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.02);text-transform:uppercase;letter-spacing:.12em}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 12px #22c55e;animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+h1.display{margin-top:24px;font-size:clamp(44px,8.4vw,116px);line-height:.92;letter-spacing:-.045em;font-weight:600}
+h1.display em{font-style:normal;background:linear-gradient(180deg,#fff 0%,#a1a1aa 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1.display .red{color:var(--accent-2);font-style:italic;font-weight:500;background:linear-gradient(180deg,#ef4444,#991b1b);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{margin-top:28px;color:var(--muted);font-size:17px;line-height:1.55;max-width:48ch}
+.hero-cta-row{margin-top:40px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 26px;border-radius:14px;font-weight:500;font-size:15px;transition:transform .2s ease,box-shadow .2s ease,background .2s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 12px 40px -10px rgba(220,38,38,.6)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 50px -8px rgba(220,38,38,.75)}
+.btn-primary:active{transform:translateY(0) scale(.98)}
+.btn-ghost{border:1px solid var(--line-2);color:#fff;background:rgba(255,255,255,.02)}
+.btn-ghost:hover{background:rgba(255,255,255,.06)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:56px;border-top:1px solid var(--line);padding-top:28px;gap:24px}
+.stat .num{font-size:clamp(28px,4vw,40px);font-weight:600;letter-spacing:-.03em}
+.stat .num .unit{font-size:.55em;color:var(--accent-2);font-weight:500}
+.stat .lbl{margin-top:6px;font-size:12.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+
+/* hero card */
+.hero-card{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border-radius:var(--radius-lg);padding:24px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 40px 80px -30px rgba(0,0,0,.6)}
+.hc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.hc-head .ttl{font-size:12px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+.hc-pill{font-size:11px;color:#22c55e;border:1px solid rgba(34,197,94,.3);background:rgba(34,197,94,.08);padding:4px 10px;border-radius:999px}
+.hc-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px dashed var(--line)}
+.hc-row:last-child{border-bottom:0}
+.hc-row .l{display:flex;align-items:center;gap:12px}
+.hc-icn{width:32px;height:32px;border-radius:9px;background:var(--surface-2);display:grid;place-items:center;border:1px solid var(--line)}
+.hc-icn svg{width:15px;height:15px;color:var(--accent-2)}
+.hc-row .name{font-size:14px;font-weight:500}
+.hc-row .meta{font-size:11.5px;color:var(--dim);margin-top:2px}
+.hc-row .val{font-family:'Geist Mono',monospace;font-size:13px;color:#fff}
+.hc-row .val.up{color:#22c55e}
+.hc-bar{height:4px;background:var(--surface-2);border-radius:2px;overflow:hidden;margin-top:6px;width:90px}
+.hc-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:inherit;animation:fill 3s ease-in-out infinite alternate}
+@keyframes fill{from{width:30%}to{width:92%}}
+
+/* marquee */
+.marquee{margin-top:60px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 0;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marquee-track{display:flex;gap:64px;width:max-content;animation:scroll 30s linear infinite;align-items:center}
+.marquee-track span{font-size:18px;color:var(--dim);font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:14px}
+.marquee-track span::after{content:"";width:5px;height:5px;background:var(--accent);border-radius:50%;display:inline-block}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding:120px 0;position:relative}
+.s-head{display:grid;grid-template-columns:1fr;gap:32px;align-items:end;margin-bottom:64px}
+@media(min-width:900px){.s-head{grid-template-columns:1fr auto}}
+.s-tag{font-family:'Geist Mono',monospace;font-size:12px;color:var(--accent-2);text-transform:uppercase;letter-spacing:.18em;margin-bottom:18px}
+.s-h{font-size:clamp(36px,5.4vw,68px);font-weight:600;letter-spacing:-.04em;line-height:1.02;max-width:18ch}
+.s-h .accent{color:var(--accent-2);font-style:italic;font-weight:500}
+.s-sub{font-size:16px;color:var(--muted);line-height:1.55;max-width:42ch;justify-self:start}
+@media(min-width:900px){.s-sub{justify-self:end;text-align:right}}
+
+/* bento */
+.bento{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:768px){.bento{grid-template-columns:repeat(6,1fr)}}
+.tile{position:relative;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.005));border-radius:var(--radius-lg);padding:32px;overflow:hidden;transition:border-color .3s,transform .3s}
+.tile:hover{border-color:var(--line-2);transform:translateY(-3px)}
+.tile.lg{grid-column:span 1}
+@media(min-width:768px){
+  .tile.t1{grid-column:span 4}
+  .tile.t2{grid-column:span 2}
+  .tile.t3{grid-column:span 2}
+  .tile.t4{grid-column:span 2}
+  .tile.t5{grid-column:span 2}
+  .tile.t6{grid-column:span 3}
+  .tile.t7{grid-column:span 3}
+}
+.tile .t-num{font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--dim);letter-spacing:.15em}
+.tile h3{margin-top:16px;font-size:24px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.tile p{margin-top:12px;color:var(--muted);font-size:14.5px;line-height:1.6}
+.tile .icn{width:42px;height:42px;border-radius:12px;background:var(--accent-soft);border:1px solid rgba(220,38,38,.25);display:grid;place-items:center;margin-bottom:18px}
+.tile .icn svg{width:20px;height:20px;color:var(--accent-2)}
+.tile-graphic{position:absolute;inset:auto -20px -20px auto;opacity:.35;pointer-events:none}
+
+/* big-stat tile */
+.tile-stat .big{font-size:clamp(56px,8vw,96px);font-weight:600;letter-spacing:-.05em;line-height:.9;background:linear-gradient(180deg,#fff,#52525b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tile-stat .big sup{font-size:.4em;color:var(--accent-2);-webkit-text-fill-color:var(--accent-2);vertical-align:super}
+
+/* live list (intelligent list) */
+.live-list{margin-top:8px;display:flex;flex-direction:column;gap:8px}
+.ll-item{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.02);font-size:13px;transition:transform .4s cubic-bezier(.16,1,.3,1),background .3s}
+.ll-item .l{display:flex;align-items:center;gap:10px}
+.ll-item .d{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.ll-item.done .d{background:#22c55e;box-shadow:0 0 10px #22c55e}
+.ll-item .v{font-family:'Geist Mono',monospace;color:var(--dim);font-size:12px}
+
+/* process */
+.process{position:relative}
+.proc-grid{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+@media(min-width:900px){.proc-grid{grid-template-columns:repeat(5,1fr)}}
+.step{padding:36px 24px;border-bottom:1px solid var(--line);position:relative;transition:background .3s}
+@media(min-width:900px){.step{border-bottom:0;border-right:1px solid var(--line)}.step:last-child{border-right:0}}
+.step:hover{background:rgba(255,255,255,.02)}
+.step .n{font-family:'Geist Mono',monospace;font-size:12px;color:var(--accent-2);letter-spacing:.15em}
+.step h4{margin-top:20px;font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+.step p{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.55}
+.step .time{margin-top:20px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.12em}
+
+/* numbers strip */
+.numbers{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+@media(min-width:768px){.numbers{grid-template-columns:repeat(4,1fr)}}
+.num-cell{padding:48px 24px;border-bottom:1px solid var(--line)}
+@media(min-width:768px){.num-cell{border-bottom:0;border-right:1px solid var(--line)}.num-cell:last-child{border-right:0}}
+.num-cell .nn{font-size:clamp(44px,5.6vw,72px);font-weight:600;letter-spacing:-.05em;line-height:1}
+.num-cell .nn .u{color:var(--accent-2)}
+.num-cell .nl{margin-top:14px;font-size:13px;color:var(--muted);line-height:1.5;max-width:24ch}
+
+/* testimonials */
+.tst-grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:768px){.tst-grid{grid-template-columns:repeat(3,1fr)}}
+.tst{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.025),rgba(255,255,255,.005));border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:18px}
+.tst .quote{font-size:15.5px;line-height:1.55;color:#e4e4e7;flex:1}
+.tst .quote::before{content:"";display:block;width:24px;height:1px;background:var(--accent);margin-bottom:18px}
+.tst .who{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px dashed var(--line)}
+.tst .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#27272a,#3f3f46);display:grid;place-items:center;font-weight:600;font-size:14px;color:#fff}
+.tst .who .nm{font-size:14px;font-weight:500}
+.tst .who .role{font-size:12px;color:var(--dim);margin-top:2px}
+
+/* pricing */
+.tiers{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:900px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.tier{border:1px solid var(--line);border-radius:var(--radius-lg);padding:36px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.005));display:flex;flex-direction:column;position:relative}
+.tier.feat{border-color:rgba(220,38,38,.4);background:linear-gradient(180deg,rgba(220,38,38,.08),rgba(220,38,38,.02));box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 30px 60px -25px rgba(220,38,38,.45)}
+.tier .tname{font-family:'Geist Mono',monospace;font-size:12px;color:var(--accent-2);letter-spacing:.15em;text-transform:uppercase}
+.tier h3{margin-top:14px;font-size:28px;font-weight:600;letter-spacing:-.02em}
+.tier .price{margin-top:24px;display:flex;align-items:baseline;gap:8px}
+.tier .price .v{font-size:48px;font-weight:600;letter-spacing:-.04em}
+.tier .price .u{font-size:14px;color:var(--muted)}
+.tier .desc{margin-top:14px;font-size:14px;color:var(--muted);line-height:1.55}
+.tier ul{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:12px;flex:1}
+.tier li{display:flex;gap:12px;font-size:14px;color:#d4d4d8;line-height:1.5}
+.tier li svg{width:16px;height:16px;color:var(--accent-2);flex-shrink:0;margin-top:2px}
+.tier .btn{margin-top:32px;justify-content:center;width:100%}
+.tier-badge{position:absolute;top:18px;right:18px;font-size:10.5px;color:#fff;background:var(--accent);padding:4px 10px;border-radius:999px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+
+/* faq */
+.faq-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line);padding:0}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:26px 0;cursor:pointer;font-size:18px;font-weight:500;letter-spacing:-.01em;transition:color .2s;list-style:none}
+.faq-q::-webkit-details-marker{display:none}
+.faq-q:hover{color:var(--accent-2)}
+.faq-q .plus{width:32px;height:32px;border:1px solid var(--line-2);border-radius:50%;display:grid;place-items:center;transition:transform .3s,background .2s}
+details[open] .faq-q .plus{transform:rotate(45deg);background:var(--accent);border-color:var(--accent)}
+.faq-a{padding:0 0 26px;font-size:15px;color:var(--muted);line-height:1.65;max-width:72ch}
+
+/* cta block */
+.cta-block{position:relative;border:1px solid var(--line-2);border-radius:var(--radius-lg);padding:64px 40px;overflow:hidden;background:radial-gradient(circle at 80% 20%,rgba(220,38,38,.18),transparent 60%),linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01))}
+.cta-block::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'><path d='M0 30h60M30 0v60' stroke='rgba(255,255,255,.03)' stroke-width='1'/></svg>");pointer-events:none}
+.cta-block-inner{position:relative;display:grid;grid-template-columns:1fr;gap:32px;align-items:end}
+@media(min-width:900px){.cta-block-inner{grid-template-columns:1.3fr 1fr;gap:64px}}
+.cta-block h2{font-size:clamp(36px,4.6vw,56px);font-weight:600;letter-spacing:-.04em;line-height:1.04;max-width:18ch}
+.cta-block h2 em{font-style:italic;color:var(--accent-2);font-weight:500}
+.cta-block p{margin-top:20px;color:var(--muted);font-size:16px;line-height:1.55;max-width:50ch}
+.cta-form{display:flex;flex-direction:column;gap:14px}
+.cta-form input{padding:16px 18px;border-radius:14px;border:1px solid var(--line-2);background:rgba(0,0,0,.3);color:#fff;font-family:inherit;font-size:15px;transition:border-color .2s,background .2s}
+.cta-form input:focus{outline:none;border-color:var(--accent);background:rgba(0,0,0,.4)}
+.cta-form input::placeholder{color:var(--dim)}
+.cta-form .btn{justify-content:center}
+.cta-form small{color:var(--dim);font-size:12px;line-height:1.5}
+
+/* footer */
+footer{padding:80px 0 40px;border-top:1px solid var(--line);position:relative}
+.foot-grid{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:768px){.foot-grid{grid-template-columns:1.2fr repeat(3,1fr)}}
+.foot-col h5{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.15em;margin-bottom:18px}
+.foot-col a{display:block;font-size:14px;color:#d4d4d8;padding:6px 0;transition:color .2s}
+.foot-col a:hover{color:var(--accent-2)}
+.foot-bottom{margin-top:64px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--dim)}
+.huge-mark{position:absolute;left:0;right:0;bottom:-30px;font-size:clamp(80px,18vw,260px);font-weight:700;letter-spacing:-.06em;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,.04),transparent 70%);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:.85;pointer-events:none;user-select:none}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}
+.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}
+.reveal.d4{transition-delay:.32s}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01s !important;transition-duration:.01s !important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="bg-glow"></div>
+
+<a href="../" style="position:fixed;top:16px;left:16px;z-index:70;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(15,15,18,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);font-size:13px;color:#f4f4f5;font-family:'Geist',sans-serif;text-decoration:none;transition:transform .2s,background .2s" onmouseover="this.style.background='rgba(220,38,38,.2)'" onmouseout="this.style.background='rgba(15,15,18,.75)'">← К макетам</a>
+
+<nav class="top" style="left:auto;right:16px;transform:none;width:auto;max-width:none">
+  <a href="#" class="brand">
+    <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l6 6 6-6M6 20l6-6 6 6M4 12h16"/></svg></span>
+    Бойцовский&nbsp;Клуб
+  </a>
+  <div class="nav-links">
+    <a href="#services">Услуги</a>
+    <a href="#process">Процесс</a>
+    <a href="#pricing">Тарифы</a>
+    <a href="#faq">Вопросы</a>
+    <a href="#contact">Контакты</a>
+  </div>
+  <a href="#contact" class="nav-cta">Получить расчёт →</a>
+</nav>
+
+<header class="hero shell">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow reveal"><span class="dot"></span>Свободно 247&nbsp;паллетомест</span>
+      <h1 class="display reveal d1">
+        Фулфилмент,<br/>
+        <em>который выдерживает</em><br/>
+        <span class="red">любой раунд.</span>
+      </h1>
+      <p class="hero-sub reveal d2">Приёмка, маркировка и отгрузка на склады <b style="color:#fff">Wildberries</b> и <b style="color:#fff">OZON</b> за 24&nbsp;часа. Свой склад в&nbsp;Москве, личный кабинет, персональный менеджер. Без подвалов, без срывов сроков.</p>
+      <div class="hero-cta-row reveal d3">
+        <a href="#contact" class="btn btn-primary">Выйти на ринг →</a>
+        <a href="#process" class="btn btn-ghost">Как мы работаем</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat reveal d2">
+          <div class="num">24<span class="unit">ч</span></div>
+          <div class="lbl">SLA на отгрузку</div>
+        </div>
+        <div class="stat reveal d3">
+          <div class="num">1 500<span class="unit">м²</span></div>
+          <div class="lbl">Площадь склада</div>
+        </div>
+        <div class="stat reveal d4">
+          <div class="num">340<span class="unit">+</span></div>
+          <div class="lbl">Селлеров на ринге</div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="hero-card reveal d2">
+      <div class="hc-head">
+        <span class="ttl">Лента поставок · Live</span>
+        <span class="hc-pill">● онлайн</span>
+      </div>
+      <div class="hc-row">
+        <div class="l">
+          <div class="hc-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a4 4 0 018 0v2"/></svg></div>
+          <div>
+            <div class="name">FBO · Подольск WB</div>
+            <div class="meta">418 ед. · короб B-72</div>
+          </div>
+        </div>
+        <span class="val up">отгружено</span>
+      </div>
+      <div class="hc-row">
+        <div class="l">
+          <div class="hc-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l9-3 9 3v12l-9 3-9-3V6z"/><path d="M3 6l9 3 9-3M12 22V9"/></svg></div>
+          <div>
+            <div class="name">OZON · Хоругвино</div>
+            <div class="meta">маркировка</div>
+            <div class="hc-bar"><i></i></div>
+          </div>
+        </div>
+        <span class="val">в работе</span>
+      </div>
+      <div class="hc-row">
+        <div class="l">
+          <div class="hc-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div>
+            <div class="name">FBS · Коледино</div>
+            <div class="meta">слот забронирован 14:30</div>
+          </div>
+        </div>
+        <span class="val">+128 ед.</span>
+      </div>
+      <div class="hc-row">
+        <div class="l">
+          <div class="hc-icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.7L13 2.5a2 2 0 00-2 0L4 6.3A2 2 0 003 8v8a2 2 0 001 1.7l7 4a2 2 0 002 0l7-4a2 2 0 001-1.7z"/></svg></div>
+          <div>
+            <div class="name">Возвраты · WB</div>
+            <div class="meta">проверка качества</div>
+          </div>
+        </div>
+        <span class="val">42 шт.</span>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<div class="shell">
+  <div class="marquee reveal">
+    <div class="marquee-track">
+      <span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМегаМаркет</span><span>Авито</span><span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМегаМаркет</span><span>Авито</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES BENTO -->
+<section id="services" class="shell">
+  <div class="s-head">
+    <div>
+      <div class="s-tag reveal">// 01 — Услуги</div>
+      <h2 class="s-h reveal d1">Полный комплект <span class="accent">бойца</span> — от приёмки до возвратов.</h2>
+    </div>
+    <p class="s-sub reveal d2">Закрываем весь операционный фулфилмент, чтобы вы занимались только продажами и закупкой.</p>
+  </div>
+
+  <div class="bento">
+    <article class="tile t1 reveal">
+      <span class="t-num">01 / FFU</span>
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-6 9 6v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M9 22V12h6v10"/></svg></div>
+      <h3>Приёмка, маркировка, упаковка</h3>
+      <p>Конвейерная обработка с фотофиксацией каждой единицы. Маркируем «Честный знак», КИЗ, индивидуальные штрихкоды WB и OZON. Брак отсеиваем на входе — никаких скрытых возвратов.</p>
+      <div class="live-list" data-rotate>
+        <div class="ll-item done"><div class="l"><span class="d"></span>Партия #A-2418 · 1 240 ед.</span></div><span class="v">маркировано</span></div>
+        <div class="ll-item"><div class="l"><span class="d"></span>Партия #A-2419 · 412 ед.</span></div><span class="v">в очереди</span></div>
+        <div class="ll-item done"><div class="l"><span class="d"></span>Партия #A-2417 · 86 ед.</span></div><span class="v">отгружено</span></div>
+      </div>
+    </article>
+
+    <article class="tile t2 tile-stat reveal d1">
+      <span class="t-num">02 / SLA</span>
+      <div class="big" style="margin-top:18px">24<sup>ч</sup></div>
+      <p style="margin-top:auto">От поступления до загрузки в фуру маркетплейса. Жёсткий тайминг прописан в&nbsp;договоре.</p>
+    </article>
+
+    <article class="tile t3 reveal d2">
+      <span class="t-num">03 / DELIVERY</span>
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 3h5v13h-2"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/><path d="M3 13V6a3 3 0 013-3h10v14"/></svg></div>
+      <h3>Доставка на склады</h3>
+      <p>Слоты в Коледино, Электросталь, Подольск, Хоругвино, Тверь — по нашему расписанию или по&nbsp;вашему графику.</p>
+    </article>
+
+    <article class="tile t4 reveal d1">
+      <span class="t-num">04 / PICKUP</span>
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div>
+      <h3>Забор от поставщика</h3>
+      <p>Ежедневно вывозим из ТЯК, Садовода, Южных&nbsp;Ворот и любых других точек по&nbsp;Москве и&nbsp;области.</p>
+    </article>
+
+    <article class="tile t5 reveal d2">
+      <span class="t-num">05 / RETURNS</span>
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 0115-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 01-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></div>
+      <h3>Обработка возвратов</h3>
+      <p>Перебираем, переупаковываем, фотографируем, отправляем обратно в&nbsp;продажу. Невосстановимое — сразу в&nbsp;утиль.</p>
+    </article>
+
+    <article class="tile t6 reveal">
+      <span class="t-num">06 / STORAGE</span>
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="14" rx="1"/><path d="M3 11h18M9 6V4h6v2"/></svg></div>
+      <h3>Хранение: полки, паллеты, ячейки</h3>
+      <p>Адресное хранение с&nbsp;инвентаризацией раз в&nbsp;14 дней. Холодные стеллажи для&nbsp;косметики, отдельные зоны для&nbsp;food-категории.</p>
+    </article>
+
+    <article class="tile t7 reveal d1">
+      <span class="t-num">07 / TECH</span>
+      <div class="icn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg></div>
+      <h3>Личный кабинет 24/7</h3>
+      <p>Остатки, заявки на&nbsp;поставку, статусы, чек-листы фотофиксации, выгрузка в&nbsp;Excel. Telegram-бот пушит критичные события.</p>
+    </article>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="shell process">
+  <div class="s-head">
+    <div>
+      <div class="s-tag reveal">// 02 — Раунды</div>
+      <h2 class="s-h reveal d1">Пять раундов <span class="accent">до полки.</span></h2>
+    </div>
+    <p class="s-sub reveal d2">От заявки до поставки на склад маркетплейса — каждый шаг с дедлайном и фиксацией в&nbsp;ЛК.</p>
+  </div>
+
+  <div class="proc-grid reveal">
+    <div class="step">
+      <div class="n">R · 01</div>
+      <h4>Забор груза</h4>
+      <p>Курьер выезжает в&nbsp;течение 4&nbsp;часов после заявки. Фиксируем количество мест на&nbsp;точке.</p>
+      <div class="time">⏱ 0—4&nbsp;часа</div>
+    </div>
+    <div class="step">
+      <div class="n">R · 02</div>
+      <h4>Приёмка по&nbsp;шт.</h4>
+      <p>Поштучный пересчёт, сверка с&nbsp;УПД, фотопротокол брака. Расхождения в&nbsp;ЛК сразу.</p>
+      <div class="time">⏱ +2&nbsp;часа</div>
+    </div>
+    <div class="step">
+      <div class="n">R · 03</div>
+      <h4>Маркировка</h4>
+      <p>Штрихкоды WB/OZON, КИЗ, «Честный знак», термоэтикетки, инструкции, упаковка по&nbsp;стандартам МП.</p>
+      <div class="time">⏱ +6—10&nbsp;часов</div>
+    </div>
+    <div class="step">
+      <div class="n">R · 04</div>
+      <h4>Сборка поставки</h4>
+      <p>Палетирование, обмотка, документы, автоматическая бронь слота, подгон фуры.</p>
+      <div class="time">⏱ +4&nbsp;часа</div>
+    </div>
+    <div class="step">
+      <div class="n">R · 05</div>
+      <h4>Победный удар</h4>
+      <p>Доставка на&nbsp;РЦ Wildberries или OZON. Фото-отчёт о&nbsp;сдаче и&nbsp;УПД в&nbsp;ЛК.</p>
+      <div class="time">⏱ +4—8&nbsp;часов</div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="shell">
+  <div class="s-head">
+    <div>
+      <div class="s-tag reveal">// 03 — Цифры ринга</div>
+      <h2 class="s-h reveal d1">Каждая цифра — <span class="accent">подтверждённый</span> KO.</h2>
+    </div>
+    <p class="s-sub reveal d2">Не маркетинг — данные из&nbsp;ЛК за&nbsp;последние 90&nbsp;дней. Готовы показать в&nbsp;живом дашборде на&nbsp;встрече.</p>
+  </div>
+
+  <div class="numbers reveal">
+    <div class="num-cell">
+      <div class="nn">1.4M<span class="u">+</span></div>
+      <div class="nl">единиц прошло через склад с&nbsp;момента запуска</div>
+    </div>
+    <div class="num-cell">
+      <div class="nn">99.6<span class="u">%</span></div>
+      <div class="nl">SLA по&nbsp;отгрузке за&nbsp;последний квартал</div>
+    </div>
+    <div class="num-cell">
+      <div class="nn">7&nbsp;мин<span class="u">.</span></div>
+      <div class="nl">среднее время ответа персонального менеджера</div>
+    </div>
+    <div class="num-cell">
+      <div class="nn">340<span class="u">+</span></div>
+      <div class="nl">активных селлеров — от&nbsp;ИП до&nbsp;ООО с&nbsp;десятками SKU</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="shell">
+  <div class="s-head">
+    <div>
+      <div class="s-tag reveal">// 04 — Углы ринга</div>
+      <h2 class="s-h reveal d1">Что говорят те, <span class="accent">кто бьётся рядом.</span></h2>
+    </div>
+    <p class="s-sub reveal d2">Реальные кейсы селлеров, которые перешли к&nbsp;нам с&nbsp;других фулфилментов и&nbsp;«гаражных» решений.</p>
+  </div>
+
+  <div class="tst-grid">
+    <div class="tst reveal">
+      <p class="quote">До&nbsp;Бойцовского ездили по&nbsp;трём складам — теряли по&nbsp;партии в&nbsp;месяц на&nbsp;браке. За&nbsp;квартал тут — ноль расхождений и&nbsp;всё в&nbsp;ЛК. Полностью закрыл операционку.</p>
+      <div class="who">
+        <div class="av">КС</div>
+        <div><div class="nm">Ксения Шарифуллина</div><div class="role">Бренд одежды · WB&nbsp;+&nbsp;OZON · 18 SKU</div></div>
+      </div>
+    </div>
+    <div class="tst reveal d1">
+      <p class="quote">Менеджер Артём пишет в&nbsp;TG быстрее моей жены. Слот на&nbsp;Хоругвино перебронировали за&nbsp;ночь, иначе бы потерял неделю продаж по&nbsp;Black&nbsp;Friday.</p>
+      <div class="who">
+        <div class="av">РТ</div>
+        <div><div class="nm">Руслан Тимергалиев</div><div class="role">Электроника · OZON · 230 SKU</div></div>
+      </div>
+    </div>
+    <div class="tst reveal d2">
+      <p class="quote">Заехал на&nbsp;экскурсию, ожидал «подвал» — увидел нормальный склад с&nbsp;адресным хранением и&nbsp;камерами. После трёх лет на&nbsp;«дядюшке Васе» это другая планета.</p>
+      <div class="who">
+        <div class="av">МД</div>
+        <div><div class="nm">Марк Двойников</div><div class="role">Косметика · WB · 64 SKU</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="shell">
+  <div class="s-head">
+    <div>
+      <div class="s-tag reveal">// 05 — Тарифы</div>
+      <h2 class="s-h reveal d1">Прозрачные ставки <span class="accent">без сюрпризов.</span></h2>
+    </div>
+    <p class="s-sub reveal d2">Финальная стоимость зависит от&nbsp;объёма и&nbsp;категории. Все цифры — после короткого брифа.</p>
+  </div>
+
+  <div class="tiers">
+    <div class="tier reveal">
+      <div class="tname">// Любитель</div>
+      <h3>Старт</h3>
+      <div class="price"><span class="v">14</span><span class="u">₽ / единица, от</span></div>
+      <p class="desc">Для&nbsp;тех, кто только заходит на&nbsp;маркетплейсы — до&nbsp;500&nbsp;ед. в&nbsp;месяц.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Приёмка и&nbsp;поштучная сверка</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Маркировка штрихкодов WB / OZON</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Хранение 14&nbsp;дней бесплатно</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Доступ в&nbsp;ЛК и&nbsp;TG-бот</li>
+      </ul>
+      <a href="#contact" class="btn btn-ghost">Выбрать тариф</a>
+    </div>
+
+    <div class="tier feat reveal d1">
+      <span class="tier-badge">Хит</span>
+      <div class="tname">// Боец</div>
+      <h3>Профи</h3>
+      <div class="price"><span class="v">9</span><span class="u">₽ / единица, от</span></div>
+      <p class="desc">Оптимальный — для&nbsp;селлеров с&nbsp;потоком 500–10&nbsp;000&nbsp;ед./мес.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Всё из&nbsp;тарифа «Старт»</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Персональный менеджер 7д/нед.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Возвраты и&nbsp;переупаковка</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Бронь слотов на&nbsp;все РЦ</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Хранение 30&nbsp;дней бесплатно</li>
+      </ul>
+      <a href="#contact" class="btn btn-primary">На ринг →</a>
+    </div>
+
+    <div class="tier reveal d2">
+      <div class="tname">// Чемпион</div>
+      <h3>Энтерпрайз</h3>
+      <div class="price"><span class="v">по запросу</span></div>
+      <p class="desc">Для&nbsp;брендов с&nbsp;собственной зоной хранения и&nbsp;кастомным проце��сом.</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Выделенная зона на&nbsp;складе</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Кастомные SLA в&nbsp;договоре</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>API-интеграция в&nbsp;вашу&nbsp;ERP</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Менеджмент кабинетов МП</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12l5 5L20 7"/></svg>Личный супервайзер</li>
+      </ul>
+      <a href="#contact" class="btn btn-ghost">Обсудить</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="shell">
+  <div class="s-head">
+    <div>
+      <div class="s-tag reveal">// 06 — FAQ</div>
+      <h2 class="s-h reveal d1">Вопросы <span class="accent">в перерыве.</span></h2>
+    </div>
+    <p class="s-sub reveal d2">Если ответа нет ниже — пишите в&nbsp;Telegram, отвечаем за&nbsp;7&nbsp;минут в&nbsp;рабочее время.</p>
+  </div>
+
+  <div class="faq-list reveal">
+    <details class="faq-item"><summary class="faq-q">Работаете с самозанятыми и ИП без НДС?<span class="plus"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="faq-a">Да. Договор подписываем с&nbsp;ИП, ООО и&nbsp;самозанятыми. Закрывающие документы — ежемесячно через ЭДО или&nbsp;по&nbsp;почте.</div></details>
+    <details class="faq-item"><summary class="faq-q">Что с возвратами с маркетплейсов?<span class="plus"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="faq-a">Получаем возвраты на&nbsp;склад, делаем КК, фотофиксацию и&nbsp;разделяем поток: годное — в&nbsp;следующую поставку, брак — в&nbsp;утиль или&nbsp;вам обратно по&nbsp;запросу.</div></details>
+    <details class="faq-item"><summary class="faq-q">Можно приехать посмотреть склад?<span class="plus"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="faq-a">Обязательно. Записываем на&nbsp;экскурсию каждый будний день с&nbsp;10:00 до&nbsp;18:00. Покажем зоны приёмки, маркировки, хранения и&nbsp;сборки.</div></details>
+    <details class="faq-item"><summary class="faq-q">Как считаются деньги за хранение?<span class="plus"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="faq-a">Первые 14–30&nbsp;дней (зависит от&nbsp;тарифа) — бесплатно. Дальше — по&nbsp;паллетоместам или&nbsp;ячейкам с&nbsp;посуточным начислением. Все чек-поинты в&nbsp;ЛК.</div></details>
+    <details class="faq-item"><summary class="faq-q">Что если маркетплейс не примет поставку?<span class="plus"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="faq-a">Если непринятие по&nbsp;нашей вине (упаковка, маркировка, документы) — компенсируем рейс и&nbsp;переделываем за&nbsp;свой счёт. Прописано в&nbsp;договоре.</div></details>
+    <details class="faq-item"><summary class="faq-q">Минимальный объём?<span class="plus"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></span></summary><div class="faq-a">Берём от&nbsp;1&nbsp;паллеты или&nbsp;50&nbsp;единиц на&nbsp;тестовую поставку. Без обязательных депозитов и&nbsp;абонентских платежей.</div></details>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="shell">
+  <div class="cta-block reveal">
+    <div class="cta-block-inner">
+      <div>
+        <div class="s-tag">// 07 — Заявка</div>
+        <h2>Выходите <em>на ринг</em> — расчёт за&nbsp;7&nbsp;минут.</h2>
+        <p>Оставьте контакт — менеджер свяжется в&nbsp;Telegram или&nbsp;по&nbsp;телефону, рассчитает ставку под ваш объём и&nbsp;категорию, пришлёт договор. Без скрытых платежей.</p>
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:10px;font-family:'Geist Mono',monospace;font-size:13.5px;color:var(--muted)">
+          <div>📞&nbsp; +7&nbsp;(985)&nbsp;417&nbsp;28&nbsp;63</div>
+          <div>✉&nbsp;&nbsp; ring@fightclub-ff.ru</div>
+          <div>📍&nbsp; Москва, Дмитровское ш., 157с5</div>
+          <div>⏰&nbsp; пн–вс · 09:00 — 22:00</div>
+        </div>
+      </div>
+      <form class="cta-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Заявка отправлена ✓';this.querySelector('button').style.background='#22c55e'">
+        <input required placeholder="Как к вам обращаться"/>
+        <input required type="tel" placeholder="Телефон или Telegram"/>
+        <input placeholder="Объём в месяц (шт.) и категория"/>
+        <button type="submit" class="btn btn-primary">Получить расчёт →</button>
+        <small>Нажимая кнопку, соглашаетесь с&nbsp;обработкой персональных данных. Перезвоним в&nbsp;течение 7&nbsp;минут в&nbsp;рабочее время.</small>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="shell">
+  <div class="foot-grid">
+    <div class="foot-col">
+      <div class="brand" style="font-size:18px;margin-bottom:18px">
+        <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round"><path d="M6 4l6 6 6-6M6 20l6-6 6 6M4 12h16"/></svg></span>
+        Бойцовский&nbsp;Клуб
+      </div>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.6;max-width:36ch">Фулфилмент-центр для селлеров маркетплейсов. С&nbsp;2022&nbsp;года в&nbsp;ринге.</p>
+    </div>
+    <div class="foot-col">
+      <h5>Услуги</h5>
+      <a href="#services">Приёмка и&nbsp;маркировка</a>
+      <a href="#services">Хранение</a>
+      <a href="#services">Возвраты</a>
+      <a href="#services">Доставка на&nbsp;РЦ</a>
+    </div>
+    <div class="foot-col">
+      <h5>Маркетплейсы</h5>
+      <a href="#">Wildberries</a>
+      <a href="#">OZON</a>
+      <a href="#">Яндекс Маркет</a>
+      <a href="#">Lamoda</a>
+    </div>
+    <div class="foot-col">
+      <h5>Контакты</h5>
+      <a href="tel:+79854172863">+7 985 417 28 63</a>
+      <a href="https://t.me/fightclub_ff">Telegram</a>
+      <a href="mailto:ring@fightclub-ff.ru">ring@fightclub-ff.ru</a>
+      <a href="#">Политика конфиденциальности</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Бойцовский Клуб · ИНН 7700000000</span>
+    <span class="mono">v 1.0 · made in Moscow</span>
+  </div>
+  <div class="huge-mark" aria-hidden="true">FIGHT&nbsp;CLUB</div>
+</footer>
+
+<script>
+// scroll reveal
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
+},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// magnetic primary CTAs
+document.querySelectorAll('.btn-primary, .nav-cta').forEach(b=>{
+  b.addEventListener('mousemove',e=>{
+    const r=b.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.18;
+    const y=(e.clientY-r.top-r.height/2)*.25;
+    b.style.transform=`translate(${x}px, ${y - 1}px)`;
+  });
+  b.addEventListener('mouseleave',()=>{b.style.transform=''});
+});
+
+// intelligent list rotation
+document.querySelectorAll('[data-rotate]').forEach(list=>{
+  setInterval(()=>{
+    const items=Array.from(list.children);
+    const first=items.shift();
+    list.appendChild(first);
+    items.forEach(i=>i.classList.toggle('done', Math.random()>.5));
+  },2400);
+});
+
+// nav shrink on scroll
+let lastY=0;
+const nav=document.querySelector('nav.top');
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  if(y>20)nav.style.transform='translateX(-50%) translateY(0)';
+  if(y>lastY&&y>200)nav.style.opacity='.85';else nav.style.opacity='1';
+  lastY=y;
+},{passive:true});
+</script>
+</body>
+</html>
