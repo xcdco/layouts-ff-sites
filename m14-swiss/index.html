@@ -1,0 +1,375 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NaN Lab · Swiss — концепт 14 / редакционная сетка</title>
+<meta name="description" content="Швейцарская типографическая школа для лендинга фулфилмента. Сетка 12 колонок, минимум цвета, максимум воздуха."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#fafaf7; --paper-2:#f0f0ec; --ink:#0a0a0a; --ink2:#1a1a1a;
+  --muted:#525252; --dim:#737373; --line:#dcdcd5; --line-2:#bdbdb4;
+  --accent:#ff3d00;
+}
+html,body{background:var(--paper);color:var(--ink);font-family:'Inter Tight',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.011em;min-height:100dvh;overflow-x:hidden;line-height:1.45;font-feature-settings:"ss01","cv11"}
+a{color:inherit;text-decoration:none}
+.serif{font-family:'Instrument Serif',serif;font-style:italic;letter-spacing:-.005em}
+.mono{font-family:'JetBrains Mono',monospace;letter-spacing:-.01em}
+
+.back{position:fixed;top:20px;left:20px;z-index:80;display:inline-flex;align-items:center;gap:10px;padding:9px 16px;background:var(--paper);font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;color:var(--ink);border:1px solid var(--line);transition:background .2s,color .2s}
+.back:hover{background:var(--ink);color:var(--paper)}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:14px 24px 14px 200px;background:var(--paper);border-bottom:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.bar .l,.bar .r{display:flex;gap:24px;align-items:center}
+.bar .l b{color:var(--ink);font-weight:500}
+.bar .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:8px;animation:bl 1.6s infinite}
+@keyframes bl{50%{opacity:.3}}
+.bar a.cta{padding:7px 14px;background:var(--ink);color:var(--paper);font-weight:500;letter-spacing:.04em;text-transform:uppercase;font-size:10.5px}
+.bar a.cta:hover{background:var(--accent)}
+@media(max-width:780px){.bar{padding-left:160px;font-size:10px}.bar .l span:nth-child(n+2),.bar .r span:nth-child(n+1){display:none}.bar .r a.cta{display:inline-flex}}
+
+.shell{max-width:1380px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+@media(min-width:768px){.shell{padding:0 40px}}
+
+/* 12-col grid baseline */
+.g12{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;column-gap:24px}
+
+/* hero — асимметричный split: 8/4 */
+.hero{padding:140px 0 60px;border-bottom:1px solid var(--line)}
+.hero .g12{align-items:end}
+.hero .lead{grid-column:1 / span 12}
+@media(min-width:1024px){.hero .lead{grid-column:1 / span 8}.hero .side{grid-column:9 / span 4}}
+.kicker{display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:34px}
+.kicker .n{color:var(--accent)}
+.kicker .sp{flex:1;height:1px;background:var(--line)}
+
+h1.disp{font-size:clamp(48px,8.4vw,128px);line-height:.94;letter-spacing:-.045em;font-weight:500;color:var(--ink)}
+h1.disp em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--accent);letter-spacing:-.01em}
+h1.disp .b{display:block}
+
+.lede{margin-top:36px;display:grid;grid-template-columns:1fr;gap:24px;max-width:80ch}
+@media(min-width:768px){.lede{grid-template-columns:1fr 1fr}}
+.lede p{font-size:17px;line-height:1.55;color:var(--ink2)}
+.lede p b{color:var(--ink);font-weight:500}
+.lede p .serif{color:var(--ink);font-size:1.05em}
+
+.cta-row{margin-top:44px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:500;letter-spacing:-.005em;border:1px solid var(--ink);transition:background .2s,color .2s,transform .2s}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent)}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.btn .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px;line-height:1}
+
+.hero .side{margin-top:44px}
+@media(min-width:1024px){.hero .side{margin-top:0}}
+.idx{border-top:1px solid var(--ink);padding-top:18px}
+.idx .row{display:grid;grid-template-columns:24px 1fr auto;gap:14px;padding:14px 0;border-bottom:1px solid var(--line);align-items:baseline;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--ink)}
+.idx .row .num{color:var(--muted)}
+.idx .row .ttl{font-family:'Inter Tight',sans-serif;font-size:14.5px;font-weight:500;letter-spacing:-.005em}
+.idx .row .pg{color:var(--muted)}
+.idx .row a{display:contents}
+.idx .row:hover .ttl{color:var(--accent)}
+
+/* trust band — sober */
+.trust{padding:22px 0;border-bottom:1px solid var(--line)}
+.trust .g12{align-items:center}
+.trust .lab{grid-column:1 / span 12;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;margin-bottom:14px}
+@media(min-width:768px){.trust .lab{grid-column:1 / span 3;margin-bottom:0}}
+.trust .logos{grid-column:1 / span 12;display:flex;flex-wrap:wrap;gap:32px 48px;align-items:center}
+@media(min-width:768px){.trust .logos{grid-column:4 / span 9}}
+.trust .logos span{font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:var(--ink2);letter-spacing:-.02em}
+
+/* section heads */
+section{padding:90px 0;border-bottom:1px solid var(--line)}
+.s-h{margin-bottom:60px}
+.s-h .kicker{margin-bottom:30px}
+.s-h h2{font-size:clamp(36px,5.4vw,72px);line-height:.98;letter-spacing:-.035em;font-weight:500;color:var(--ink);max-width:18ch}
+.s-h h2 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--accent)}
+
+/* metrics — figure plate */
+.fig{padding:24px 0;border-top:1px solid var(--ink)}
+.fig .row{display:grid;grid-template-columns:1fr;gap:0;border-bottom:1px solid var(--line)}
+@media(min-width:768px){.fig .row{grid-template-columns:80px 1fr 1fr 1fr 1fr}}
+.fig .row .lbl{padding:22px 0;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;align-self:center}
+.fig .col{padding:22px 18px 22px 0;border-left:1px solid var(--line)}
+@media(max-width:767px){.fig .col{border-left:0;border-top:1px solid var(--line);padding:18px 0}}
+.fig .col .v{font-family:'Inter Tight',sans-serif;font-size:clamp(38px,4.2vw,56px);font-weight:400;letter-spacing:-.04em;line-height:1;color:var(--ink)}
+.fig .col .v sup{font-family:'Instrument Serif',serif;font-style:italic;font-size:.42em;color:var(--accent);font-weight:400;margin-left:3px;vertical-align:top;top:.4em}
+.fig .col .k{margin-top:10px;font-size:13.5px;color:var(--muted);line-height:1.4}
+.fig .col .k em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--ink)}
+
+/* services — editorial 12col list with prose */
+.svc{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--ink)}
+.svc-row{display:grid;grid-template-columns:1fr;gap:14px;padding:36px 0;border-bottom:1px solid var(--line);transition:background .25s}
+@media(min-width:900px){.svc-row{grid-template-columns:60px 3fr 6fr 2fr;gap:32px;align-items:start}}
+.svc-row:hover{background:var(--paper-2)}
+.svc-row .num{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted)}
+.svc-row h3{font-family:'Inter Tight',sans-serif;font-size:26px;font-weight:500;letter-spacing:-.025em;line-height:1.05;color:var(--ink)}
+.svc-row h3 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--accent)}
+.svc-row p{font-size:15px;line-height:1.55;color:var(--ink2);max-width:60ch}
+.svc-row p b{color:var(--ink);font-weight:500}
+.svc-row .meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;line-height:1.6}
+.svc-row .meta b{color:var(--ink);display:block;margin-bottom:4px;font-weight:500}
+
+/* pricing — strict 3-col plate */
+.tiers{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+@media(min-width:900px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.tier{padding:42px 32px 36px;border-bottom:1px solid var(--line);position:relative}
+@media(min-width:900px){.tier{border-bottom:0;border-right:1px solid var(--line)}.tier:last-child{border-right:0}}
+.tier.feat{background:var(--ink);color:var(--paper)}
+.tier .ln{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;padding-bottom:18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.tier.feat .ln{color:#a3a3a3;border-color:#262626}
+.tier.feat .ln .badge{color:var(--accent);font-weight:500}
+.tier h3{margin-top:24px;font-family:'Inter Tight',sans-serif;font-size:28px;font-weight:500;letter-spacing:-.025em;line-height:1;color:inherit}
+.tier h3 em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--accent)}
+.tier .price{margin-top:36px;font-size:64px;font-weight:400;letter-spacing:-.045em;line-height:1;color:inherit}
+.tier .price small{display:block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.02em;font-weight:400}
+.tier.feat .price small{color:#a3a3a3}
+.tier .desc{margin-top:18px;font-size:14.5px;color:var(--muted);line-height:1.5;min-height:3em}
+.tier.feat .desc{color:#a3a3a3}
+.tier ul{list-style:none;margin-top:30px;display:flex;flex-direction:column;gap:0}
+.tier li{padding:12px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.45;color:var(--ink2);display:grid;grid-template-columns:18px 1fr;gap:12px;align-items:baseline}
+.tier li::before{content:"+";color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:13px}
+.tier.feat li{color:#d4d4d4;border-color:#262626}
+.tier .btn{margin-top:32px;width:100%;justify-content:space-between}
+.tier.feat .btn-primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.tier.feat .btn-primary:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+
+/* contact — 2-col editorial */
+.ct{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--ink)}
+@media(min-width:900px){.ct{grid-template-columns:1fr 1fr}}
+.ct-info{padding:48px 36px;border-bottom:1px solid var(--line);position:relative}
+@media(min-width:900px){.ct-info{border-bottom:0;border-right:1px solid var(--line)}}
+.ct-info .quote{font-family:'Instrument Serif',serif;font-style:italic;font-size:clamp(28px,3.4vw,42px);line-height:1.15;letter-spacing:-.02em;color:var(--ink);max-width:18ch;font-weight:400}
+.ct-info .quote em{color:var(--accent)}
+.ct-info p{margin-top:30px;font-size:14.5px;color:var(--muted);line-height:1.55;max-width:42ch}
+.ct-info .info{margin-top:36px;display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+.ct-info .info .it{display:grid;grid-template-columns:90px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line);align-items:baseline;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em}
+.ct-info .info .it span{color:var(--ink);font-family:'Inter Tight',sans-serif;font-size:14.5px;letter-spacing:-.005em;font-weight:500}
+.ct-form{padding:48px 36px;display:grid;grid-template-columns:1fr;gap:0}
+.ct-form .ttl{font-family:'Inter Tight',sans-serif;font-size:24px;font-weight:500;letter-spacing:-.02em;line-height:1.1;color:var(--ink);padding-bottom:24px;border-bottom:1px solid var(--ink);margin-bottom:18px}
+.ct-form .ttl em{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--accent)}
+.ct-form .field{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:14px 0;border-bottom:1px solid var(--line);align-items:center}
+.ct-form .field label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;font-weight:400}
+.ct-form .field input{padding:8px 0;border:0;background:transparent;font-family:inherit;font-size:15px;color:var(--ink);letter-spacing:-.005em}
+.ct-form .field input:focus{outline:none}
+.ct-form .field input::placeholder{color:var(--dim)}
+.ct-form .field:focus-within{border-color:var(--ink)}
+.ct-form button{margin-top:28px;padding:16px 22px;background:var(--ink);color:var(--paper);border:1px solid var(--ink);font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:500;letter-spacing:-.005em;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s,border-color .2s}
+.ct-form button:hover{background:var(--accent);border-color:var(--accent)}
+.ct-form button .arr{font-family:'Instrument Serif',serif;font-style:italic;font-size:18px}
+
+footer{padding:48px 0 40px;background:var(--paper);border-top:1px solid var(--ink)}
+.f{display:grid;grid-template-columns:1fr;gap:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em}
+@media(min-width:768px){.f{grid-template-columns:1fr auto auto auto}}
+.f b{color:var(--ink);font-family:'Inter Tight',sans-serif;font-size:14px;font-weight:500;letter-spacing:-.01em}
+.f b em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--accent);font-weight:400}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.06s}.reveal.d2{transition-delay:.12s}.reveal.d3{transition-delay:.18s}.reveal.d4{transition-delay:.24s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← К макетам</a>
+
+<div class="bar">
+  <div class="l"><span><span class="dot"></span><b>NaN Lab</b></span><span>concept 14</span><span>swiss editorial</span></div>
+  <div class="r"><span>247 паллет свободно</span><a href="#contact" class="cta">Заявка</a></div>
+</div>
+
+<header class="hero shell">
+  <div class="g12">
+    <div class="lead">
+      <div class="kicker reveal"><span class="n">N° 14</span><span>Swiss / Editorial</span><span class="sp"></span><span>14.05.2026</span></div>
+      <h1 class="disp reveal d1">
+        <span class="b">Фулфилмент,</span>
+        <span class="b">собранный <em>как&nbsp;журнал</em></span>
+        <span class="b">— по сетке.</span>
+      </h1>
+      <div class="lede reveal d2">
+        <p>Партия проходит шесть колонок: <b>приёмка, маркировка, хранение, доставка, возврат, отчёт</b>. Каждая — отдельная статья с&nbsp;нормой, фотографией и&nbsp;дедлайном.</p>
+        <p><span class="serif">Без</span> срывов, скрытых возвратов и&nbsp;«мы перезвоним». Закрепляем SLA в&nbsp;договоре, не&nbsp;на&nbsp;слове.</p>
+      </div>
+      <div class="cta-row reveal d3">
+        <a href="#contact" class="btn btn-primary">Получить расчёт <span class="arr">→</span></a>
+        <a href="#svc" class="btn btn-ghost">Что внутри</a>
+      </div>
+    </div>
+    <aside class="side reveal d2">
+      <div class="idx">
+        <div class="row"><span class="num">01</span><span class="ttl">Приёмка и маркировка</span><span class="pg">↓ svc</span></div>
+        <div class="row"><span class="num">02</span><span class="ttl">Сдача на РЦ</span><span class="pg">↓ svc</span></div>
+        <div class="row"><span class="num">03</span><span class="ttl">Возвраты + QC</span><span class="pg">↓ svc</span></div>
+        <div class="row"><span class="num">04</span><span class="ttl">Хранение и&nbsp;инвентарь</span><span class="pg">↓ svc</span></div>
+        <div class="row"><span class="num">05</span><span class="ttl">API в&nbsp;ERP</span><span class="pg">↓ svc</span></div>
+        <div class="row"><span class="num">06</span><span class="ttl">Цифры и&nbsp;тарифы</span><span class="pg">↓ tier</span></div>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<div class="trust shell">
+  <div class="g12">
+    <div class="lab reveal">// контракты на&nbsp;полку</div>
+    <div class="logos reveal d1">
+      <span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span>
+    </div>
+  </div>
+</div>
+
+<section class="shell">
+  <div class="s-h">
+    <div class="kicker reveal"><span class="n">N° 02</span><span>Цифры за&nbsp;90&nbsp;дней</span><span class="sp"></span><span>источник: ЛК + CRM</span></div>
+    <h2 class="reveal d1">Не <em>обещания</em> —<br/>а строки из&nbsp;кабинета.</h2>
+  </div>
+  <div class="fig reveal">
+    <div class="row">
+      <div class="lbl">// Q-2026</div>
+      <div class="col"><div class="v">99.6<sup>%</sup></div><div class="k"><em>SLA</em> отгрузки на&nbsp;РЦ</div></div>
+      <div class="col"><div class="v">1.4M<sup>+</sup></div><div class="k">единиц через&nbsp;<em>склад</em></div></div>
+      <div class="col"><div class="v">7<sup>m</sup></div><div class="k">отклик менеджера, <em>среднее</em></div></div>
+      <div class="col"><div class="v">347<sup>+</sup></div><div class="k">активных <em>селлеров</em></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="svc" class="shell">
+  <div class="s-h">
+    <div class="kicker reveal"><span class="n">N° 03</span><span>Шесть колонок одной полосы</span><span class="sp"></span><span>модули</span></div>
+    <h2 class="reveal d1">Каждая услуга —<br/><em>статья</em> с&nbsp;нормой<br/>и дедлайном.</h2>
+  </div>
+  <div class="svc">
+    <article class="svc-row reveal">
+      <span class="num">— 01</span>
+      <h3>Приёмка и&nbsp;<em>маркировка</em></h3>
+      <p>Конвейер с&nbsp;поштучной фотофиксацией. <b>КИЗ, «Честный знак», штрихкоды&nbsp;WB и&nbsp;OZON.</b> Брак отсеиваем на&nbsp;входе — никаких скрытых возвратов через&nbsp;месяц.</p>
+      <div class="meta"><b>// норма</b>до 2 000&nbsp;ед / смену<br/><b>// доказательство</b>фото каждой&nbsp;ед.</div>
+    </article>
+    <article class="svc-row reveal d1">
+      <span class="num">— 02</span>
+      <h3>Сдача на&nbsp;<em>РЦ</em></h3>
+      <p>Слоты Коледино, Электросталь, Подольск, Хоругвино, Тверь — по&nbsp;расписанию. Машина на&nbsp;линии, водитель в&nbsp;TG.</p>
+      <div class="meta"><b>// рц</b>5 точек<br/><b>// окно</b>24&nbsp;ч</div>
+    </article>
+    <article class="svc-row reveal">
+      <span class="num">— 03</span>
+      <h3>Возвраты + <em>QC</em></h3>
+      <p>Перебираем, переупаковываем, фотографируем. <b>Брак — в&nbsp;утиль</b>. Годное — обратно на&nbsp;полку с&nbsp;новым штрихкодом.</p>
+      <div class="meta"><b>// repack</b>в&nbsp;день получения<br/><b>// фото</b>до и&nbsp;после</div>
+    </article>
+    <article class="svc-row reveal d1">
+      <span class="num">— 04</span>
+      <h3>Своя <em>зона</em> хранения</h3>
+      <p>1 500&nbsp;м² с&nbsp;инвентаризацией раз в&nbsp;14 дней. Расхождение по&nbsp;остатку — наша зона ответственности.</p>
+      <div class="meta"><b>// площадь</b>1 500&nbsp;м²<br/><b>// аудит</b>2&nbsp;нед.</div>
+    </article>
+    <article class="svc-row reveal">
+      <span class="num">— 05</span>
+      <h3>API в&nbsp;<em>ERP</em></h3>
+      <p>1С / МойСклад / Битрикс24 — нативные коннекторы. Webhook-уведомления о&nbsp;смене статуса, REST для&nbsp;остатков.</p>
+      <div class="meta"><b>// rest</b>open spec<br/><b>// hooks</b>real-time</div>
+    </article>
+    <article class="svc-row reveal d1">
+      <span class="num">— 06</span>
+      <h3>Личный <em>супер</em></h3>
+      <p>Один человек — на&nbsp;связи 7&nbsp;дней / нед. Эскалации в&nbsp;Telegram, ежедневная сводка в&nbsp;9:00.</p>
+      <div class="meta"><b>// канал</b>Telegram<br/><b>// сводка</b>09:00 МСК</div>
+    </article>
+  </div>
+</section>
+
+<section id="tiers" class="shell">
+  <div class="s-h">
+    <div class="kicker reveal"><span class="n">N° 04</span><span>Три тарифа</span><span class="sp"></span><span>без депозитов</span></div>
+    <h2 class="reveal d1">Цена <em>в&nbsp;лоб</em>.<br/>Без сюрпризов.</h2>
+  </div>
+  <div class="tiers reveal">
+    <div class="tier">
+      <div class="ln"><span>// LIGHT</span><span>01</span></div>
+      <h3>Старт</h3>
+      <div class="price">14₽<small>/ ед, от · до 500&nbsp;ед/мес</small></div>
+      <p class="desc">Базовый комплект для&nbsp;входа на&nbsp;маркетплейсы.</p>
+      <ul>
+        <li>Приёмка и&nbsp;сверка</li>
+        <li>Маркировка WB / OZON</li>
+        <li>Хранение 14 дней</li>
+        <li>ЛК + TG-бот</li>
+      </ul>
+      <a href="#contact" class="btn btn-ghost">Выбрать <span class="arr">→</span></a>
+    </div>
+    <div class="tier feat">
+      <div class="ln"><span>// PRO</span><span class="badge">★ хит</span></div>
+      <h3>Боец</h3>
+      <div class="price">9₽<small>/ ед, от · 500–10&nbsp;000&nbsp;ед/мес</small></div>
+      <p class="desc">Полный цикл с&nbsp;менеджером и&nbsp;SLA в&nbsp;договоре.</p>
+      <ul>
+        <li>Всё из «Старт»</li>
+        <li>Менеджер 7 дней&nbsp;/&nbsp;нед</li>
+        <li>Возвраты + repack</li>
+        <li>Бронь любых&nbsp;РЦ</li>
+        <li>Хранение 30 дней</li>
+        <li>SLA 24ч в&nbsp;договоре</li>
+      </ul>
+      <a href="#contact" class="btn btn-primary">На&nbsp;ринг <span class="arr">→</span></a>
+    </div>
+    <div class="tier">
+      <div class="ln"><span>// ENTERPRISE</span><span>03</span></div>
+      <h3>Энтерпрайз</h3>
+      <div class="price">∞<small>по&nbsp;запросу · 10&nbsp;000+&nbsp;ед/мес</small></div>
+      <p class="desc">Своя зона, кастомные&nbsp;SLA, API в&nbsp;ERP.</p>
+      <ul>
+        <li>Выделенная зона склада</li>
+        <li>Кастомные SLA</li>
+        <li>API-интеграция в&nbsp;ERP</li>
+        <li>Менеджмент кабинетов МП</li>
+        <li>Личный супервайзер</li>
+      </ul>
+      <a href="#contact" class="btn btn-ghost">Обсудить <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="shell" style="border-bottom:0">
+  <div class="s-h">
+    <div class="kicker reveal"><span class="n">N° 05</span><span>Договор за&nbsp;48&nbsp;часов</span><span class="sp"></span><span>перезвон 7&nbsp;мин</span></div>
+    <h2 class="reveal d1">Бриф 15&nbsp;минут —<br/><em>расчёт</em> сегодня.</h2>
+  </div>
+  <div class="ct reveal">
+    <div class="ct-info">
+      <div class="quote">«Мы не&nbsp;продаём <em>надежду</em>. Мы продаём строку SLA, на&nbsp;которой стоит подпись.»</div>
+      <p>Без обязательных депозитов. Тестовая партия от&nbsp;50&nbsp;ед. SLA закрепляем в&nbsp;договоре, не&nbsp;на&nbsp;словах.</p>
+      <div class="info">
+        <div class="it">// тел<span>+7 999 999 33 68</span></div>
+        <div class="it">// почта<span>email@example.com</span></div>
+        <div class="it">// адрес<span>Г. Москва, ул. Московская, д. 9, кв 5</span></div>
+        <div class="it">// часы<span>пн–вс · 09—22</span></div>
+        <div class="it">// tg<span>@nanlab</span></div>
+      </div>
+    </div>
+    <form class="ct-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Отправлено →';this.querySelector('button').style.background='var(--accent)';this.querySelector('button').style.borderColor='var(--accent)'">
+      <div class="ttl">Оставьте <em>заявку</em></div>
+      <div class="field"><label>// имя</label><input required placeholder="Иван Петров"/></div>
+      <div class="field"><label>// контакт</label><input required type="tel" placeholder="+7 / @telegram"/></div>
+      <div class="field"><label>// объём / мес</label><input placeholder="напр. 3 000 ед"/></div>
+      <div class="field"><label>// категория</label><input placeholder="одежда, WB + OZON"/></div>
+      <button type="submit">Получить SLA-расчёт <span class="arr">→</span></button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="shell f">
+    <span><b>NaN Lab <em>·</em> FF Layouts</b></span>
+    <span>concept 14 / swiss editorial</span>
+    <span>© 2026 Moscow</span>
+    <span>v 1.0</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
