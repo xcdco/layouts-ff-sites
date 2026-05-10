@@ -1,0 +1,241 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Бойцовский Клуб · Терминал — CRT/CLI</title>
+<meta name="description" content="CRT-терминал фулфилмента. Зелёный фосфор, моноширинный код, всё командой."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Geist:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#020a04;--bg2:#041209;--surf:#0a1c10;--ink:#86efac;--ink-hi:#bbf7d0;--ink-lo:#4ade80;--muted:#22c55e;--dim:#166534;--line:rgba(134,239,172,.18);--line2:rgba(134,239,172,.36);--accent:#bef264;--err:#ef4444;--warn:#fbbf24}
+html,body{background:var(--bg);color:var(--ink);font-family:'JetBrains Mono',monospace;-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden;font-size:14px;line-height:1.55}
+a{color:inherit;text-decoration:none}
+.geist{font-family:'Geist',sans-serif;letter-spacing:-.02em}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:55;background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0,rgba(0,0,0,.18) 1px,transparent 1px,transparent 3px);mix-blend-mode:multiply}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:56;background:radial-gradient(ellipse at center,transparent 30%,rgba(0,0,0,.55) 100%)}
+.flicker{position:fixed;inset:0;pointer-events:none;z-index:57;background:rgba(134,239,172,.02);animation:flick 7s steps(2) infinite}
+@keyframes flick{0%,100%{opacity:1}50%{opacity:.94}97%{opacity:.7}}
+
+.back{position:fixed;top:14px;left:14px;z-index:80;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--ink);background:var(--bg2);font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink);transition:background .2s}
+.back:hover{background:var(--ink);color:var(--bg)}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:12px 18px 12px 180px;border-bottom:1px solid var(--line);background:var(--bg);font-size:11px;text-transform:uppercase;letter-spacing:.16em;color:var(--ink-lo)}
+.bar .l,.bar .r{display:flex;gap:18px;align-items:center}
+.bar .ok{color:var(--ink-hi)}
+.bar .ok::before{content:"●";color:var(--ink-hi);margin-right:6px;animation:p 1.6s infinite;text-shadow:0 0 8px var(--ink-hi)}
+@keyframes p{50%{opacity:.4}}
+@media(max-width:780px){.bar{padding-left:140px;font-size:10px}.bar .l span:not(:first-child),.bar .r span{display:none}}
+
+.shell{max-width:1320px;margin:0 auto;padding:0 22px;position:relative;z-index:1}
+
+/* terminal frame */
+.term{margin-top:80px;border:1px solid var(--ink);background:var(--bg2);box-shadow:0 0 0 1px var(--line),0 0 60px rgba(74,222,128,.14),inset 0 0 0 1px rgba(0,0,0,.4)}
+.term-h{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);background:var(--surf);font-size:10.5px;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-lo)}
+.term-h .dots{display:flex;gap:6px}
+.term-h .dots i{width:10px;height:10px;border-radius:50%;border:1px solid var(--line2)}
+.term-h .dots i:nth-child(1){background:var(--err)}
+.term-h .dots i:nth-child(2){background:var(--warn)}
+.term-h .dots i:nth-child(3){background:var(--ink-hi)}
+.term-body{padding:32px 28px}
+
+.prompt{color:var(--ink-lo)}
+.prompt::before{content:"$ ";color:var(--ink-hi);text-shadow:0 0 8px var(--ink-hi)}
+.cur{display:inline-block;width:9px;height:16px;background:var(--ink-hi);vertical-align:-2px;margin-left:4px;animation:bl 1.05s steps(2) infinite;box-shadow:0 0 10px var(--ink-hi)}
+@keyframes bl{50%{opacity:0}}
+
+.banner{margin-top:24px;padding:18px 0;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);font-family:'JetBrains Mono',monospace;color:var(--ink-hi);text-shadow:0 0 12px rgba(187,247,208,.5);white-space:pre;overflow-x:auto;font-size:clamp(8px,1.55vw,15px);line-height:1.05;font-weight:500}
+
+h1.disp{margin-top:42px;font-family:'Geist',sans-serif;font-size:clamp(46px,8.6vw,118px);font-weight:600;letter-spacing:-.045em;line-height:.92;color:var(--ink-hi);text-shadow:0 0 18px rgba(134,239,172,.3)}
+h1.disp em{font-style:italic;font-weight:500;color:var(--accent);text-shadow:0 0 18px rgba(190,242,100,.45)}
+h1.disp .out{-webkit-text-stroke:1.5px var(--ink);color:transparent}
+.sub{margin-top:22px;color:var(--ink-lo);font-size:14px;max-width:64ch;line-height:1.65}
+.sub b{color:var(--ink-hi);font-weight:500}
+
+.cta-row{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;font-weight:500;transition:transform .2s,background .2s,color .2s,box-shadow .2s}
+.btn-primary{background:var(--ink-hi);color:var(--bg);box-shadow:0 0 0 1px var(--ink-hi),0 0 26px rgba(187,247,208,.4)}
+.btn-primary:hover{transform:translateY(-1px);background:var(--accent);box-shadow:0 0 0 1px var(--accent),0 0 36px rgba(190,242,100,.6)}
+.btn-ghost{border:1px solid var(--ink);color:var(--ink-hi)}
+.btn-ghost:hover{background:var(--ink);color:var(--bg)}
+
+.kpi-row{margin-top:36px;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px dashed var(--line);border-bottom:1px dashed var(--line)}
+@media(min-width:768px){.kpi-row{grid-template-columns:repeat(4,1fr)}}
+.kpi{padding:22px 18px;border-right:1px dashed var(--line)}
+.kpi:last-child{border-right:0}
+@media(max-width:767px){.kpi:nth-child(2n){border-right:0}.kpi:nth-child(-n+2){border-bottom:1px dashed var(--line)}}
+.kpi .k{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:var(--dim)}
+.kpi .v{margin-top:10px;font-family:'Geist',sans-serif;font-size:clamp(28px,3.6vw,42px);font-weight:600;letter-spacing:-.03em;color:var(--ink-hi);text-shadow:0 0 12px rgba(187,247,208,.35)}
+.kpi .v .u{color:var(--accent);font-size:.55em;font-weight:500;font-family:'JetBrains Mono',monospace}
+
+section{padding:90px 0;border-bottom:1px solid var(--line)}
+.s-h{display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:18px;margin-bottom:40px}
+.s-h h2{font-family:'Geist',sans-serif;font-size:clamp(30px,4.4vw,58px);font-weight:600;letter-spacing:-.035em;color:var(--ink-hi);text-shadow:0 0 14px rgba(187,247,208,.25)}
+.s-h h2 em{color:var(--accent);font-style:italic;font-weight:500}
+.s-h .tag{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.16em}
+
+/* services as commands list */
+.svc{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line)}
+.svc-row{padding:24px 22px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:50px 1fr 130px;gap:18px;align-items:start;transition:background .2s}
+.svc-row:last-child{border-bottom:0}
+.svc-row:hover{background:rgba(134,239,172,.05)}
+@media(max-width:767px){.svc-row{grid-template-columns:40px 1fr;gap:12px}.svc-row .tags{grid-column:1 / -1;padding-left:52px}}
+.svc-row .n{color:var(--accent);font-size:13px;font-weight:600}
+.svc-row h3{font-family:'Geist',sans-serif;font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--ink-hi);line-height:1.18}
+.svc-row .cmd{margin-top:6px;color:var(--muted);font-size:12px}
+.svc-row .cmd::before{content:"› "}
+.svc-row p{margin-top:10px;color:var(--ink-lo);font-size:13px;line-height:1.55;max-width:62ch}
+.svc-row .tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end}
+.svc-row .tags span{font-size:10px;border:1px solid var(--line2);padding:3px 8px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+/* pricing as man pages */
+.pr{display:grid;grid-template-columns:1fr;gap:18px;margin-top:8px}
+@media(min-width:900px){.pr{grid-template-columns:repeat(3,1fr)}}
+.pr-c{border:1px solid var(--line);background:var(--bg2);padding:26px 24px;display:flex;flex-direction:column;transition:border-color .25s,box-shadow .25s}
+.pr-c:hover{border-color:var(--ink);box-shadow:0 0 24px rgba(74,222,128,.12)}
+.pr-c.feat{border-color:var(--ink-hi);box-shadow:inset 0 0 0 1px rgba(187,247,208,.4),0 0 36px rgba(187,247,208,.18)}
+.pr-c .ln{font-size:10px;color:var(--accent);letter-spacing:.16em;text-transform:uppercase}
+.pr-c h3{margin-top:10px;font-family:'Geist',sans-serif;font-size:26px;font-weight:600;letter-spacing:-.025em;color:var(--ink-hi)}
+.pr-c .price{margin-top:18px;font-family:'Geist',sans-serif;font-size:38px;font-weight:600;letter-spacing:-.03em;color:var(--ink-hi)}
+.pr-c .price small{font-size:.4em;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;font-weight:400}
+.pr-c .desc{margin-top:8px;color:var(--ink-lo);font-size:12.5px;line-height:1.55}
+.pr-c ul{list-style:none;margin-top:20px;display:flex;flex-direction:column;gap:7px;flex:1}
+.pr-c li{font-size:12.5px;color:var(--ink);padding-left:16px;position:relative;line-height:1.55}
+.pr-c li::before{content:"+";position:absolute;left:0;color:var(--accent)}
+.pr-c .btn{margin-top:22px;justify-content:center;width:100%}
+.pr-c .badge{display:inline-block;font-size:9.5px;padding:3px 8px;background:var(--accent);color:var(--bg);letter-spacing:.14em;margin-left:10px;vertical-align:2px;font-weight:600;text-transform:uppercase}
+
+/* contact form */
+.form{display:grid;grid-template-columns:1fr;gap:24px;margin-top:24px}
+@media(min-width:900px){.form{grid-template-columns:1fr 1fr;gap:48px}}
+.info{font-size:13px;line-height:2;color:var(--ink-lo)}
+.info b{color:var(--accent);text-transform:uppercase;letter-spacing:.14em;font-size:10.5px;font-weight:500;display:block;margin-top:18px}
+.info b:first-child{margin-top:0}
+form.t{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--bg2)}
+form.t .field{padding:14px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px}
+form.t .field:last-of-type{border-bottom:0}
+form.t .field label{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.14em;min-width:84px}
+form.t .field input{flex:1;background:transparent;border:0;color:var(--ink-hi);font-family:inherit;font-size:13px}
+form.t .field input::placeholder{color:var(--dim)}
+form.t .field input:focus{outline:none}
+form.t button{padding:18px;background:var(--ink-hi);color:var(--bg);border:0;font-family:inherit;font-size:12px;text-transform:uppercase;letter-spacing:.16em;cursor:pointer;font-weight:600;border-top:1px solid var(--line);transition:background .2s,box-shadow .2s}
+form.t button:hover{background:var(--accent);box-shadow:0 0 30px rgba(190,242,100,.5)}
+
+footer{padding:36px 0;border-top:1px solid var(--line)}
+.f{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:10.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.14em}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.06s}.reveal.d2{transition-delay:.12s}.reveal.d3{transition-delay:.18s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← К макетам</a>
+<div class="flicker"></div>
+
+<div class="bar">
+  <div class="l"><span>FF · TERMINAL</span><span>v0.7.3</span><span>tty1 · MOSCOW</span></div>
+  <div class="r"><span>247 PALLET FREE</span><span class="ok">UP 47d 12h</span></div>
+</div>
+
+<header class="shell">
+  <div class="term reveal">
+    <div class="term-h"><div class="dots"><i></i><i></i><i></i></div><span>~/fightclub-ff/ring</span><span>UTF-8 · BASH</span></div>
+    <div class="term-body">
+      <div class="prompt">whoami</div>
+      <div style="color:var(--ink-hi);margin-top:4px">fightclub_ff · ops@moscow-1</div>
+      <div class="prompt" style="margin-top:14px">cat ./manifest.txt</div>
+      <pre class="banner">  ███████╗██╗ ██████╗ ██╗  ██╗████████╗     ██████╗██╗     ██╗   ██╗██████╗
+  ██╔════╝██║██╔════╝ ██║  ██║╚══██╔══╝    ██╔════╝██║     ██║   ██║██╔══██╗
+  █████╗  ██║██║  ███╗███████║   ██║       ██║     ██║     ██║   ██║██████╔╝
+  ██╔══╝  ██║██║   ██║██╔══██║   ██║       ██║     ██║     ██║   ██║██╔══██╗
+  ██║     ██║╚██████╔╝██║  ██║   ██║       ╚██████╗███████╗╚██████╔╝██████╔╝
+  ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝        ╚═════╝╚══════╝ ╚═════╝ ╚═════╝ </pre>
+      <h1 class="disp reveal d1">Фулфилмент<br/>как <em>команда.</em><br/><span class="out">Без админок.</span></h1>
+      <p class="sub reveal d2">Поднимаем партию <b>./batch up</b>, маркируем <b>./mark wb,oz</b>, отгружаем <b>./ship --rc=podolsk</b>. Каждое действие — событие в логе, каждое событие — webhook в&nbsp;вашу систему.<span class="cur"></span></p>
+      <div class="cta-row reveal d3">
+        <a href="#contact" class="btn btn-primary">./apply --priority=1 →</a>
+        <a href="#ops" class="btn btn-ghost">man fightclub-ff</a>
+      </div>
+      <div class="kpi-row reveal d3">
+        <div class="kpi"><div class="k">$ uptime</div><div class="v">99.6<span class="u">%</span></div></div>
+        <div class="kpi"><div class="k">$ throughput</div><div class="v">1.4M<span class="u">+ ед</span></div></div>
+        <div class="kpi"><div class="k">$ ping → mgr</div><div class="v">7<span class="u">m</span></div></div>
+        <div class="kpi"><div class="k">$ active.users</div><div class="v">347<span class="u">+</span></div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="ops" class="shell">
+  <div class="s-h"><div><div class="tag reveal">// 01 — operations</div><h2 class="reveal d1">Команды <em>боевого</em> расчёта.</h2></div><span class="tag" style="color:var(--muted)">/usr/local/bin/ff-*</span></div>
+  <div class="svc reveal d2">
+    <div class="svc-row"><span class="n">01</span><div><h3>Приёмка и сверка</h3><div class="cmd">ff intake --batch=&lt;id&gt; --photo=on</div><p>Поштучная фотофиксация на конвейере, сверка с УПД, расхождения — webhook в ЛК и Telegram.</p></div><div class="tags"><span>photo</span><span>upd</span><span>webhook</span></div></div>
+    <div class="svc-row"><span class="n">02</span><div><h3>Маркировка</h3><div class="cmd">ff mark wb oz --kiz --honest</div><p>КИЗ, «Честный знак», термоэтикетки WB и OZON, индивидуальная упаковка.</p></div><div class="tags"><span>kiz</span><span>label</span><span>pack</span></div></div>
+    <div class="svc-row"><span class="n">03</span><div><h3>Хранение</h3><div class="cmd">ff store --zone=A4 --inv=14d</div><p>Адресное хранение 1 500 м², инвентаризация раз в 14 дней, отдельные зоны для food и косметики.</p></div><div class="tags"><span>1500m²</span><span>inv 14d</span></div></div>
+    <div class="svc-row"><span class="n">04</span><div><h3>Сдача на РЦ</h3><div class="cmd">ff ship --rc=koledino,horugvino,tver</div><p>Слоты в Коледино, Электросталь, Подольск, Хоругвино, Тверь. Палетирование, документы, фуру подгоняем мы.</p></div><div class="tags"><span>fbo</span><span>fbs</span><span>slots</span></div></div>
+    <div class="svc-row"><span class="n">05</span><div><h3>Возвраты и QC</h3><div class="cmd">ff return --qc --repack</div><p>Перебираем, переупаковываем, фотографируем. Годное обратно в продажу, брак в утиль или вам по запросу.</p></div><div class="tags"><span>qc</span><span>repack</span></div></div>
+    <div class="svc-row"><span class="n">06</span><div><h3>API и webhooks</h3><div class="cmd">ff api keys --erp=1c,moysklad</div><p>REST + webhooks для остатков, статусов, событий. Интеграция в 1С / МойСклад / Битрикс24 за один день.</p></div><div class="tags"><span>rest</span><span>webhook</span><span>erp</span></div></div>
+  </div>
+</section>
+
+<section id="tiers" class="shell">
+  <div class="s-h"><div><div class="tag reveal">// 02 — pricing</div><h2 class="reveal d1">man <em>fightclub-ff</em>(8) · tiers</h2></div><span class="tag" style="color:var(--muted)">SLA в договоре</span></div>
+  <div class="pr">
+    <div class="pr-c reveal">
+      <div class="ln">// LIGHT</div>
+      <h3>Старт</h3>
+      <div class="price">14<small>₽ / ед, от</small></div>
+      <p class="desc">До 500 ед/мес. Базовый пакет команд для входа на маркетплейсы.</p>
+      <ul><li>ff intake</li><li>ff mark wb,oz</li><li>ff store 14d</li><li>лк + tg-bot</li></ul>
+      <a href="#contact" class="btn btn-ghost">./select</a>
+    </div>
+    <div class="pr-c feat reveal d1">
+      <div class="ln">// PRO<span class="badge">Хит</span></div>
+      <h3>Боец</h3>
+      <div class="price">9<small>₽ / ед, от</small></div>
+      <p class="desc">500–10 000 ед/мес. Полный цикл, менеджер 7д/нед, SLA в договоре.</p>
+      <ul><li>всё из «Старт»</li><li>ff return --repack</li><li>любые РЦ</li><li>ff store 30d</li><li>SLA 24h в договоре</li><li>менеджер 7d/wk</li></ul>
+      <a href="#contact" class="btn btn-primary">./engage →</a>
+    </div>
+    <div class="pr-c reveal d2">
+      <div class="ln">// ENTERPRISE</div>
+      <h3>Энтерпрайз</h3>
+      <div class="price">∞<small>по запросу</small></div>
+      <p class="desc">10 000+ ед/мес. Своя зона на складе, кастомные SLA, API в ERP.</p>
+      <ul><li>ff zone --dedicated</li><li>custom SLA</li><li>ff api enterprise</li><li>ff super --personal</li><li>менеджмент кабинетов МП</li></ul>
+      <a href="#contact" class="btn btn-ghost">./discuss</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="shell">
+  <div class="s-h"><div><div class="tag reveal">// 03 — connect</div><h2 class="reveal d1">$ ff <em>connect</em> --priority=1</h2></div><span class="tag" style="color:var(--muted)">ack &lt; 7m</span></div>
+  <div class="form reveal d1">
+    <div class="info">
+      <b>// phone</b>+7 (985) 417 28 63<br/>
+      <b>// mail</b>ring@fightclub-ff.ru<br/>
+      <b>// addr</b>Москва, Дмитровское ш., 157с5<br/>
+      <b>// hours</b>пн–вс · 09:00 — 22:00<br/>
+      <b>// telegram</b>@fightclub_ff
+    </div>
+    <form class="t" onsubmit="event.preventDefault();this.querySelector('button').textContent='[ OK ] заявка отправлена';this.querySelector('button').style.background='var(--accent)';">
+      <div class="field"><label>name:</label><input required placeholder="Иван Петров"/></div>
+      <div class="field"><label>contact:</label><input required type="tel" placeholder="+7 / @telegram"/></div>
+      <div class="field"><label>volume:</label><input placeholder="ед / мес"/></div>
+      <div class="field"><label>cabs:</label><input placeholder="WB · OZON · Lamoda"/></div>
+      <button type="submit">./submit --priority=1 →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="shell f">
+    <span>© 2026 Бойцовский Клуб · Терминал</span>
+    <span>concept 07 / crt phosphor</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
