@@ -1,0 +1,415 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NaN Lab · Memphis — концепт 15 / постмодерн 80-х</title>
+<meta name="description" content="Memphis-эстетика 80-х для лендинга фулфилмента. Геометрия, скводли, примарные цвета."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Space+Grotesk:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#fef9e7; --paper-2:#fff5d1;
+  --ink:#0d0d0d;
+  --m-pink:#ff5da2;
+  --m-cyan:#3ecbed;
+  --m-yellow:#ffd23f;
+  --m-mint:#7fe7c4;
+  --m-coral:#ff6b4a;
+  --m-purple:#9b6cf2;
+  --line:#0d0d0d;
+}
+html,body{background:var(--paper);color:var(--ink);font-family:'Space Grotesk',sans-serif;-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden;line-height:1.5}
+body{background-image:radial-gradient(circle at 8% 92%,var(--m-mint) 0%,transparent 18%),radial-gradient(circle at 92% 8%,var(--m-pink) 0%,transparent 16%);background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+.disp{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.025em;line-height:.9}
+.script{font-family:'Caveat',cursive;font-weight:700}
+
+/* primitives */
+.shape{position:absolute;pointer-events:none;z-index:0}
+.s-circle{border-radius:50%}
+.s-tri{width:0;height:0;background:transparent !important}
+.s-zig{background-image:linear-gradient(135deg,transparent 46%,var(--ink) 46%,var(--ink) 54%,transparent 54%),linear-gradient(45deg,transparent 46%,var(--ink) 46%,var(--ink) 54%,transparent 54%);background-size:18px 18px}
+.s-dot{background-image:radial-gradient(circle,var(--ink) 18%,transparent 22%);background-size:14px 14px}
+
+.back{position:fixed;top:18px;left:18px;z-index:80;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:var(--m-yellow);color:var(--ink);border:3px solid var(--ink);border-radius:14px;font-weight:700;font-size:13.5px;box-shadow:5px 5px 0 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.back:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 0 var(--m-pink)}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:14px 22px 14px 220px;background:var(--paper);border-bottom:3px solid var(--ink);font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:500;color:var(--ink)}
+.bar .l,.bar .r{display:flex;gap:18px;align-items:center}
+.bar .l b{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.01em}
+.bar .dot{display:inline-block;width:10px;height:10px;background:var(--m-coral);border-radius:50%;border:2px solid var(--ink);margin-right:8px;animation:bl 1.4s infinite}
+@keyframes bl{50%{background:var(--m-cyan)}}
+.bar a.cta{padding:9px 18px;background:var(--m-pink);color:var(--ink);font-weight:700;border:3px solid var(--ink);border-radius:12px;box-shadow:3px 3px 0 0 var(--ink)}
+.bar a.cta:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 0 var(--m-cyan)}
+@media(max-width:780px){.bar{padding-left:170px;font-size:11px}.bar .l span:nth-child(n+2),.bar .r span:nth-child(n+1){display:none}.bar .r a.cta{display:inline-flex}}
+
+.shell{max-width:1340px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+@media(min-width:768px){.shell{padding:0 40px}}
+
+.hero{padding:140px 0 90px;display:grid;gap:48px;grid-template-columns:1fr;align-items:start;position:relative}
+@media(min-width:1024px){.hero{grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}}
+.hero .h-shape-1{width:160px;height:160px;background:var(--m-yellow);border:3px solid var(--ink);top:90px;right:-40px;border-radius:50%;animation:fl 6s ease-in-out infinite}
+.hero .h-shape-2{width:90px;height:90px;background:var(--m-cyan);border:3px solid var(--ink);bottom:140px;left:-30px;transform:rotate(45deg);animation:fl 7s ease-in-out infinite reverse}
+.hero .h-shape-3{width:120px;height:120px;background:var(--m-mint);border:3px solid var(--ink);top:200px;left:55%;border-radius:50%;animation:fl 8s ease-in-out infinite}
+@keyframes fl{50%{transform:translate(8px,-12px) rotate(8deg)}}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:9px 18px;background:var(--m-cyan);border:3px solid var(--ink);border-radius:999px;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em;box-shadow:3px 3px 0 0 var(--ink);position:relative;z-index:2}
+.eyebrow::before{content:"✺";color:var(--ink);font-size:14px}
+
+h1.disp{margin-top:30px;font-size:clamp(54px,11vw,156px);position:relative;z-index:2}
+h1.disp .l1{display:block;color:var(--ink)}
+h1.disp .l2{display:block;color:var(--m-pink);-webkit-text-stroke:3px var(--ink);margin-left:.4em}
+h1.disp .l2 .script{font-family:'Caveat',cursive;-webkit-text-stroke:0;color:var(--m-purple);font-size:.85em;font-weight:700}
+h1.disp .l3{display:block;color:var(--ink);position:relative}
+h1.disp .l3::after{content:"";position:absolute;left:-.05em;right:-.04em;bottom:.06em;height:.18em;background:var(--m-yellow);border:3px solid var(--ink);border-radius:8px;z-index:-1;transform:rotate(-1.2deg)}
+
+.sub{margin-top:32px;font-size:18px;line-height:1.55;max-width:50ch;font-weight:500;color:var(--ink);position:relative;z-index:2}
+.sub b{background:var(--m-yellow);padding:1px 7px;border:2px solid var(--ink);border-radius:6px;font-weight:700}
+.sub em{font-family:'Caveat',cursive;font-style:normal;font-weight:700;color:var(--m-coral);font-size:1.25em}
+
+.cta-row{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px;position:relative;z-index:2}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;border:3px solid var(--ink);border-radius:14px;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.btn-primary{background:var(--ink);color:var(--paper);box-shadow:6px 6px 0 0 var(--m-pink)}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 0 var(--m-pink)}
+.btn-ghost{background:var(--paper);color:var(--ink);box-shadow:6px 6px 0 0 var(--m-cyan)}
+.btn-ghost:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 0 var(--m-cyan)}
+.btn-y{background:var(--m-yellow);color:var(--ink);box-shadow:6px 6px 0 0 var(--ink)}
+.btn-y:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 0 var(--ink)}
+
+.stats{margin-top:50px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;z-index:2}
+.stat{padding:22px 18px;background:var(--paper);border:3px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 0 var(--ink);position:relative;overflow:hidden}
+.stat:nth-child(1){background:var(--m-mint)}
+.stat:nth-child(2){background:var(--m-yellow)}
+.stat:nth-child(3){background:var(--m-coral);color:var(--paper)}
+.stat .v{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(34px,4.6vw,52px);font-weight:800;letter-spacing:-.03em;line-height:1}
+.stat .v sup{font-size:.45em;font-weight:700}
+.stat .l{margin-top:8px;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+
+/* hero side: scattered chips */
+.hero-side{position:relative;display:grid;gap:16px;align-content:start}
+.chip{position:relative;padding:24px;border:3px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 0 var(--ink)}
+.chip.c1{background:var(--m-pink);color:var(--paper);transform:rotate(-2deg)}
+.chip.c2{background:var(--m-cyan);transform:rotate(1.5deg)}
+.chip.c3{background:var(--m-yellow);transform:rotate(-1deg)}
+.chip .lab{font-family:'Caveat',cursive;font-weight:700;font-size:22px;line-height:1}
+.chip .v{margin-top:8px;font-family:'Bricolage Grotesque',sans-serif;font-size:54px;font-weight:800;line-height:.9;letter-spacing:-.035em}
+.chip .v sup{font-size:.4em}
+.chip .desc{margin-top:8px;font-size:13.5px;font-weight:500;line-height:1.4}
+.chip .seal{position:absolute;top:14px;right:14px;width:50px;height:50px;border:3px solid var(--ink);border-radius:50%;background:var(--paper);color:var(--ink);display:grid;place-items:center;font-family:'Caveat',cursive;font-weight:700;font-size:13px;line-height:1;text-align:center;transform:rotate(8deg)}
+.chip-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+/* trust marquee */
+.trust{margin-top:70px;padding:18px 0;background:var(--ink);color:var(--paper);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.trust-track{display:flex;gap:48px;width:max-content;animation:m 28s linear infinite;font-family:'Bricolage Grotesque',sans-serif;font-size:34px;font-weight:800;letter-spacing:-.015em}
+.trust-track span{white-space:nowrap;display:flex;align-items:center;gap:24px}
+.trust-track span:nth-child(2n){color:var(--m-pink)}
+.trust-track span:nth-child(3n){color:var(--m-yellow)}
+.trust-track span:nth-child(5n){color:var(--m-cyan)}
+.trust-track span::after{content:"✺";font-size:.65em}
+@keyframes m{to{transform:translateX(-50%)}}
+
+section{padding:110px 0;position:relative}
+.s-h{display:grid;gap:24px;grid-template-columns:1fr;align-items:end;margin-bottom:60px;position:relative;z-index:2}
+@media(min-width:900px){.s-h{grid-template-columns:1.3fr .7fr}}
+.s-tag{display:inline-flex;padding:7px 16px;background:var(--m-purple);color:var(--paper);font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;align-self:start;margin-bottom:18px;border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 0 var(--ink)}
+.s-h h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(42px,6.6vw,92px);line-height:.92;letter-spacing:-.025em;font-weight:800;color:var(--ink);max-width:14ch}
+.s-h h2 mark{background:var(--m-yellow);color:var(--ink);padding:0 .15em;border:3px solid var(--ink);border-radius:14px}
+.s-h h2 em{font-family:'Caveat',cursive;font-style:normal;color:var(--m-coral);font-weight:700}
+.s-h .right{font-size:14.5px;line-height:1.5;max-width:34ch;color:var(--ink);font-weight:500;justify-self:start}
+@media(min-width:900px){.s-h .right{justify-self:end;text-align:right}}
+
+/* services */
+.svc{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:768px){.svc{grid-template-columns:repeat(6,1fr)}}
+.tile{position:relative;padding:32px;border:3px solid var(--ink);border-radius:24px;background:var(--paper);box-shadow:6px 6px 0 0 var(--ink);transition:transform .25s,box-shadow .25s;overflow:hidden;display:flex;flex-direction:column}
+.tile:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 0 var(--ink)}
+.tile.t1{grid-column:span 6;background:var(--m-pink);color:var(--paper);min-height:280px}
+@media(min-width:768px){.tile.t2{grid-column:span 3}.tile.t3{grid-column:span 3;background:var(--m-cyan)}.tile.t4{grid-column:span 2}.tile.t5{grid-column:span 2;background:var(--m-yellow)}.tile.t6{grid-column:span 2;background:var(--m-mint)}}
+.tile .num{font-family:'Caveat',cursive;font-weight:700;font-size:22px;line-height:1}
+.tile h3{margin-top:14px;font-family:'Bricolage Grotesque',sans-serif;font-size:30px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.tile.t1 h3{font-size:52px}
+.tile p{margin-top:14px;font-size:14.5px;line-height:1.55;font-weight:500;flex:1}
+.tile .tag{margin-top:18px;padding-top:14px;border-top:2px dashed var(--ink);font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.tile .deco{position:absolute;border:3px solid var(--ink);pointer-events:none}
+.tile.t1 .deco{width:140px;height:140px;background:var(--m-yellow);border-radius:50%;bottom:-30px;right:-30px}
+.tile.t2 .deco{width:80px;height:80px;background:var(--m-coral);border-radius:50%;top:-20px;right:-20px}
+.tile.t4 .deco{width:60px;height:60px;background:var(--m-purple);transform:rotate(45deg);bottom:-15px;right:-15px}
+.tile.t6 .deco{width:90px;height:90px;background:var(--m-pink);border-radius:50%;top:-25px;right:-25px}
+
+/* metrics */
+.met{display:grid;grid-template-columns:1fr;gap:18px;margin-top:8px}
+@media(min-width:768px){.met{grid-template-columns:repeat(4,1fr)}}
+.peb{padding:36px 28px;border:3px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 0 var(--ink);position:relative;overflow:hidden}
+.peb:nth-child(1){background:var(--m-cyan)}
+.peb:nth-child(2){background:var(--m-yellow)}
+.peb:nth-child(3){background:var(--m-coral);color:var(--paper)}
+.peb:nth-child(4){background:var(--m-mint)}
+.peb .k{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.85}
+.peb .v{margin-top:14px;font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(58px,7.5vw,92px);font-weight:800;line-height:.85;letter-spacing:-.035em}
+.peb .v sup{font-size:.4em;font-weight:700;vertical-align:top;margin-left:3px}
+.peb .l{margin-top:14px;font-size:13.5px;font-weight:500;line-height:1.45}
+.peb .deco{position:absolute;border:3px solid var(--ink);pointer-events:none}
+.peb:nth-child(1) .deco{width:60px;height:60px;background:var(--m-pink);border-radius:50%;bottom:-15px;right:14px}
+.peb:nth-child(3) .deco{width:80px;height:80px;background:var(--m-yellow);transform:rotate(45deg);top:-25px;right:-25px}
+
+/* pricing */
+.pr{display:grid;grid-template-columns:1fr;gap:24px;margin-top:8px}
+@media(min-width:900px){.pr{grid-template-columns:repeat(3,1fr);gap:28px}}
+.pc{position:relative;padding:42px 36px;border:3px solid var(--ink);border-radius:28px;background:var(--paper);box-shadow:8px 8px 0 0 var(--ink);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;overflow:hidden}
+.pc:hover{transform:translate(-3px,-3px);box-shadow:11px 11px 0 0 var(--ink)}
+.pc.feat{background:var(--m-pink);color:var(--paper);transform:translateY(-12px);box-shadow:8px 8px 0 0 var(--ink)}
+.pc.feat:hover{transform:translate(-3px,-15px);box-shadow:11px 11px 0 0 var(--ink)}
+.pc.bloom{background:var(--m-mint)}
+.pc .ln{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.pc h3{margin-top:14px;font-family:'Bricolage Grotesque',sans-serif;font-size:42px;font-weight:800;letter-spacing:-.02em;line-height:.95}
+.pc .price{margin-top:24px;font-family:'Bricolage Grotesque',sans-serif;font-size:78px;font-weight:800;line-height:.85;letter-spacing:-.04em}
+.pc .price small{font-family:'Space Grotesk',sans-serif;display:block;margin-top:8px;font-size:.18em;font-weight:600;text-transform:uppercase;letter-spacing:.08em;opacity:.85}
+.pc .desc{margin-top:14px;font-size:14px;line-height:1.5;font-weight:500}
+.pc ul{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.pc li{font-size:14px;line-height:1.5;padding-left:28px;position:relative;font-weight:500}
+.pc li::before{content:"✺";position:absolute;left:0;top:0;font-size:18px;font-weight:700}
+.pc.feat li::before{color:var(--m-yellow)}
+.pc .badge{position:absolute;top:-14px;right:32px;padding:8px 18px;background:var(--m-yellow);color:var(--ink);font-family:'Caveat',cursive;font-weight:700;font-size:18px;border:3px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 0 var(--ink);transform:rotate(-3deg)}
+.pc .btn{margin-top:30px;justify-content:center;width:100%}
+.pc .deco{position:absolute;border:3px solid var(--ink);pointer-events:none}
+.pc.feat .deco{width:120px;height:120px;background:var(--m-yellow);border-radius:50%;bottom:-40px;right:-40px}
+.pc.bloom .deco{width:90px;height:90px;background:var(--m-cyan);transform:rotate(45deg);top:-30px;right:30px}
+
+/* contact */
+.ct{display:grid;grid-template-columns:1fr;gap:24px;margin-top:8px}
+@media(min-width:900px){.ct{grid-template-columns:1.05fr .95fr;gap:32px}}
+.ct-info{position:relative;padding:46px;border:3px solid var(--ink);border-radius:28px;background:var(--m-cyan);box-shadow:8px 8px 0 0 var(--ink);overflow:hidden}
+.ct-info h3{font-family:'Bricolage Grotesque',sans-serif;font-size:46px;font-weight:800;letter-spacing:-.025em;line-height:.95;max-width:14ch;position:relative}
+.ct-info h3 em{font-family:'Caveat',cursive;font-style:normal;color:var(--m-pink);-webkit-text-stroke:2px var(--ink);font-weight:700}
+.ct-info p{margin-top:18px;font-size:15px;line-height:1.55;font-weight:500;max-width:38ch;position:relative}
+.ct-info .info{margin-top:32px;display:flex;flex-direction:column;gap:10px;position:relative}
+.ct-info .info .it{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--paper);border:3px solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 0 var(--ink)}
+.ct-info .info .it b{font-family:'Caveat',cursive;font-weight:700;font-size:18px;width:80px;flex-shrink:0;line-height:1}
+.ct-info .info .it span{font-size:14px;font-weight:600}
+.ct-info .deco{position:absolute;border:3px solid var(--ink);pointer-events:none}
+.ct-info .deco-1{width:140px;height:140px;background:var(--m-yellow);border-radius:50%;bottom:-50px;right:-50px}
+.ct-info .deco-2{width:70px;height:70px;background:var(--m-coral);transform:rotate(45deg);top:30px;right:40px}
+
+.ct-form{position:relative;padding:46px;border:3px solid var(--ink);border-radius:28px;background:var(--paper);box-shadow:8px 8px 0 0 var(--ink);display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.ct-form .ttl{font-family:'Bricolage Grotesque',sans-serif;font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:.95}
+.ct-form .ttl em{font-family:'Caveat',cursive;font-style:normal;color:var(--m-pink);font-weight:700}
+.ct-form label{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:-8px}
+.ct-form input{padding:16px 20px;border:3px solid var(--ink);border-radius:14px;background:var(--paper);font-family:inherit;font-size:14.5px;font-weight:500;color:var(--ink);transition:background .2s,box-shadow .2s}
+.ct-form input:focus{outline:none;background:var(--m-yellow);box-shadow:4px 4px 0 0 var(--ink)}
+.ct-form input::placeholder{color:rgba(13,13,13,.45)}
+.ct-form button{margin-top:10px;padding:18px;border:3px solid var(--ink);border-radius:14px;background:var(--ink);color:var(--paper);font-family:'Bricolage Grotesque',sans-serif;font-size:16px;font-weight:800;letter-spacing:-.01em;cursor:pointer;box-shadow:6px 6px 0 0 var(--m-pink);transition:transform .15s,box-shadow .15s}
+.ct-form button:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 0 var(--m-pink)}
+.ct-form .deco{position:absolute;border:3px solid var(--ink);pointer-events:none}
+.ct-form .deco-1{width:80px;height:80px;background:var(--m-mint);border-radius:50%;top:-30px;right:30px;z-index:0}
+
+footer{padding:50px 0;margin-top:80px;background:var(--ink);color:var(--paper);border-top:3px solid var(--ink)}
+.f{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:center;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:500}
+.f span:first-child{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.01em}
+.f span:first-child em{font-family:'Caveat',cursive;font-style:normal;color:var(--m-pink);font-weight:700}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← К макетам</a>
+
+<div class="bar">
+  <div class="l"><span><span class="dot"></span><b>NaN Lab</b></span><span>concept 15</span><span>memphis 80s</span></div>
+  <div class="r"><span>247 паллет свободно</span><a href="#contact" class="cta">Заявка ✺</a></div>
+</div>
+
+<header class="hero shell">
+  <div class="shape h-shape-1"></div>
+  <div class="shape h-shape-2"></div>
+  <div class="shape h-shape-3"></div>
+  <div>
+    <span class="eyebrow reveal">// бодрый склад · 1986 → 2026</span>
+    <h1 class="disp reveal d1">
+      <span class="l1">партии</span>
+      <span class="l2">пляшут <span class="script">~по</span></span>
+      <span class="l3">конвейеру</span>
+    </h1>
+    <p class="sub reveal d2">Не серая логистика — <b>геометричный поток</b>. Партия проходит приёмку, маркировку и&nbsp;РЦ <em>в&nbsp;ритме</em> постмодерна.</p>
+    <div class="cta-row reveal d3">
+      <a href="#contact" class="btn btn-primary">Получить расчёт ✺</a>
+      <a href="#svc" class="btn btn-ghost">Что делаем</a>
+      <a href="#tiers" class="btn btn-y">Тарифы</a>
+    </div>
+    <div class="stats reveal d4">
+      <div class="stat"><div class="v">99.6<sup>%</sup></div><div class="l">SLA отгрузки</div></div>
+      <div class="stat"><div class="v">1.4M<sup>+</sup></div><div class="l">единиц / склад</div></div>
+      <div class="stat"><div class="v">347<sup>+</sup></div><div class="l">селлеров</div></div>
+    </div>
+  </div>
+
+  <aside class="hero-side reveal d2">
+    <div class="chip c1">
+      <div class="seal">SLA<br/>OK</div>
+      <div class="lab">квартал · '26</div>
+      <div class="v">99.6<sup>%</sup></div>
+      <div class="desc">отгрузка&nbsp;в&nbsp;срок · закреплён в&nbsp;договоре</div>
+    </div>
+    <div class="chip-row">
+      <div class="chip c2">
+        <div class="lab">объём</div>
+        <div class="v" style="font-size:42px">1.4M<sup>+</sup></div>
+        <div class="desc">единиц через&nbsp;склад</div>
+      </div>
+      <div class="chip c3">
+        <div class="lab">отклик</div>
+        <div class="v" style="font-size:42px">7<sup>m</sup></div>
+        <div class="desc">менеджер в&nbsp;TG</div>
+      </div>
+    </div>
+  </aside>
+</header>
+
+<div class="trust"><div class="trust-track">
+  <span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span>
+  <span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span>
+</div></div>
+
+<section id="svc" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">// 01 услуги</span><h2 class="reveal d1">шесть <em>фигур</em><br/>на&nbsp;<mark>конвейере</mark></h2></div>
+    <p class="right reveal d2">Каждая услуга — отдельный модуль с&nbsp;нормой и&nbsp;дедлайном. Соберите свою комбинацию.</p>
+  </div>
+  <div class="svc">
+    <article class="tile t1 reveal">
+      <span class="num">~ 01 ~</span>
+      <h3>Приёмка<br/>и&nbsp;маркировка</h3>
+      <p>Конвейер с&nbsp;поштучной фотофиксацией. КИЗ, «Честный знак», штрихкоды WB и&nbsp;OZON. Брак отсеиваем на&nbsp;входе — никаких скрытых возвратов через&nbsp;месяц.</p>
+      <span class="tag">// фото · киз · честный знак</span>
+      <div class="deco"></div>
+    </article>
+    <article class="tile t2 reveal d1">
+      <span class="num">~ 02 ~</span>
+      <h3>Сдача на&nbsp;РЦ</h3>
+      <p>Слоты Коледино, Электросталь, Подольск, Хоругвино, Тверь — по&nbsp;расписанию.</p>
+      <span class="tag">// 5 РЦ · 24h</span>
+      <div class="deco"></div>
+    </article>
+    <article class="tile t3 reveal d2">
+      <span class="num">~ 03 ~</span>
+      <h3>Возвраты + QC</h3>
+      <p>Перебираем, переупаковываем, фотографируем. Брак — в&nbsp;утиль.</p>
+      <span class="tag">// repack · фото до/после</span>
+    </article>
+    <article class="tile t4 reveal">
+      <span class="num">~ 04 ~</span>
+      <h3>Своя зона</h3>
+      <p>1 500&nbsp;м², инвентарь раз в&nbsp;14 дней.</p>
+      <span class="tag">// 1500 м²</span>
+      <div class="deco"></div>
+    </article>
+    <article class="tile t5 reveal d1">
+      <span class="num">~ 05 ~</span>
+      <h3>API в&nbsp;ERP</h3>
+      <p>1С / МойСклад / Битрикс24, webhook-уведомления.</p>
+      <span class="tag">// rest · webhook</span>
+    </article>
+    <article class="tile t6 reveal d2">
+      <span class="num">~ 06 ~</span>
+      <h3>Личный супер</h3>
+      <p>Контроль смен, эскалации в&nbsp;Telegram, сводка 09:00.</p>
+      <span class="tag">// 7 / нед</span>
+      <div class="deco"></div>
+    </article>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">// 02 цифры</span><h2 class="reveal d1"><em>цифры</em>,<br/>не <mark>обещания</mark></h2></div>
+    <p class="right reveal d2">Показатели за&nbsp;последние 90&nbsp;дней. Источник: ЛК и&nbsp;CRM, без&nbsp;ретуши.</p>
+  </div>
+  <div class="met">
+    <div class="peb reveal"><div class="k">// объём</div><div class="v">1.4M<sup>+</sup></div><div class="l">единиц через&nbsp;склад с&nbsp;запуска</div><div class="deco"></div></div>
+    <div class="peb reveal d1"><div class="k">// SLA</div><div class="v">99.6<sup>%</sup></div><div class="l">отгрузка в&nbsp;срок · квартал</div></div>
+    <div class="peb reveal d2"><div class="k">// отклик</div><div class="v">7<sup>m</sup></div><div class="l">менеджер в&nbsp;TG, среднее</div><div class="deco"></div></div>
+    <div class="peb reveal d3"><div class="k">// клиенты</div><div class="v">347<sup>+</sup></div><div class="l">активных селлеров</div></div>
+  </div>
+</section>
+
+<section id="tiers" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">// 03 тарифы</span><h2 class="reveal d1">цена <em>в&nbsp;лоб</em>.<br/>без <mark>сюрпризов</mark>.</h2></div>
+    <p class="right reveal d2">Финальная ставка — после короткого брифа по&nbsp;объёму. Без&nbsp;депозитов и&nbsp;звёздочек в&nbsp;договоре.</p>
+  </div>
+  <div class="pr">
+    <div class="pc reveal">
+      <div class="ln">// LIGHT</div>
+      <h3>Старт</h3>
+      <div class="price">14₽<small>/ ед, от · до 500&nbsp;ед/мес</small></div>
+      <p class="desc">Базовый комплект для&nbsp;входа на&nbsp;маркетплейсы.</p>
+      <ul><li>Приёмка и&nbsp;сверка</li><li>Маркировка WB / OZON</li><li>Хранение 14&nbsp;дней</li><li>ЛК + TG-бот</li></ul>
+      <a href="#contact" class="btn btn-ghost">Выбрать ✺</a>
+    </div>
+    <div class="pc feat reveal d1">
+      <span class="badge">★ хит</span>
+      <div class="ln">// PRO</div>
+      <h3>Боец</h3>
+      <div class="price">9₽<small>/ ед, от · 500–10&nbsp;000&nbsp;ед/мес</small></div>
+      <p class="desc">Полный цикл с&nbsp;менеджером и&nbsp;SLA в&nbsp;договоре.</p>
+      <ul><li>Всё из «Старт»</li><li>Менеджер 7&nbsp;дней&nbsp;/&nbsp;нед</li><li>Возвраты + repack</li><li>Бронь любых&nbsp;РЦ</li><li>Хранение 30&nbsp;дней</li><li>SLA 24ч в&nbsp;договоре</li></ul>
+      <a href="#contact" class="btn btn-y">На&nbsp;ринг ✺</a>
+      <div class="deco"></div>
+    </div>
+    <div class="pc bloom reveal d2">
+      <div class="ln">// ENTERPRISE</div>
+      <h3>Энтерпрайз</h3>
+      <div class="price">∞<small>по&nbsp;запросу · 10&nbsp;000+&nbsp;ед/мес</small></div>
+      <p class="desc">Своя зона, кастомные&nbsp;SLA, API в&nbsp;ERP.</p>
+      <ul><li>Выделенная зона склада</li><li>Кастомные SLA</li><li>API-интеграция в&nbsp;ERP</li><li>Менеджмент кабинетов МП</li><li>Личный супервайзер</li></ul>
+      <a href="#contact" class="btn btn-primary">Обсудить ✺</a>
+      <div class="deco"></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">// 04 заявка</span><h2 class="reveal d1">договор за&nbsp;<em>48</em><br/>часов <mark>ровно</mark></h2></div>
+    <p class="right reveal d2">Перезвон в&nbsp;течение 7&nbsp;минут в&nbsp;рабочее время. Бриф 15&nbsp;минут — расчёт сегодня.</p>
+  </div>
+  <div class="ct">
+    <div class="ct-info reveal">
+      <div class="deco deco-1"></div>
+      <div class="deco deco-2"></div>
+      <h3>бриф · <em>15 минут</em> · расчёт сегодня</h3>
+      <p>Без обязательных депозитов. Тестовая партия от&nbsp;50&nbsp;ед. SLA закрепляем в&nbsp;договоре, не&nbsp;на&nbsp;словах.</p>
+      <div class="info">
+        <div class="it"><b>тел.</b><span>+7 999 999 33 68</span></div>
+        <div class="it"><b>почта</b><span>email@example.com</span></div>
+        <div class="it"><b>адрес</b><span>Г. Москва, ул. Московская, д. 9, кв 5</span></div>
+        <div class="it"><b>часы</b><span>пн–вс · 09—22</span></div>
+        <div class="it"><b>tg</b><span>@nanlab</span></div>
+      </div>
+    </div>
+    <form class="ct-form reveal d1" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ отправлено';this.querySelector('button').style.background='var(--m-mint)';this.querySelector('button').style.color='var(--ink)';this.querySelector('button').style.boxShadow='6px 6px 0 0 var(--ink)'">
+      <div class="deco deco-1"></div>
+      <div class="ttl">оставьте <em>заявку</em></div>
+      <label>// имя</label><input required placeholder="Иван Петров"/>
+      <label>// контакт</label><input required type="tel" placeholder="+7 / @telegram"/>
+      <label>// объём в&nbsp;месяц</label><input placeholder="напр. 3 000 ед"/>
+      <label>// категория и&nbsp;кабинеты</label><input placeholder="одежда, WB + OZON"/>
+      <button type="submit">Получить SLA-расчёт ✺</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="shell f">
+    <span>NaN Lab <em>·</em> FF Layouts</span>
+    <span>concept 15 / memphis 80s</span>
+    <span>© 2026 Moscow</span>
+    <span>v 1.0</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
