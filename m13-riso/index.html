@@ -1,0 +1,346 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NaN Lab · Riso — концепт 13 / двуцветная печать</title>
+<meta name="description" content="Risograph-эстетика для лендинга фулфилмента. Двуцветная печать, оффсет каналов, зернистость."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#f3ead8; --paper-2:#e8dcc0;
+  --ink:#1a1a1a;
+  --riso-blue:#3955a3;
+  --riso-blue-2:#5471c4;
+  --riso-red:#e8483c;
+  --riso-red-2:#ff6b5e;
+  --riso-yellow:#f5c83b;
+  --riso-green:#3a8c5a;
+  --line:rgba(26,26,26,.18);
+}
+html,body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.005em;min-height:100dvh;overflow-x:hidden;line-height:1.5}
+body{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence baseFrequency='.92' numOctaves='2' seed='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/></svg>");background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+.disp{font-family:'Big Shoulders Display',sans-serif;font-weight:900;letter-spacing:-.02em;text-transform:uppercase;line-height:.85}
+.mono{font-family:'Space Mono',monospace}
+
+.back{position:fixed;top:18px;left:18px;z-index:80;display:inline-flex;align-items:center;gap:8px;padding:11px 20px;background:var(--paper);border:2px solid var(--ink);font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--ink);box-shadow:4px 4px 0 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.back:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 0 var(--riso-red)}
+
+.bar{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:14px 22px 14px 220px;background:var(--paper);border-bottom:2px solid var(--ink);font-family:'Space Mono',monospace;font-size:11.5px;color:var(--ink);text-transform:uppercase;letter-spacing:.06em}
+.bar .l,.bar .r{display:flex;gap:18px;align-items:center}
+.bar .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--riso-red);margin-right:6px;animation:bl 1.4s infinite}
+@keyframes bl{50%{opacity:.4}}
+.bar a.cta{padding:9px 16px;background:var(--ink);color:var(--paper);font-weight:700;border:2px solid var(--ink);box-shadow:3px 3px 0 0 var(--riso-red)}
+.bar a.cta:hover{box-shadow:5px 5px 0 0 var(--riso-blue);transform:translate(-1px,-1px)}
+@media(max-width:780px){.bar{padding-left:170px;font-size:10px}.bar .l span:nth-child(n+2),.bar .r span:nth-child(n+1){display:none}.bar .r a.cta{display:inline-flex}}
+
+.shell{max-width:1320px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+@media(min-width:768px){.shell{padding:0 40px}}
+
+.shape{position:absolute;mix-blend-mode:multiply;pointer-events:none;opacity:.85;z-index:0}
+
+.hero{padding:130px 0 80px;display:grid;gap:48px;grid-template-columns:1fr;align-items:start;position:relative}
+@media(min-width:1024px){.hero{grid-template-columns:1.15fr .85fr;gap:60px}}
+.hero .shape-1{width:380px;height:380px;border-radius:50%;background:var(--riso-yellow);top:80px;right:-100px;mix-blend-mode:multiply}
+.hero .shape-2{width:220px;height:220px;background:var(--riso-blue);top:380px;left:-60px;border-radius:50%;mix-blend-mode:multiply;opacity:.7}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;background:var(--ink);color:var(--paper);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;position:relative;z-index:2}
+.eyebrow::after{content:"";display:inline-block;width:8px;height:8px;background:var(--riso-red);border-radius:50%;animation:bl 1.4s infinite}
+
+h1.disp{margin-top:24px;font-size:clamp(54px,11vw,160px);position:relative;z-index:2}
+h1.disp .l1{display:block;color:var(--ink)}
+h1.disp .l2{display:block;color:var(--riso-red);mix-blend-mode:multiply;margin-left:.4em}
+h1.disp .l3{display:block;color:var(--riso-blue);mix-blend-mode:multiply}
+
+.sub{margin-top:28px;font-size:18px;line-height:1.5;max-width:50ch;color:var(--ink);font-weight:500;position:relative;z-index:2}
+.sub b{background:var(--riso-yellow);padding:0 6px;mix-blend-mode:multiply;font-weight:700}
+
+.cta-row{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px;position:relative;z-index:2}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border:2px solid var(--ink);transition:transform .15s,box-shadow .15s;cursor:pointer}
+.btn-primary{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 0 var(--riso-red)}
+.btn-primary:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 0 var(--riso-red)}
+.btn-ghost{background:var(--paper);color:var(--ink);box-shadow:5px 5px 0 0 var(--riso-blue)}
+.btn-ghost:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 0 var(--riso-blue)}
+.btn-y{background:var(--riso-yellow);color:var(--ink);box-shadow:5px 5px 0 0 var(--ink)}
+
+.stats{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);position:relative;z-index:2}
+.stat{padding:22px 18px;border-right:2px solid var(--ink)}
+.stat:last-child{border-right:0}
+.stat .v{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(38px,5.2vw,58px);font-weight:900;line-height:1;color:var(--riso-red);mix-blend-mode:multiply}
+.stat .v sup{font-size:.45em;color:var(--riso-blue)}
+.stat .l{margin-top:8px;font-family:'Space Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink)}
+
+.hero-side{position:relative;display:grid;gap:18px;align-content:start}
+.stamp{position:relative;padding:28px;background:var(--paper);border:2px solid var(--ink);box-shadow:6px 6px 0 0 var(--ink)}
+.stamp.r{background:var(--riso-red);color:var(--paper);box-shadow:6px 6px 0 0 var(--ink);transform:rotate(-2deg)}
+.stamp.b{background:var(--riso-blue);color:var(--paper);box-shadow:6px 6px 0 0 var(--riso-yellow);transform:rotate(1.5deg)}
+.stamp.y{background:var(--riso-yellow);color:var(--ink);box-shadow:6px 6px 0 0 var(--riso-red);transform:rotate(-1deg)}
+.stamp .lab{font-family:'Space Mono',monospace;font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;font-weight:700;opacity:.85}
+.stamp .v{margin-top:10px;font-family:'Big Shoulders Display',sans-serif;font-size:64px;font-weight:900;line-height:.85}
+.stamp .v sup{font-size:.36em}
+.stamp .desc{margin-top:10px;font-size:13.5px;line-height:1.4;font-weight:500}
+.stamp .seal{position:absolute;top:14px;right:14px;width:46px;height:46px;border:2px solid currentColor;border-radius:50%;display:grid;place-items:center;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.05em;text-align:center;line-height:1}
+.stamp-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+.trust{margin-top:64px;padding:18px 0;background:var(--ink);color:var(--paper);overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.trust-track{display:flex;gap:48px;width:max-content;animation:m 26s linear infinite;font-family:'Big Shoulders Display',sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+.trust-track span{white-space:nowrap;display:flex;align-items:center;gap:24px}
+.trust-track span:nth-child(2n){color:var(--riso-red);mix-blend-mode:screen}
+.trust-track span:nth-child(3n){color:var(--riso-yellow);mix-blend-mode:screen}
+.trust-track span::after{content:"✱";font-size:.7em;color:var(--riso-yellow)}
+@keyframes m{to{transform:translateX(-50%)}}
+
+section{padding:100px 0;position:relative}
+.s-h{display:grid;gap:24px;grid-template-columns:1fr;align-items:end;margin-bottom:50px;position:relative;z-index:2}
+@media(min-width:900px){.s-h{grid-template-columns:1.4fr .6fr}}
+.s-tag{display:inline-flex;padding:6px 14px;background:var(--riso-red);color:var(--paper);font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;align-self:start;margin-bottom:18px;mix-blend-mode:multiply}
+.s-h h2{font-family:'Big Shoulders Display',sans-serif;font-size:clamp(48px,7.5vw,108px);font-weight:900;line-height:.88;text-transform:uppercase;letter-spacing:-.025em;color:var(--ink);max-width:14ch}
+.s-h h2 mark{background:var(--riso-yellow);color:var(--ink);padding:0 .1em;mix-blend-mode:multiply}
+.s-h h2 em{font-style:normal;color:var(--riso-blue);mix-blend-mode:multiply}
+.s-h .right{font-family:'Space Mono',monospace;font-size:13px;line-height:1.5;max-width:34ch;color:var(--ink);justify-self:start}
+@media(min-width:900px){.s-h .right{justify-self:end;text-align:right}}
+
+.svc{display:grid;grid-template-columns:1fr;gap:0}
+@media(min-width:768px){.svc{grid-template-columns:repeat(6,1fr)}}
+.zine{position:relative;padding:34px;border:2px solid var(--ink);background:var(--paper);margin:-1px 0 0 -1px;display:flex;flex-direction:column;transition:transform .25s;overflow:hidden}
+.zine:hover{transform:translate(-3px,-3px);z-index:5;box-shadow:6px 6px 0 0 var(--ink)}
+.zine.s1{grid-column:span 6;background:var(--riso-red);color:var(--paper);min-height:280px}
+@media(min-width:768px){.zine.s2{grid-column:span 3}.zine.s3{grid-column:span 3;background:var(--riso-blue);color:var(--paper)}.zine.s4{grid-column:span 2}.zine.s5{grid-column:span 2;background:var(--riso-yellow)}.zine.s6{grid-column:span 2}}
+.zine .num{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.zine h3{margin-top:14px;font-family:'Big Shoulders Display',sans-serif;font-size:32px;font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:-.02em}
+.zine.s1 h3{font-size:54px}
+.zine p{margin-top:14px;font-size:14.5px;line-height:1.5;font-weight:500;flex:1}
+.zine .tag{margin-top:18px;font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding-top:14px;border-top:1px dashed currentColor;opacity:.85}
+
+.met{display:grid;grid-template-columns:1fr;gap:0;border:2px solid var(--ink);background:var(--paper);margin-top:8px}
+@media(min-width:768px){.met{grid-template-columns:repeat(4,1fr)}}
+.peb{padding:38px 28px;border-bottom:2px solid var(--ink);position:relative;overflow:hidden}
+@media(min-width:768px){.peb{border-bottom:0;border-right:2px solid var(--ink)}.peb:last-child{border-right:0}}
+.peb:nth-child(1){background:var(--riso-yellow)}
+.peb:nth-child(2){background:var(--paper)}
+.peb:nth-child(3){background:var(--riso-blue);color:var(--paper)}
+.peb:nth-child(4){background:var(--riso-red);color:var(--paper)}
+.peb .k{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.85}
+.peb .v{margin-top:14px;font-family:'Big Shoulders Display',sans-serif;font-size:clamp(58px,7.5vw,92px);font-weight:900;line-height:.85;letter-spacing:-.03em}
+.peb .v sup{font-size:.4em;font-weight:700;vertical-align:top;margin-left:3px}
+.peb .l{margin-top:14px;font-size:13.5px;font-weight:500;line-height:1.45}
+
+.pr{display:grid;grid-template-columns:1fr;gap:0;margin-top:8px}
+@media(min-width:900px){.pr{grid-template-columns:repeat(3,1fr)}}
+.pc{position:relative;padding:38px;border:2px solid var(--ink);background:var(--paper);margin-left:-2px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.pc:first-child{margin-left:0}
+.pc:hover{transform:translate(0,-4px);box-shadow:0 8px 0 0 var(--ink);z-index:3}
+.pc.feat{background:var(--ink);color:var(--paper);transform:translateY(-12px)}
+.pc.feat:hover{transform:translateY(-18px)}
+.pc.bloom{background:var(--riso-red);color:var(--paper)}
+.pc .ln{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.85}
+.pc h3{margin-top:14px;font-family:'Big Shoulders Display',sans-serif;font-size:42px;font-weight:900;text-transform:uppercase;line-height:.9;letter-spacing:-.02em}
+.pc .price{margin-top:24px;font-family:'Big Shoulders Display',sans-serif;font-size:78px;font-weight:900;line-height:.85;letter-spacing:-.04em}
+.pc.feat .price{color:var(--riso-yellow);mix-blend-mode:screen}
+.pc .price small{font-family:'Space Mono',monospace;display:block;margin-top:8px;font-size:.18em;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.75}
+.pc .desc{margin-top:14px;font-size:14px;line-height:1.5;font-weight:500}
+.pc ul{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.pc li{font-size:14px;line-height:1.5;padding-left:24px;position:relative;font-weight:500}
+.pc li::before{content:"✱";position:absolute;left:0;top:0;color:var(--riso-red);font-weight:900}
+.pc.feat li::before{color:var(--riso-yellow)}
+.pc.bloom li::before{color:var(--riso-yellow)}
+.pc .badge{position:absolute;top:-12px;right:32px;padding:7px 16px;background:var(--riso-yellow);color:var(--ink);font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border:2px solid var(--ink);box-shadow:3px 3px 0 0 var(--ink)}
+.pc .btn{margin-top:28px;justify-content:center;width:100%}
+
+.ct{display:grid;grid-template-columns:1fr;gap:0;margin-top:8px;border:2px solid var(--ink)}
+@media(min-width:900px){.ct{grid-template-columns:1.05fr .95fr}}
+.ct-info{padding:42px;background:var(--riso-blue);color:var(--paper);border-right:2px solid var(--ink);position:relative;overflow:hidden}
+.ct-info::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:var(--riso-yellow);mix-blend-mode:screen;opacity:.4}
+.ct-info h3{font-family:'Big Shoulders Display',sans-serif;font-size:46px;font-weight:900;text-transform:uppercase;line-height:.9;letter-spacing:-.025em;max-width:14ch;position:relative}
+.ct-info h3 mark{background:var(--riso-yellow);color:var(--ink);padding:0 .1em;mix-blend-mode:screen}
+.ct-info p{margin-top:18px;font-size:15px;line-height:1.5;font-weight:500;max-width:38ch;position:relative}
+.ct-info .info{margin-top:30px;display:flex;flex-direction:column;gap:10px;position:relative}
+.ct-info .info .it{display:flex;gap:14px;padding:13px 16px;background:rgba(243,234,216,.16);border:1.5px solid rgba(243,234,216,.4);align-items:center}
+.ct-info .info .it b{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;width:75px;flex-shrink:0;opacity:.85}
+.ct-info .info .it span{font-size:14px;font-weight:600}
+@media(max-width:899px){.ct-info{border-right:0;border-bottom:2px solid var(--ink)}}
+
+.ct-form{padding:42px;background:var(--paper);display:flex;flex-direction:column;gap:14px}
+.ct-form .ttl{font-family:'Big Shoulders Display',sans-serif;font-size:36px;font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:-.02em}
+.ct-form .ttl em{font-style:normal;color:var(--riso-red);mix-blend-mode:multiply}
+.ct-form label{font-family:'Space Mono',monospace;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ink);margin-bottom:-8px}
+.ct-form input{padding:14px 18px;border:2px solid var(--ink);background:var(--paper);font-family:inherit;font-size:14.5px;font-weight:500;color:var(--ink)}
+.ct-form input:focus{outline:none;background:var(--riso-yellow);box-shadow:3px 3px 0 0 var(--ink)}
+.ct-form input::placeholder{color:rgba(26,26,26,.45)}
+.ct-form button{margin-top:8px;padding:18px;border:2px solid var(--ink);background:var(--ink);color:var(--paper);font-family:'Space Mono',monospace;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;box-shadow:5px 5px 0 0 var(--riso-red);transition:transform .15s,box-shadow .15s}
+.ct-form button:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 0 var(--riso-red)}
+
+footer{padding:50px 0;margin-top:80px;background:var(--ink);color:var(--paper);border-top:2px solid var(--ink)}
+.f{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;align-items:center;font-family:'Space Mono',monospace;font-size:11.5px;text-transform:uppercase;letter-spacing:.1em}
+.f span:first-child{font-family:'Big Shoulders Display',sans-serif;font-size:24px;font-weight:900;letter-spacing:-.01em;text-transform:uppercase}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+
+<a href="../" class="back">← К макетам</a>
+
+<div class="bar">
+  <div class="l"><span><span class="dot"></span>NaN LAB</span><span>concept 13</span><span>RISO 2-color</span></div>
+  <div class="r"><span>247 паллет свободно</span><a href="#contact" class="cta">Заявка ✱</a></div>
+</div>
+
+<header class="hero shell">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div>
+    <span class="eyebrow reveal">// макет от студии NaN Lab · 2026</span>
+    <h1 class="disp reveal d1">
+      <span class="l1">склад</span>
+      <span class="l2">печатает</span>
+      <span class="l3">отгрузки</span>
+    </h1>
+    <p class="sub reveal d2">Фулфилмент, который работает <b>как печатный станок</b>: партия проходит приёмку, маркировку и&nbsp;РЦ — без срывов и&nbsp;скрытых возвратов.</p>
+    <div class="cta-row reveal d3">
+      <a href="#contact" class="btn btn-primary">Получить расчёт →</a>
+      <a href="#svc" class="btn btn-ghost">Что делаем</a>
+      <a href="#tiers" class="btn btn-y">Тарифы</a>
+    </div>
+    <div class="stats reveal d4">
+      <div class="stat"><div class="v">99.6<sup>%</sup></div><div class="l">SLA отгрузки</div></div>
+      <div class="stat"><div class="v">1.4M<sup>+</sup></div><div class="l">единиц / склад</div></div>
+      <div class="stat"><div class="v">347<sup>+</sup></div><div class="l">селлеров</div></div>
+    </div>
+  </div>
+
+  <aside class="hero-side reveal d2">
+    <div class="stamp r">
+      <div class="seal">SLA<br/>OK</div>
+      <div class="lab">// тираж 047</div>
+      <div class="v">99.6<sup>%</sup></div>
+      <div class="desc">отгрузка&nbsp;в&nbsp;срок · квартал</div>
+    </div>
+    <div class="stamp-row">
+      <div class="stamp b">
+        <div class="lab">// объём</div>
+        <div class="v" style="font-size:42px">1.4M<sup>+</sup></div>
+        <div class="desc">единиц через&nbsp;склад</div>
+      </div>
+      <div class="stamp y">
+        <div class="lab">// отклик</div>
+        <div class="v" style="font-size:42px">7<sup>m</sup></div>
+        <div class="desc">менеджер в&nbsp;TG</div>
+      </div>
+    </div>
+  </aside>
+</header>
+
+<div class="trust"><div class="trust-track">
+  <span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span>
+  <span>Wildberries</span><span>OZON</span><span>Яндекс Маркет</span><span>Lamoda</span><span>СберМаркет</span><span>Авито</span>
+</div></div>
+
+<section id="svc" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">// 01 услуги</span><h2 class="reveal d1">шесть <em>тиражей</em><br/>одной <mark>смены</mark></h2></div>
+    <p class="right reveal d2">// каждая услуга — самостоятельный модуль с&nbsp;нормой и&nbsp;дедлайном.</p>
+  </div>
+  <div class="svc">
+    <article class="zine s1 reveal">
+      <span class="num">01 — приёмка</span>
+      <h3>приёмка<br/>и&nbsp;маркировка</h3>
+      <p>Конвейер с&nbsp;поштучной фотофиксацией. КИЗ, «Честный знак», штрихкоды WB и&nbsp;OZON. Брак отсеиваем на&nbsp;входе — никаких скрытых возвратов.</p>
+      <span class="tag">// фото · киз · честный знак</span>
+    </article>
+    <article class="zine s2 reveal d1"><span class="num">02 — доставка</span><h3>сдача на&nbsp;РЦ</h3><p>Слоты Коледино, Электросталь, Подольск, Хоругвино, Тверь — по&nbsp;расписанию.</p><span class="tag">// 5 РЦ</span></article>
+    <article class="zine s3 reveal d2"><span class="num">03 — возвраты</span><h3>возвраты + QC</h3><p>Перебираем, переупаковываем, фотографируем. Брак — в&nbsp;утиль.</p><span class="tag">// repack</span></article>
+    <article class="zine s4 reveal"><span class="num">04 — хранение</span><h3>своя зона</h3><p>1 500 м², инвентарь раз в&nbsp;14 дней.</p><span class="tag">// 1500 м²</span></article>
+    <article class="zine s5 reveal d1"><span class="num">05 — API</span><h3>API в&nbsp;ERP</h3><p>1С / МойСклад / Битрикс24, webhook.</p><span class="tag">// rest · webhook</span></article>
+    <article class="zine s6 reveal d2"><span class="num">06 — менеджер</span><h3>личный супер</h3><p>Контроль смен, эскалации в&nbsp;Telegram.</p><span class="tag">// 7 / нед</span></article>
+  </div>
+</section>
+
+<section class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">// 02 цифры</span><h2 class="reveal d1"><em>цифры</em>,<br/>не <mark>обещания</mark></h2></div>
+    <p class="right reveal d2">// показатели за&nbsp;последние 90&nbsp;дней. источник: ЛК и&nbsp;CRM.</p>
+  </div>
+  <div class="met reveal d1">
+    <div class="peb"><div class="k">// объём</div><div class="v">1.4M<sup>+</sup></div><div class="l">единиц через&nbsp;склад с&nbsp;запуска</div></div>
+    <div class="peb"><div class="k">// SLA</div><div class="v">99.6<sup>%</sup></div><div class="l">отгрузка в&nbsp;срок · квартал</div></div>
+    <div class="peb"><div class="k">// отклик</div><div class="v">7<sup>m</sup></div><div class="l">менеджер в&nbsp;TG, среднее</div></div>
+    <div class="peb"><div class="k">// клиенты</div><div class="v">347<sup>+</sup></div><div class="l">активных селлеров</div></div>
+  </div>
+</section>
+
+<section id="tiers" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">// 03 тарифы</span><h2 class="reveal d1">цена <em>в&nbsp;лоб</em>.<br/>без <mark>сюрпризов</mark>.</h2></div>
+    <p class="right reveal d2">// финальная ставка — после короткого брифа по&nbsp;объёму. без&nbsp;депозитов.</p>
+  </div>
+  <div class="pr">
+    <div class="pc reveal">
+      <div class="ln">// LIGHT</div>
+      <h3>старт</h3>
+      <div class="price">14₽<small>/ ед, от</small></div>
+      <p class="desc">До 500&nbsp;ед/мес. Базовый комплект для&nbsp;входа на&nbsp;маркетплейсы.</p>
+      <ul><li>Приёмка и&nbsp;сверка</li><li>Маркировка WB / OZON</li><li>Хранение 14&nbsp;дней</li><li>ЛК + TG-бот</li></ul>
+      <a href="#contact" class="btn btn-ghost">Выбрать ✱</a>
+    </div>
+    <div class="pc feat reveal d1">
+      <span class="badge">★ хит</span>
+      <div class="ln">// PRO</div>
+      <h3>боец</h3>
+      <div class="price">9₽<small>/ ед, от</small></div>
+      <p class="desc">500–10&nbsp;000&nbsp;ед/мес. Полный цикл с&nbsp;менеджером и&nbsp;SLA в&nbsp;договоре.</p>
+      <ul><li>Всё из «Старт»</li><li>Менеджер 7&nbsp;дней&nbsp;/&nbsp;нед</li><li>Возвраты + repack</li><li>Бронь любых&nbsp;РЦ</li><li>Хранение 30&nbsp;дней</li><li>SLA 24ч в&nbsp;договоре</li></ul>
+      <a href="#contact" class="btn btn-y" style="border-color:var(--ink)">На&nbsp;ринг ✱</a>
+    </div>
+    <div class="pc bloom reveal d2">
+      <div class="ln">// ENTERPRISE</div>
+      <h3>энтерпрайз</h3>
+      <div class="price">∞<small>по&nbsp;запросу</small></div>
+      <p class="desc">10&nbsp;000+&nbsp;ед/мес. Своя зона, кастомные&nbsp;SLA, API в&nbsp;ERP.</p>
+      <ul><li>Выделенная зона склада</li><li>Кастомные SLA</li><li>API-интеграция в&nbsp;ERP</li><li>Менеджмент кабинетов МП</li><li>Личный супервайзер</li></ul>
+      <a href="#contact" class="btn btn-primary" style="background:var(--paper);color:var(--ink);box-shadow:5px 5px 0 0 var(--riso-yellow)">Обсудить ✱</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="shell">
+  <div class="s-h">
+    <div><span class="s-tag reveal">// 04 заявка</span><h2 class="reveal d1">договор за&nbsp;<em>48</em><br/>часов <mark>ровно</mark>.</h2></div>
+    <p class="right reveal d2">// перезвон в&nbsp;течение 7&nbsp;минут в&nbsp;рабочее время. бриф 15&nbsp;минут.</p>
+  </div>
+  <div class="ct">
+    <div class="ct-info reveal">
+      <h3>бриф · <mark>15&nbsp;минут</mark> · расчёт сегодня</h3>
+      <p>Без обязательных депозитов. Тестовая партия от&nbsp;50&nbsp;ед. SLA закрепляем в&nbsp;договоре.</p>
+      <div class="info">
+        <div class="it"><b>// тел</b><span>+7 999 999 33 68</span></div>
+        <div class="it"><b>// почта</b><span>email@example.com</span></div>
+        <div class="it"><b>// адрес</b><span>Г. Москва, ул. Московская, д. 9, кв 5</span></div>
+        <div class="it"><b>// часы</b><span>пн–вс · 09—22</span></div>
+        <div class="it"><b>// tg</b><span>@nanlab</span></div>
+      </div>
+    </div>
+    <form class="ct-form reveal d1" onsubmit="event.preventDefault();this.querySelector('button').textContent='✓ отправлено';this.querySelector('button').style.background='var(--riso-green)';this.querySelector('button').style.boxShadow='5px 5px 0 0 var(--ink)'">
+      <div class="ttl">оставьте <em>заявку</em></div>
+      <label>// имя</label><input required placeholder="Иван Петров"/>
+      <label>// контакт</label><input required type="tel" placeholder="+7 / @telegram"/>
+      <label>// объём в&nbsp;месяц</label><input placeholder="напр. 3 000 ед"/>
+      <label>// категория и&nbsp;кабинеты</label><input placeholder="одежда, WB + OZON"/>
+      <button type="submit">отправить ✱</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="shell f">
+    <span>NaN LAB</span>
+    <span>© 2026 · concept 13 / risograph</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
