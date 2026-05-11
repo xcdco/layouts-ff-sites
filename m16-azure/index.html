@@ -1,0 +1,515 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Лазурь — фулфилмент для маркетплейсов · NaN Lab</title>
+<meta name="description" content="Лазурный фулфилмент-центр. Приёмка, упаковка, хранение, отгрузка на Wildberries, Ozon, Яндекс Маркет. Концепт m16 от NaN Lab."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8fafc;--surface:#ffffff;--ink:#0b1220;--ink2:#1e293b;--muted:#475569;--dim:#94a3b8;
+  --line:#e2e8f0;--line2:#cbd5e1;--accent:#1d4ed8;--accent2:#3b82f6;--accent-soft:#dbeafe;
+  --ok:#15803d;--warn:#b45309;
+}
+html,body{background:var(--bg);color:var(--ink);font-family:'Geist',sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:-.011em;min-height:100dvh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'Geist Mono',monospace}
+.dots{position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,rgba(15,23,42,.07) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 80% 60% at 50% 30%,#000,transparent 80%)}
+.blob{position:fixed;border-radius:50%;filter:blur(80px);opacity:.5;z-index:-1;pointer-events:none}
+.b1{top:-120px;right:-80px;width:480px;height:480px;background:radial-gradient(circle,#bfdbfe,transparent 70%);animation:fl 22s ease-in-out infinite}
+.b2{bottom:-160px;left:-120px;width:540px;height:540px;background:radial-gradient(circle,#c7d2fe,transparent 70%);animation:fl2 28s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px) scale(1.08)}}
+@keyframes fl2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px) scale(1.1)}}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(160%) blur(14px);-webkit-backdrop-filter:saturate(160%) blur(14px);background:rgba(248,250,252,.78);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1320px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:28px}
+.logo{display:inline-flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;font-size:16px}
+.logo .mk{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#1d4ed8,#1e3a8a);display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 4px 14px rgba(29,78,216,.25)}
+.logo .mk svg{width:16px;height:16px}
+.nav-links{display:none;gap:26px;font-size:14px;color:var(--muted);margin-left:14px}
+.nav-links a{transition:color .18s}.nav-links a:hover{color:var(--ink)}
+.nav-r{margin-left:auto;display:flex;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:11px;font-size:14px;font-weight:500;transition:transform .2s cubic-bezier(.16,1,.3,1),box-shadow .25s,background .2s,color .2s;cursor:pointer;border:0}
+.btn:active{transform:translateY(1px)}
+.btn-pri{background:var(--ink);color:#fff;box-shadow:0 8px 22px -10px rgba(11,18,32,.45)}
+.btn-pri:hover{background:#000}
+.btn-acc{background:var(--accent);color:#fff;box-shadow:0 10px 26px -12px rgba(29,78,216,.55)}
+.btn-acc:hover{background:#1e40af}
+.btn-gh{background:transparent;border:1px solid var(--line2);color:var(--ink)}
+.btn-gh:hover{background:#fff}
+@media(min-width:900px){.nav-links{display:inline-flex}}
+
+/* shell */
+.shell{max-width:1320px;margin:0 auto;padding:0 24px}
+
+/* hero asymmetric */
+.hero{padding:80px 0 100px;display:grid;grid-template-columns:1fr;gap:48px;align-items:end;position:relative}
+@media(min-width:1024px){.hero{grid-template-columns:1.35fr .65fr;padding:120px 0 140px;gap:64px}}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border:1px solid var(--line2);border-radius:999px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;background:#fff;font-family:'Geist Mono',monospace}
+.eyebrow .d{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e;animation:p 2.4s ease-in-out infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.45}}
+.hero h1{margin-top:24px;font-size:clamp(54px,8.6vw,124px);line-height:.94;letter-spacing:-.045em;font-weight:600}
+.hero h1 em{font-style:normal;color:var(--accent);background:linear-gradient(180deg,#3b82f6,#1e3a8a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 .slash{color:var(--dim);font-weight:300}
+.hero .lede{margin-top:28px;font-size:18px;line-height:1.55;color:var(--muted);max-width:54ch}
+.hero .cta{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-side{display:flex;flex-direction:column;gap:18px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 24px;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+.kpi .v{font-size:38px;font-weight:600;letter-spacing:-.035em;line-height:1}
+.kpi .l{font-size:12.5px;color:var(--muted);font-family:'Geist Mono',monospace;text-transform:uppercase;letter-spacing:.12em}
+.kpi .t{font-size:14px;color:var(--ink2);margin-top:4px}
+
+.marquee{margin-top:48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;position:relative;background:#fff}
+.mq-track{display:flex;gap:56px;animation:mq 38s linear infinite;width:max-content}
+.mq-track span{font-family:'Geist Mono',monospace;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;white-space:nowrap;display:inline-flex;align-items:center;gap:14px}
+.mq-track span::after{content:"●";color:var(--accent);font-size:9px}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* section title */
+.sect{padding:100px 0;border-top:1px solid var(--line)}
+.sect-head{display:grid;grid-template-columns:1fr;gap:24px;margin-bottom:56px;align-items:end}
+@media(min-width:900px){.sect-head{grid-template-columns:1.4fr .6fr}}
+.sect-tag{font-family:'Geist Mono',monospace;font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.18em;margin-bottom:14px}
+.sect-h{font-size:clamp(36px,5.4vw,68px);letter-spacing:-.035em;line-height:1;font-weight:600}
+.sect-sub{color:var(--muted);font-size:16px;line-height:1.55;max-width:42ch;justify-self:start}
+@media(min-width:900px){.sect-sub{justify-self:end;text-align:right}}
+
+/* services bento */
+.svc{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:768px){.svc{grid-template-columns:repeat(6,1fr)}}
+.s-card{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px;position:relative;overflow:hidden;min-height:240px;display:flex;flex-direction:column;transition:transform .35s cubic-bezier(.16,1,.3,1),border-color .25s,box-shadow .35s}
+.s-card:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:0 20px 40px -22px rgba(15,23,42,.18)}
+.s-card .ico{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:18px}
+.s-card .ico svg{width:22px;height:22px}
+.s-card h3{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.s-card p{font-size:14px;color:var(--muted);line-height:1.55;flex:1}
+.s-card .tag{position:absolute;top:18px;right:18px;font-family:'Geist Mono',monospace;font-size:11px;color:var(--dim);letter-spacing:.1em}
+@media(min-width:768px){.s-card.w1{grid-column:span 3}.s-card.w2{grid-column:span 2}.s-card.w3{grid-column:span 2}.s-card.w4{grid-column:span 2}.s-card.w5{grid-column:span 3}}
+.s-card.feature{background:linear-gradient(145deg,#1e3a8a,#1d4ed8);color:#fff;border-color:transparent;grid-column:span 1}
+@media(min-width:768px){.s-card.feature{grid-column:span 3}}
+.s-card.feature .ico{background:rgba(255,255,255,.15);color:#fff}
+.s-card.feature p{color:rgba(255,255,255,.78)}
+.s-card.feature .tag{color:rgba(255,255,255,.55)}
+.s-card.feature::after{content:"";position:absolute;right:-60px;bottom:-60px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);pointer-events:none}
+
+/* process */
+.proc{display:grid;grid-template-columns:1fr;gap:14px;counter-reset:step}
+@media(min-width:768px){.proc{grid-template-columns:repeat(3,1fr)}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:32px;position:relative}
+.step::before{counter-increment:step;content:"0" counter(step);position:absolute;top:24px;right:28px;font-family:'Geist Mono',monospace;font-size:14px;color:var(--dim);letter-spacing:.1em}
+.step .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-bottom:18px;box-shadow:0 0 0 4px var(--accent-soft)}
+.step h4{font-size:22px;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.step p{font-size:14px;color:var(--muted);line-height:1.55}
+.step .meta{margin-top:18px;font-family:'Geist Mono',monospace;font-size:11.5px;color:var(--ink2);letter-spacing:.08em;border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between}
+
+/* pricing */
+.price{background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.price-row{display:grid;grid-template-columns:1fr auto;gap:24px;padding:22px 28px;border-bottom:1px solid var(--line);align-items:center;transition:background .2s}
+.price-row:last-child{border-bottom:0}
+.price-row:hover{background:#f1f5f9}
+.price-row .nm{display:flex;flex-direction:column;gap:4px}
+.price-row .nm strong{font-size:17px;font-weight:500;letter-spacing:-.01em}
+.price-row .nm small{font-size:13px;color:var(--muted)}
+.price-row .pr{font-family:'Geist Mono',monospace;font-size:18px;font-weight:500;letter-spacing:-.01em;white-space:nowrap;color:var(--ink)}
+.price-row .pr em{font-style:normal;color:var(--dim);font-size:12px;margin-left:4px}
+.price-foot{padding:22px 28px;background:#f8fafc;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:13.5px;color:var(--muted)}
+
+/* why us */
+.why{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:900px){.why{grid-template-columns:1.2fr 1fr}}
+.why-main{background:linear-gradient(145deg,#0b1220,#1e293b);color:#fff;border-radius:24px;padding:48px;position:relative;overflow:hidden}
+.why-main::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 80% 0%,rgba(59,130,246,.25),transparent 60%);pointer-events:none}
+.why-main h3{font-size:clamp(28px,3.6vw,44px);letter-spacing:-.03em;line-height:1.05;font-weight:600;max-width:18ch;position:relative}
+.why-main p{margin-top:18px;color:rgba(255,255,255,.7);font-size:15.5px;line-height:1.6;max-width:46ch;position:relative}
+.why-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:38px;position:relative}
+.why-stats div{border-top:1px solid rgba(255,255,255,.15);padding-top:18px}
+.why-stats .v{font-size:32px;font-weight:600;letter-spacing:-.025em;line-height:1}
+.why-stats .l{font-size:12px;color:rgba(255,255,255,.55);margin-top:6px;font-family:'Geist Mono',monospace;text-transform:uppercase;letter-spacing:.1em}
+.why-side{display:grid;gap:14px;grid-template-rows:repeat(3,1fr)}
+.w-mini{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;gap:18px;align-items:flex-start}
+.w-mini .wm-ico{flex-shrink:0;width:40px;height:40px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.w-mini h5{font-size:16px;font-weight:600;letter-spacing:-.015em;margin-bottom:5px}
+.w-mini p{font-size:13.5px;color:var(--muted);line-height:1.5}
+
+/* marketplaces */
+.mps{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(min-width:768px){.mps{grid-template-columns:repeat(4,1fr)}}
+.mp{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;text-align:center;transition:transform .25s,border-color .25s}
+.mp:hover{transform:translateY(-2px);border-color:var(--accent2)}
+.mp .nm{font-size:19px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
+.mp .l{font-family:'Geist Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.mp .nm.wb{color:#a020f0}
+.mp .nm.oz{color:#005bff}
+.mp .nm.ym{color:#fc3f1d}
+.mp .nm.ali{color:#ff6a00}
+
+/* contact */
+.cta-block{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:48px;display:grid;grid-template-columns:1fr;gap:40px;position:relative;overflow:hidden}
+@media(min-width:900px){.cta-block{grid-template-columns:1fr 1fr;padding:64px}}
+.cta-block::before{content:"";position:absolute;top:-100px;right:-100px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,var(--accent-soft),transparent 70%);pointer-events:none}
+.cta-l h3{font-size:clamp(32px,4.2vw,52px);letter-spacing:-.035em;line-height:1;font-weight:600;position:relative}
+.cta-l p{margin-top:18px;color:var(--muted);font-size:15.5px;line-height:1.6;max-width:42ch;position:relative}
+.cta-l ul{margin-top:24px;list-style:none;display:grid;gap:10px;position:relative}
+.cta-l li{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--ink2)}
+.cta-l li svg{width:18px;height:18px;color:var(--accent);flex-shrink:0}
+.form{display:flex;flex-direction:column;gap:14px;position:relative}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:12.5px;color:var(--ink2);font-weight:500}
+.field input,.field textarea{width:100%;border:1px solid var(--line2);background:#fff;border-radius:12px;padding:13px 14px;font-family:'Geist',sans-serif;font-size:15px;color:var(--ink);transition:border-color .2s,box-shadow .2s}
+.field input:focus,.field textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 4px rgba(29,78,216,.12)}
+.field textarea{min-height:96px;resize:vertical}
+.form .btn-acc{align-self:flex-start;padding:14px 24px;font-size:15px}
+.form .hint{font-size:12px;color:var(--dim);font-family:'Geist Mono',monospace}
+
+/* footer */
+footer.f{margin-top:120px;border-top:1px solid var(--line);background:#fff}
+.f-in{max-width:1320px;margin:0 auto;padding:56px 24px 28px;display:grid;grid-template-columns:1fr;gap:36px}
+@media(min-width:900px){.f-in{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+.f-col h6{font-size:12px;font-family:'Geist Mono',monospace;color:var(--dim);text-transform:uppercase;letter-spacing:.14em;margin-bottom:16px}
+.f-col a,.f-col p{display:block;font-size:14px;color:var(--ink2);margin-bottom:9px;transition:color .18s}
+.f-col a:hover{color:var(--accent)}
+.f-bot{max-width:1320px;margin:0 auto;padding:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--dim);font-family:'Geist Mono',monospace}
+
+/* back link */
+.back{position:fixed;top:14px;left:14px;z-index:51;padding:9px 14px;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:999px;font-size:12px;font-family:'Geist Mono',monospace;color:var(--ink2);transition:background .2s,border-color .2s;text-transform:uppercase;letter-spacing:.1em}
+.back:hover{background:#fff;border-color:var(--line2)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s !important;transition-duration:.01s !important}.reveal{opacity:1;transform:none}}
+</style></head><body>
+<div class="dots"></div><div class="blob b1"></div><div class="blob b2"></div>
+
+<a class="back" href="../">← К&nbsp;концепциям</a>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#">
+      <span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round"><path d="M3 7l9-4 9 4-9 4-9-4zm0 5l9 4 9-4M3 17l9 4 9-4"/></svg></span>
+      Лазурь
+    </a>
+    <div class="nav-links">
+      <a href="#services">Услуги</a>
+      <a href="#process">Процесс</a>
+      <a href="#pricing">Прайс</a>
+      <a href="#why">О&nbsp;нас</a>
+      <a href="#contact">Контакты</a>
+    </div>
+    <div class="nav-r">
+      <a class="btn btn-gh" href="#contact"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>+7&nbsp;495&nbsp;847-21-08</a>
+      <a class="btn btn-pri" href="#contact">Рассчитать →</a>
+    </div>
+  </div>
+</nav>
+
+<main class="shell">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow reveal"><span class="d"></span>склад работает · MSK +3</span>
+      <h1 class="reveal d1">Фулфилмент<br/><em>как для&nbsp;своих</em><span class="slash">.</span></h1>
+      <p class="lede reveal d2">Принимаем, считаем, проверяем, упаковываем и&nbsp;отгружаем ваш товар на&nbsp;Wildberries, Ozon и&nbsp;Яндекс Маркет. Без&nbsp;скрытых тарифов, без&nbsp;потерь, без&nbsp;тишины в&nbsp;чате с&nbsp;менеджером.</p>
+      <div class="cta reveal d3">
+        <a class="btn btn-acc" href="#contact">Получить расчёт<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a class="btn btn-gh" href="#process">Как&nbsp;это работает</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="kpi reveal d2"><span class="l">приёмка / сутки</span><span class="v">8&nbsp;420</span><span class="t">единиц товара в&nbsp;день</span></div>
+      <div class="kpi reveal d3"><span class="l">время обработки</span><span class="v">47&nbsp;мин</span><span class="t">от&nbsp;приёмки до&nbsp;ячейки</span></div>
+      <div class="kpi reveal d4"><span class="l">точность сборки</span><span class="v">99.94%</span><span class="t">за&nbsp;последние 90&nbsp;дней</span></div>
+    </div>
+  </section>
+
+  <div class="marquee reveal">
+    <div class="mq-track">
+      <span>Wildberries</span><span>Ozon</span><span>Яндекс Маркет</span><span>СберМегаМаркет</span><span>Lamoda</span><span>KazanExpress</span><span>AliExpress</span><span>Detmir</span>
+      <span>Wildberries</span><span>Ozon</span><span>Яндекс Маркет</span><span>СберМегаМаркет</span><span>Lamoda</span><span>KazanExpress</span><span>AliExpress</span><span>Detmir</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="sect" id="services">
+    <div class="sect-head">
+      <div>
+        <div class="sect-tag reveal">§ 01 · услуги</div>
+        <h2 class="sect-h reveal d1">Закрываем весь&nbsp;цикл — от&nbsp;коробки до&nbsp;карточки.</h2>
+      </div>
+      <p class="sect-sub reveal d2">Девять операций, один договор, прозрачный отчёт каждые 24&nbsp;часа. Без&nbsp;посредников и&nbsp;двойных пересортировок.</p>
+    </div>
+
+    <div class="svc">
+      <a class="s-card feature reveal" href="#contact">
+        <span class="tag">01 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/></svg></span>
+        <h3>Приёмка и&nbsp;проверка на&nbsp;брак</h3>
+        <p>Визуальный и&nbsp;детальный контроль каждой единицы. Сверка с&nbsp;накладной, фотоотчёт, выявление производственных дефектов до&nbsp;того, как&nbsp;это сделает площадка.</p>
+      </a>
+      <div class="s-card w2 reveal d1">
+        <span class="tag">02 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+        <h3>Упаковка</h3>
+        <p>ЗИП-локи, курьерские пакеты, ВПП, индивидуальная защита для&nbsp;хрупкого.</p>
+      </div>
+      <div class="s-card w3 reveal d2">
+        <span class="tag">03 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg></span>
+        <h3>Маркировка</h3>
+        <p>Штрихкоды площадок, Честный знак, размерные стикеры, ярлыки состава.</p>
+      </div>
+
+      <div class="s-card w4 reveal">
+        <span class="tag">04 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-3V4a2 2 0 00-2-2H9a2 2 0 00-2 2v3H4a2 2 0 00-2 2v11a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM9 4h6v3H9z"/></svg></span>
+        <h3>Хранение 24/7</h3>
+        <p>Стеллажное и&nbsp;паллетное. Температурный режим, видеонаблюдение, охрана.</p>
+      </div>
+      <div class="s-card w5 reveal d1">
+        <span class="tag">05 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>
+        <h3>Отгрузка на&nbsp;маркетплейсы</h3>
+        <p>Ежедневно на&nbsp;склады Wildberries, Ozon, Яндекс. Электронная очередь, своё&nbsp;ТС, отчёт о&nbsp;сдаче в&nbsp;течение часа.</p>
+      </div>
+      <div class="s-card w2 reveal d2">
+        <span class="tag">06 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4-9 4-9-4zm0 5l9 4 9-4M3 17l9 4 9-4"/></svg></span>
+        <h3>Формирование наборов</h3>
+        <p>Бандлы, подарочные комплекты, акционные сборки под&nbsp;карточку.</p>
+      </div>
+
+      <div class="s-card w3 reveal">
+        <span class="tag">07 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+        <h3>Забор товара</h3>
+        <p>Бесплатно по&nbsp;Москве и&nbsp;области от&nbsp;200&nbsp;единиц. По&nbsp;РФ&nbsp;— ТК&nbsp;на&nbsp;выбор.</p>
+      </div>
+      <div class="s-card w4 reveal d1">
+        <span class="tag">08 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></span>
+        <h3>Отчёты и&nbsp;документы</h3>
+        <p>Личный кабинет, выгрузка остатков, акты, УПД, реестр операций.</p>
+      </div>
+      <div class="s-card w5 reveal d2">
+        <span class="tag">09 / 09</span>
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></span>
+        <h3>Персональный менеджер</h3>
+        <p>Один контакт на&nbsp;всё. Telegram&nbsp;/ WhatsApp&nbsp;/ почта. Ответ в&nbsp;течение 12&nbsp;минут в&nbsp;рабочее время. Без&nbsp;тикетов и&nbsp;ботов.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="sect" id="process">
+    <div class="sect-head">
+      <div>
+        <div class="sect-tag reveal">§ 02 · процесс</div>
+        <h2 class="sect-h reveal d1">Три&nbsp;шага.<br/>Никакого&nbsp;тумана.</h2>
+      </div>
+      <p class="sect-sub reveal d2">От&nbsp;первой коробки до&nbsp;первой сданной партии&nbsp;— обычно укладываемся за&nbsp;48&nbsp;часов с&nbsp;учётом маркировки.</p>
+    </div>
+
+    <div class="proc">
+      <div class="step reveal">
+        <span class="dot"></span>
+        <h4>Заявка и&nbsp;договор</h4>
+        <p>Брифуем по&nbsp;ассортименту и&nbsp;объёму, считаем тариф, подписываем договор электронно. Подключаем&nbsp;ЛК.</p>
+        <div class="meta"><span>срок</span><span>30&nbsp;мин — 4&nbsp;часа</span></div>
+      </div>
+      <div class="step reveal d1">
+        <span class="dot"></span>
+        <h4>Приёмка и&nbsp;размещение</h4>
+        <p>Принимаем партию, фотофиксируем, маркируем, размещаем по&nbsp;ячейкам. Остатки в&nbsp;ЛК&nbsp;появляются в&nbsp;тот&nbsp;же&nbsp;день.</p>
+        <div class="meta"><span>цикл</span><span>47&nbsp;мин на&nbsp;партию</span></div>
+      </div>
+      <div class="step reveal d2">
+        <span class="dot"></span>
+        <h4>Сборка и&nbsp;отгрузка</h4>
+        <p>Заявка из&nbsp;ЛК&nbsp;маркетплейса прилетает к&nbsp;нам автоматически. Собираем, маркируем, везём на&nbsp;нужный склад площадки.</p>
+        <div class="meta"><span>отгрузка</span><span>ежедневно, 06:00</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="sect" id="why">
+    <div class="sect-head">
+      <div>
+        <div class="sect-tag reveal">§ 03 · почему&nbsp;мы</div>
+        <h2 class="sect-h reveal d1">Не&nbsp;первый сезон<br/>в&nbsp;логистике.</h2>
+      </div>
+      <p class="sect-sub reveal d2">Запустились в&nbsp;2019&nbsp;году как&nbsp;собственный склад одного бренда одежды. Сегодня&nbsp;— открытый фулфилмент-центр для&nbsp;312&nbsp;клиентов.</p>
+    </div>
+
+    <div class="why">
+      <div class="why-main reveal">
+        <h3>Знаем кухню обеих сторон&nbsp;— и&nbsp;продавца, и&nbsp;площадки.</h3>
+        <p>Мы&nbsp;сами продавали на&nbsp;маркетплейсах, поэтому понимаем, где&nbsp;именно теряются деньги: непринятая партия, перепутанный размерник, поздняя отгрузка перед&nbsp;акцией. Строили склад как&nbsp;«хотел бы&nbsp;для&nbsp;себя».</p>
+        <div class="why-stats">
+          <div><div class="v">312</div><div class="l">активных клиентов</div></div>
+          <div><div class="v">6&nbsp;лет</div><div class="l">в&nbsp;операциях</div></div>
+          <div><div class="v">4&nbsp;200&nbsp;м²</div><div class="l">площадь склада</div></div>
+          <div><div class="v">47&nbsp;мин</div><div class="l">от&nbsp;ворот до&nbsp;ячейки</div></div>
+        </div>
+      </div>
+      <div class="why-side">
+        <div class="w-mini reveal d1">
+          <span class="wm-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></span>
+          <div><h5>Прозрачный тариф</h5><p>Один договор, фиксированная стоимость за&nbsp;операцию. Без&nbsp;скрытых наценок «за&nbsp;срочность».</p></div>
+        </div>
+        <div class="w-mini reveal d2">
+          <span class="wm-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
+          <div><h5>Склад 24/7</h5><p>Принимаем партии круглосуточно, охрана и&nbsp;видеонаблюдение, температурные зоны для&nbsp;косметики и&nbsp;БАДов.</p></div>
+        </div>
+        <div class="w-mini reveal d3">
+          <span class="wm-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg></span>
+          <div><h5>Свой автопарк</h5><p>Четыре газели и&nbsp;две&nbsp;фуры. Не&nbsp;зависим от&nbsp;ТК&nbsp;и&nbsp;их&nbsp;«перезапись слотов на&nbsp;завтра».</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKETPLACES -->
+  <section class="sect">
+    <div class="sect-head">
+      <div>
+        <div class="sect-tag reveal">§ 04 · площадки</div>
+        <h2 class="sect-h reveal d1">Возим туда,<br/>где&nbsp;вы&nbsp;продаёте.</h2>
+      </div>
+      <p class="sect-sub reveal d2">Слоты бронируем заранее. Поддерживаем FBO, FBS и&nbsp;DBS&nbsp;— переключение между схемами без&nbsp;простоя.</p>
+    </div>
+    <div class="mps">
+      <div class="mp reveal"><div class="nm wb">Wildberries</div><div class="l">FBO · FBS · DBS</div></div>
+      <div class="mp reveal d1"><div class="nm oz">Ozon</div><div class="l">FBO · FBS · rFBS</div></div>
+      <div class="mp reveal d2"><div class="nm ym">Яндекс&nbsp;Маркет</div><div class="l">FBY · FBS · DBS</div></div>
+      <div class="mp reveal d3"><div class="nm ali">+ ещё&nbsp;6</div><div class="l">Lamoda · СберМаркет · KazanExpress</div></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="sect" id="pricing">
+    <div class="sect-head">
+      <div>
+        <div class="sect-tag reveal">§ 05 · прайс</div>
+        <h2 class="sect-h reveal d1">Прайс открытый.<br/>Считается просто.</h2>
+      </div>
+      <p class="sect-sub reveal d2">Базовые тарифы. Финальная сумма зависит от&nbsp;объёма и&nbsp;ассортимента&nbsp;— честный расчёт после брифа.</p>
+    </div>
+
+    <div class="price reveal">
+      <div class="price-row"><div class="nm"><strong>Формирование наборов</strong><small>Бандлы, акционные комплекты</small></div><div class="pr">от&nbsp;14&nbsp;₽<em>/ единица</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Упаковка в&nbsp;ЗИП-лок</strong><small>С&nbsp;размерным стикером</small></div><div class="pr">9&nbsp;₽<em>/ единица</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Упаковка в&nbsp;курьерский пакет</strong><small>Размер S / M / L / XL</small></div><div class="pr">от&nbsp;11&nbsp;₽<em>/ единица</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Упаковка ВПП (воздушка)</strong><small>Для&nbsp;хрупкого и&nbsp;стекла</small></div><div class="pr">от&nbsp;18&nbsp;₽<em>/ единица</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Визуальная проверка на&nbsp;брак</strong><small>Внешний осмотр, упаковка, ярлыки</small></div><div class="pr">4&nbsp;₽<em>/ единица</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Детальная проверка на&nbsp;брак</strong><small>Проверка функционала, комплектности</small></div><div class="pr">от&nbsp;22&nbsp;₽<em>/ единица</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Маркировка штрихкодом</strong><small>Wildberries / Ozon / Честный знак</small></div><div class="pr">3&nbsp;₽<em>/ единица</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Хранение паллетное</strong><small>Стандарт 1.2×0.8 м, до&nbsp;1.8&nbsp;м</small></div><div class="pr">28&nbsp;₽<em>/ паллета / сутки</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Отгрузка на&nbsp;склад&nbsp;МП</strong><small>Москва и&nbsp;область, своё&nbsp;ТС</small></div><div class="pr">от&nbsp;1&nbsp;850&nbsp;₽<em>/ рейс</em></div></div>
+      <div class="price-row"><div class="nm"><strong>Забор товара</strong><small>До&nbsp;200&nbsp;единиц по&nbsp;Москве — 0&nbsp;₽</small></div><div class="pr">бесплатно<em>МСК / МО</em></div></div>
+      <div class="price-foot">
+        <span>Все цены без&nbsp;НДС. Финальная смета&nbsp;— по&nbsp;брифу.</span>
+        <a class="btn btn-pri" href="#contact">Получить персональный тариф →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sect" id="contact">
+    <div class="cta-block">
+      <div class="cta-l">
+        <div class="sect-tag reveal">§ 06 · расчёт</div>
+        <h3 class="reveal d1">Посчитаем за&nbsp;15&nbsp;минут.</h3>
+        <p class="reveal d2">Оставьте контакты и&nbsp;коротко опишите ассортимент&nbsp;— пришлём расчёт в&nbsp;Telegram или&nbsp;на&nbsp;почту. Без&nbsp;спама и&nbsp;звонков с&nbsp;«предложением».</p>
+        <ul class="reveal d3">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Ответ в&nbsp;течение 12&nbsp;минут в&nbsp;рабочее время</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Расчёт по&nbsp;вашему ассортименту, не&nbsp;«вилка»</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>Договор и&nbsp;тестовая поставка&nbsp;— за&nbsp;48&nbsp;часов</li>
+        </ul>
+      </div>
+      <form class="form reveal d2" onsubmit="event.preventDefault();this.querySelector('button').textContent='Принято · ответим в Telegram';this.querySelector('button').disabled=true">
+        <div class="field"><label for="nm">Имя</label><input id="nm" required placeholder="Артём"/></div>
+        <div class="field"><label for="tg">Telegram или&nbsp;телефон</label><input id="tg" required placeholder="@artem_market · +7 (903) 218-47-19"/></div>
+        <div class="field"><label for="vol">Ассортимент и&nbsp;объём</label><textarea id="vol" placeholder="Например: одежда, 1&nbsp;800&nbsp;ед./мес, WB+Ozon"></textarea></div>
+        <button type="submit" class="btn btn-acc">Отправить заявку →</button>
+        <span class="hint">Нажимая кнопку, вы&nbsp;соглашаетесь с&nbsp;политикой обработки данных.</span>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="f">
+  <div class="f-in">
+    <div class="f-col">
+      <a class="logo" href="#"><span class="mk"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.4" stroke-linecap="round"><path d="M3 7l9-4 9 4-9 4-9-4zm0 5l9 4 9-4M3 17l9 4 9-4"/></svg></span>Лазурь</a>
+      <p style="margin-top:18px;color:var(--muted);max-width:34ch">Фулфилмент-центр для&nbsp;продавцов маркетплейсов. Москва, Дмитровское ш., 100.</p>
+    </div>
+    <div class="f-col">
+      <h6>Услуги</h6>
+      <a href="#services">Приёмка и&nbsp;проверка</a><a href="#services">Упаковка и&nbsp;маркировка</a><a href="#services">Хранение</a><a href="#services">Отгрузка</a>
+    </div>
+    <div class="f-col">
+      <h6>Площадки</h6>
+      <a href="#">Wildberries · FBO/FBS</a><a href="#">Ozon · FBO/FBS</a><a href="#">Яндекс Маркет · FBY</a><a href="#">Lamoda · СберМаркет</a>
+    </div>
+    <div class="f-col">
+      <h6>Контакты</h6>
+      <a href="tel:+74958472108">+7&nbsp;495&nbsp;847-21-08</a><a href="mailto:hello@lazur.ff">hello@lazur.ff</a><p>пн–вс · круглосуточно</p>
+    </div>
+  </div>
+  <div class="f-bot">
+    <span>© 2026 Лазурь · Концепт m16 от&nbsp;NaN Lab</span>
+    <span>v 1.0 · azure · MSK</span>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px',threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// magnetic-ish accent buttons
+document.querySelectorAll('.btn-acc,.btn-pri').forEach(b=>{
+  b.addEventListener('mousemove',e=>{
+    const r=b.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.15, y=(e.clientY-r.top-r.height/2)*.15;
+    b.style.transform=`translate(${x}px,${y}px)`;
+  });
+  b.addEventListener('mouseleave',()=>b.style.transform='');
+});
+
+// subtle parallax tilt on service cards
+document.querySelectorAll('.s-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`translateY(-3px) rotateX(${-y*1.5}deg) rotateY(${x*2}deg)`;
+  });
+  c.addEventListener('mouseleave',()=>c.style.transform='');
+});
+
+// kpi count-up
+document.querySelectorAll('.kpi .v').forEach(el=>{
+  const raw=el.textContent;const m=raw.match(/[\d\s.,]+/);if(!m)return;
+  const target=parseFloat(m[0].replace(/[\s,]/g,'').replace(',','.'));
+  if(isNaN(target))return;
+  const suffix=raw.slice(m.index+m[0].length);const prefix=raw.slice(0,m.index);
+  const obs=new IntersectionObserver(es=>es.forEach(en=>{
+    if(en.isIntersecting){
+      const dur=1400,t0=performance.now();
+      const tick=t=>{const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);
+        const v=target*e;
+        const out=Number.isInteger(target)?Math.round(v).toLocaleString('ru-RU'):v.toFixed(2);
+        el.textContent=prefix+out+suffix;
+        if(p<1)requestAnimationFrame(tick);};
+      requestAnimationFrame(tick);obs.disconnect();
+    }
+  }),{threshold:.5});
+  obs.observe(el);
+});
+</script>
+</body></html>
